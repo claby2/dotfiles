@@ -79,3 +79,8 @@ nnoremap <leader>cf :ClangFormat<CR>
 
 " Always display status bar
 set laststatus=2
+
+" Set lightline theme to sitruuna
+let g:lightline = {
+            \ 'colorscheme': 'sitruuna',
+            \ }
