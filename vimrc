@@ -11,6 +11,7 @@ Plug 'rhysd/vim-clang-format'
 Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'eemed/sitruuna.vim'
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
@@ -75,3 +76,6 @@ nnoremap <leader>nt :NERDTree<CR>
 
 " Clang format bind
 nnoremap <leader>cf :ClangFormat<CR>
+
+" Always display status bar
+set laststatus=2
