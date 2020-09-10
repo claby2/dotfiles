@@ -8,7 +8,7 @@ def main():
     if platform.system() == "Windows":
         shutil.copyfile("vimrc", "C:/Users/wibow9770/_vimrc")
     elif platform.system() == "Darwin":
-        shutil.copyfile("vimrc", "~/Users/wibow9770/.vimrc")
+        shutil.copyfile("vimrc", "~/.vimrc")
 
 if __name__ == "__main__":
     main()
