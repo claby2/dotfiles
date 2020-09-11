@@ -2,10 +2,12 @@ set nocompatible
 
 " Plugins 
 if has("win32") || has("win16")
-    call plug#begin('C:\Users\wibow9770\vimfiles\plugged')
+    let $PLUGGED = "~/vimfiles/plugged"
 else
-    call plug#begin('~/Users/wibow9770/.vim/plugged')
+    let $PLUGGED = "~/.vim/plugged"
 endif
+
+call plug#begin($PLUGGED)
 
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
