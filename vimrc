@@ -43,9 +43,6 @@ set incsearch
 " When searching try to be smart about cases
 set smartcase
 
-" Highlight line numbers
-highlight LineNr guifg=#FFFFFF
-
 " Clear hlsearch highlights
 nnoremap <silent> <esc><esc> : nohls<cr>
 
@@ -86,3 +83,6 @@ let g:lightline = {
 " Syntax related stuff
 syntax on
 colorscheme sitruuna 
+
+" Highlight line numbers
+highlight LineNr guifg=#FFFFFF
