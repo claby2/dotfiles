@@ -1,3 +1,5 @@
+set nocompatible
+
 " Plugins 
 if has("win32") || has("win16")
     call plug#begin('C:\Users\wibow9770\vimfiles\plugged')
@@ -17,10 +19,6 @@ call plug#end()
 
 set number tabstop=4 shiftwidth=4
 set expandtab 
-
-" Syntax related stuff
-syntax on
-colorscheme sitruuna 
 
 autocmd GUIEnter * simalt ~x
 set termguicolors
@@ -84,3 +82,7 @@ set laststatus=2
 let g:lightline = {
             \ 'colorscheme': 'sitruuna',
             \ }
+
+" Syntax related stuff
+syntax on
+colorscheme sitruuna 
