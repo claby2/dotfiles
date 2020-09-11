@@ -54,6 +54,9 @@ set backspace=indent,eol,start
 " Don't add empty newlines at the end of files
 set noeol
 
+" Splits open at the bottom and right
+set splitbelow splitright
+
 " Disable automatic comment insertion
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
