@@ -67,7 +67,7 @@ set spell spelllang=en_us
 set shortmess+=I
 
 " Nerd tree bind
-nnoremap <leader>nt :NERDTree<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 " Clang format bind
 nnoremap <leader>cf :ClangFormat<CR>
