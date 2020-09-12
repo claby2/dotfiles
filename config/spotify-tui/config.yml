@@ -1,0 +1,18 @@
+# Config file for spotify-tui
+
+theme:
+    banner: "250, 192, 59"
+    text: "209, 209, 209"
+    hovered: "250, 192, 59"
+    inactive: "161, 161, 161"
+    active: "250, 192, 59"
+    error_border: "193, 89, 89"
+    error_text: "193, 89, 89"
+    selected: "55, 173, 130" 
+    playbar_background: "19, 21, 21"
+    playbar_progress: "250, 192, 59"
+    playbar_text: "209, 209, 209" 
+    hint: "115, 152, 221"
+
+behavior:
+    show_loading_indicator: false
