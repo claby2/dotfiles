@@ -1,6 +1,4 @@
-set nocompatible
-
-" Plugins 
+" ///// PLUGINS /////
 if has("win32") || has("win16")
     let $PLUGGED = "~/vimfiles/plugged"
 else
@@ -8,7 +6,6 @@ else
 endif
 
 call plug#begin($PLUGGED)
-
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'rhysd/vim-clang-format'
@@ -16,13 +13,16 @@ Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
-
 call plug#end()
 
+
+
+
+
+" ///// GENERAL SETTINGS /////
+set nocompatible
 set number tabstop=4 shiftwidth=4
 set expandtab 
-
-autocmd GUIEnter * simalt ~x
 set termguicolors
 filetype plugin indent on
 
@@ -45,9 +45,6 @@ set incsearch
 " When searching try to be smart about cases
 set smartcase
 
-" Clear hlsearch highlights
-nnoremap <silent> <esc><esc> : nohls<cr>
-
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 
@@ -57,19 +54,33 @@ set noeol
 " Splits open at the bottom and right
 set splitbelow splitright
 
-" Disable automatic comment insertion
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" Enable spell check 
+set spell spelllang=en_us
+
+" Disable the default vim startup message
+set shortmess+=I
+
+" Always display status bar
+set laststatus=2
 
 " Clear using current background color
 if has("win32") || has("win16")
     set t_ut=
 endif
 
-" Enable spell check 
-set spell spelllang=en_us
+" Make vim always open windows maximized
+autocmd GUIEnter * simalt ~x
 
-" Disable the default vim startup message
-set shortmess+=I
+" Disable automatic comment insertion
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+
+
+
+
+" ///// MAPPING COMMANDS /////
+" Clear hlsearch highlights
+nnoremap <silent> <esc><esc> : nohls<cr>
 
 " Nerd tree bind
 nnoremap <leader>nt :NERDTreeToggle<CR>
@@ -77,15 +88,21 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " Clang format bind
 nnoremap <leader>cf :ClangFormat<CR>
 
-" Always display status bar
-set laststatus=2
 
+
+
+
+" ///// PLUGIN SPECIFIC SETTINGS /////
 " Set lightline theme to sitruuna
 let g:lightline = {
             \ 'colorscheme': 'sitruuna',
             \ }
 
-" Syntax related stuff
+
+
+
+
+" ///// COLOR SETTINGS /////
 syntax on
 colorscheme sitruuna 
 
