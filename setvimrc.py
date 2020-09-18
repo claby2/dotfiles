@@ -9,7 +9,7 @@ def main():
     home = expanduser("~")
     if platform.system() == "Windows":
         shutil.copyfile("vimrc", home + "/_vimrc")
-    elif platform.system() == "Darwin":
+    elif platform.system() == "Darwin" or platform.system() == "Linux":
         shutil.copyfile("vimrc", home + "/.vimrc")
 
 if __name__ == "__main__":
