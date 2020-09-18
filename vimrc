@@ -55,8 +55,8 @@ set noeol
 " Splits open at the bottom and right
 set splitbelow splitright
 
-" Enable spell check 
-set spell spelllang=en_us
+" Set spell language 
+set spelllang=en_us
 
 " Disable the default vim startup message
 set shortmess+=I
@@ -82,6 +82,9 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " ///// MAPPING COMMANDS /////
 " Clear hlsearch highlights
 nnoremap <silent> <esc><esc> : nohls<cr>
+
+" Toggle spellchecking
+nnoremap <leader>s :set spell!<CR>
 
 " Nerd tree bind
 nnoremap <leader>nt :NERDTreeToggle<CR>
