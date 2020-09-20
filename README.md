@@ -1,3 +1,3 @@
 # dotfiles
 
-claby2's epic dotfiles!
+text-based configuration files 
