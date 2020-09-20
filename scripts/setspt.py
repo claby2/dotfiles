@@ -1,12 +1,17 @@
 #!/usr/bin/env python3
 """This script replaces the spotify-tui config.yml"""
-from os.path import expanduser
-import shutil
+import dotset
+
+CONFIG = dotset.get_root() + "/config/spotify-tui/config.yml"
+
 
 def main():
     """Copy spotify-tui"""
-    home = expanduser("~")
-    shutil.copyfile("config/spotify-tui/config.yml", home + "/.config/spotify-tui/config.yml")
+    home = dotset.get_home()
+    system_config = home + "/.config/spotify-tui/config.yml"
+    dotset.print_diff(CONFIG, system_config)
+    dotset.copy_file(CONFIG, system_config)
+
 
 if __name__ == "__main__":
     main()
