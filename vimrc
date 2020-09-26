@@ -84,16 +84,16 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 nnoremap <silent> <esc><esc> : nohls<cr>
 
 " Toggle spellchecking
-nnoremap <leader>s :set spell!<CR>
+nnoremap <silent> <leader>s :set spell!<CR>
 
 " Nerd tree bind
-nnoremap <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
 " Clang format bind
-nnoremap <leader>cf :ClangFormat<CR>
+nnoremap <silent> <leader>cf :ClangFormat<CR>
 
 " fzf bind
-nnoremap <leader>fz :FZF<CR>
+nnoremap <silent> <leader>fz :FZF<CR>
 
 
 
@@ -117,7 +117,7 @@ let g:lightline = {
 " Check if spell is on
 function! HasSpell()
     if &spell
-        return 'SPELL'
+        return 'spell'
     endif
     return ''
 endfunction
