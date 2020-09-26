@@ -103,7 +103,24 @@ nnoremap <leader>fz :FZF<CR>
 " Set lightline theme to sitruuna 
 let g:lightline = {
             \ 'colorscheme': 'sitruuna',
+            \ 'active': {
+            \   'left': [ [ 'mode' ],
+            \             [ 'readonly', 'filename', 'modified', 'spell'] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'filetype' ] ]
+            \ },
+            \ 'component_function': {
+            \   'spell': 'HasSpell',
+            \ },
             \ }
+
+" Check if spell is on
+function! HasSpell()
+    if &spell
+        return 'SPELL'
+    endif
+    return ''
+endfunction
 
 " Customize fzf colors to match color scheme
 let g:fzf_colors =
