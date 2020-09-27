@@ -14,6 +14,7 @@ Plug 'aserebryakov/vim-todo-lists'
 Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
+Plug 'cespare/vim-toml'
 call plug#end()
 
 
