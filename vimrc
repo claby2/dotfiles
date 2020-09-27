@@ -15,7 +15,6 @@ Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 Plug 'cespare/vim-toml'
-Plug 'rust-lang/rust.vim'
 call plug#end()
 
 
