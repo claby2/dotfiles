@@ -97,6 +97,9 @@ nnoremap <silent> <leader>cf :ClangFormat<CR>
 " fzf bind
 nnoremap <silent> <leader>fz :FZF<CR>
 
+" Auto format bind
+nnoremap <silent> <leader>af :Autoformat<CR>
+
 
 
 
