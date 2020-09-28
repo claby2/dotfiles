@@ -15,6 +15,7 @@ Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 Plug 'cespare/vim-toml'
+Plug 'Chiel92/vim-autoformat'
 call plug#end()
 
 
@@ -138,6 +139,10 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
+
+" Autoformat options
+let g:formatdef_custom_cpp = '"clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""'
+let g:formatters_cpp = ['custom_cpp']
 
 
 
