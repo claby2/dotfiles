@@ -25,7 +25,7 @@ call plug#end()
 " ///// GENERAL SETTINGS /////
 set nocompatible
 set number tabstop=4 shiftwidth=4
-set expandtab 
+set expandtab
 set termguicolors
 filetype plugin indent on
 
@@ -37,7 +37,7 @@ set t_vb=
 set tm=500
 
 " A buffer becomes hidden when it is abandoned
-set hidden 
+set hidden
 
 " Highlight search results
 set hlsearch
@@ -57,7 +57,7 @@ set noeol
 " Splits open at the bottom and right
 set splitbelow splitright
 
-" Set spell language 
+" Set spell language
 set spelllang=en_us
 
 " Disable the default vim startup message
@@ -102,7 +102,7 @@ nnoremap <silent> <leader>fz :FZF<CR>
 
 
 " ///// PLUGIN SPECIFIC SETTINGS /////
-" Set lightline theme to sitruuna 
+" Set lightline theme to sitruuna
 let g:lightline = {
             \ 'colorscheme': 'sitruuna',
             \ 'active': {
@@ -150,7 +150,7 @@ let g:formatters_cpp = ['custom_cpp']
 
 " ///// COLOR SETTINGS /////
 syntax on
-colorscheme sitruuna 
+colorscheme sitruuna
 
 " Highlight line numbers
 highlight LineNr guifg=#FFFFFF
