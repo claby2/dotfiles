@@ -143,6 +143,8 @@ let g:fzf_colors =
 " Autoformat options
 let g:formatdef_custom_cpp = '"clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""'
 let g:formatters_cpp = ['custom_cpp']
+let g:formatdef_custom_python = '"yapf --style google"'
+let g:formatters_python = ['custom_python']
 
 
 
