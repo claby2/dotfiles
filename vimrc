@@ -1,5 +1,8 @@
+" ///// CROSS-PLATFORM /////
+let s:windows = has('win32') || has('win16')
+
 " ///// PLUGINS /////
-if has("win32") || has("win16")
+if s:windows
     let $PLUGGED = "~/vimfiles/plugged"
 else
     let $PLUGGED = "~/.vim/plugged"
@@ -67,7 +70,7 @@ set shortmess+=I
 set laststatus=2
 
 " Clear using current background color
-if has("win32") || has("win16")
+if s:windows
     set t_ut=
 endif
 
