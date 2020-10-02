@@ -146,6 +146,9 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 
+" Configure fzf window
+let g:fzf_layout = { 'down' : '40%' }
+
 " Autoformat options
 let g:formatdef_custom_cpp = '"clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""'
 let g:formatters_cpp = ['custom_cpp']
