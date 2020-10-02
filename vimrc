@@ -1,6 +1,10 @@
 " ///// CROSS-PLATFORM /////
 let s:windows = has('win32') || has('win16')
 
+
+
+
+
 " ///// PLUGINS /////
 if s:windows
     let $PLUGGED = "~/vimfiles/plugged"
