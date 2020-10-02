@@ -73,6 +73,9 @@ set shortmess+=I
 " Always display status bar
 set laststatus=2
 
+" No context lines before scroll
+set scrolloff=0
+
 " Clear using current background color
 if s:windows
     set t_ut=
@@ -119,7 +122,7 @@ let g:lightline = {
             \   'left': [ [ 'mode' ],
             \             [ 'readonly', 'filename', 'modified', 'spell'] ],
             \   'right': [ [ 'lineinfo' ],
-            \              [ 'filetype' ] ]
+            \              [ 'fileformat', 'filetype' ] ]
             \ },
             \ 'component_function': {
             \   'spell': 'HasSpell',
