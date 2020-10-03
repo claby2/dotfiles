@@ -11,7 +11,7 @@ def main():
     system = dotset.get_system()
     if system == "Windows":
         system_vimrc = home + "/_vimrc"
-    elif system in ("Darwin", "Linux"):
+    else:
         system_vimrc = home + "/.vimrc"
     dotset.print_diff(VIMRC, system_vimrc)
     dotset.copy_file(VIMRC, system_vimrc)
