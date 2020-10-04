@@ -171,7 +171,7 @@ let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\"",
             \ }
-
+let g:genfmt_enable_fallback = 1
 
 
 
