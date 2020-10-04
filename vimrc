@@ -23,6 +23,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf'
 Plug 'cespare/vim-toml'
 Plug 'Chiel92/vim-autoformat'
+Plug 'claby2/genfmt.vim'
 call plug#end()
 
 
@@ -110,6 +111,9 @@ nnoremap <silent> <leader>fz :FZF<CR>
 " Auto format bind
 nnoremap <silent> <leader>af :Autoformat<CR>
 
+" genfmt.vim bind
+nnoremap <silent> <leader>gf :GenfmtFormat<CR>
+
 
 
 
@@ -161,6 +165,12 @@ let g:formatdef_custom_cpp = '"clang-format --style=\"{BasedOnStyle: Google, Ind
 let g:formatters_cpp = ['custom_cpp']
 let g:formatdef_custom_python = '"yapf --style google"'
 let g:formatters_python = ['custom_python']
+
+" genfmt.vim configuration
+let g:genfmt_formatters = {
+            \ 'python': "yapf",
+            \ 'cpp': "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\"",
+            \ }
 
 
 
