@@ -15,14 +15,11 @@ endif
 call plug#begin($PLUGGED)
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
-Plug 'rhysd/vim-clang-format'
 Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf'
 Plug 'cespare/vim-toml'
-Plug 'Chiel92/vim-autoformat'
 Plug 'claby2/genfmt.vim'
 call plug#end()
 
@@ -102,15 +99,6 @@ nnoremap <silent> <leader>s :set spell!<CR>
 " Nerd tree bind
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
-" Clang format bind
-nnoremap <silent> <leader>cf :ClangFormat<CR>
-
-" fzf bind
-nnoremap <silent> <leader>fz :FZF<CR>
-
-" Auto format bind
-nnoremap <silent> <leader>af :Autoformat<CR>
-
 " genfmt.vim bind
 nnoremap <silent> <leader>gf :GenfmtFormat<CR>
 
@@ -141,37 +129,13 @@ function! HasSpell()
     return ''
 endfunction
 
-" Customize fzf colors to match color scheme
-let g:fzf_colors =
-            \ { 'fg':      ['fg', 'Normal'],
-            \ 'bg':      ['bg', 'Normal'],
-            \ 'hl':      ['fg', 'Comment'],
-            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-            \ 'hl+':     ['fg', 'Statement'],
-            \ 'info':    ['fg', 'PreProc'],
-            \ 'border':  ['fg', 'Ignore'],
-            \ 'prompt':  ['fg', 'Conditional'],
-            \ 'pointer': ['fg', 'Exception'],
-            \ 'marker':  ['fg', 'Keyword'],
-            \ 'spinner': ['fg', 'Label'],
-            \ 'header':  ['fg', 'Comment'] }
-
-" Configure fzf window
-let g:fzf_layout = { 'down' : '40%' }
-
-" Autoformat options
-let g:formatdef_custom_cpp = '"clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""'
-let g:formatters_cpp = ['custom_cpp']
-let g:formatdef_custom_python = '"yapf --style google"'
-let g:formatters_python = ['custom_python']
-
 " genfmt.vim configuration
 let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\"",
             \ }
 let g:genfmt_enable_fallback = 1
+
 
 
 
