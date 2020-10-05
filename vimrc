@@ -130,9 +130,17 @@ function! HasSpell()
 endfunction
 
 " genfmt.vim configuration
+function! ClangFormat()
+    if len(findfile(".clang-format", expand("%:p:h").";")) || len(findfile("_clang-format", expand("%:p:h").";"))
+        " clang-format file has been found
+        return "clang-format"
+    endif
+    " No clang-format file has been found
+    return "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
+endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
-            \ 'cpp': "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\"",
+            \ 'cpp': ClangFormat(),
             \ }
 let g:genfmt_enable_fallback = 1
 
