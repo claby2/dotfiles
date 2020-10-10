@@ -17,10 +17,11 @@ Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
-Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
+Plug 'eemed/sitruuna.vim'
+Plug 'jaredgorski/spacecamp'
 call plug#end()
 
 
@@ -107,7 +108,7 @@ nnoremap <silent> <leader>gf :GenfmtFormat<CR>
 
 
 " ///// PLUGIN SPECIFIC SETTINGS /////
-" Set lightline theme to sitruuna
+" Lightline configuration
 let g:lightline = {
             \ 'colorscheme': 'sitruuna',
             \ 'active': {
@@ -150,7 +151,7 @@ let g:genfmt_enable_fallback = 1
 
 " ///// COLOR SETTINGS /////
 syntax on
-colorscheme sitruuna
+colorscheme spacecamp
 
 " Highlight line numbers
 highlight LineNr guifg=#FFFFFF
