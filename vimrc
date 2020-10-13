@@ -22,6 +22,7 @@ Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
 Plug 'eemed/sitruuna.vim'
 Plug 'jaredgorski/spacecamp'
+Plug 'sheerun/vim-polyglot'
 call plug#end()
 
 
