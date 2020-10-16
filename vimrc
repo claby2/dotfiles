@@ -20,9 +20,11 @@ Plug 'aserebryakov/vim-todo-lists'
 Plug 'itchyny/lightline.vim'
 Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
+Plug 'claby2/virtue.vim'
 Plug 'eemed/sitruuna.vim'
 Plug 'jaredgorski/spacecamp'
 Plug 'sheerun/vim-polyglot'
+Plug 'terryma/vim-smooth-scroll'
 call plug#end()
 
 
@@ -111,7 +113,7 @@ nnoremap <silent> <leader>gf :GenfmtFormat<CR>
 " ///// PLUGIN SPECIFIC SETTINGS /////
 " Lightline configuration
 let g:lightline = {
-            \ 'colorscheme': 'sitruuna',
+            \ 'colorscheme': 'virtue',
             \ 'active': {
             \   'left': [ [ 'mode' ],
             \             [ 'readonly', 'filename', 'modified', 'spell'] ],
@@ -135,10 +137,10 @@ endfunction
 function! ClangFormat()
     if len(findfile(".clang-format", expand("%:p:h").";")) || len(findfile("_clang-format", expand("%:p:h").";"))
         " clang-format file has been found
-        return "clang-format"
+        return "clang-format --assume-filename=".expand('%:t')." -style=file"
     endif
     " No clang-format file has been found
-    return "clang-format --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
+    return "clang-format --assume-filename=".expand('%:t')." --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
 endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
@@ -146,13 +148,16 @@ let g:genfmt_formatters = {
             \ }
 let g:genfmt_enable_fallback = 1
 
+" Smooth scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
 
 
 
 
 " ///// COLOR SETTINGS /////
 syntax on
-colorscheme spacecamp
-
-" Highlight line numbers
-highlight LineNr guifg=#FFFFFF
+colorscheme virtue
