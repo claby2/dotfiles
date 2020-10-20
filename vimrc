@@ -106,6 +106,12 @@ nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 " genfmt.vim bind
 nnoremap <silent> <leader>gf :GenfmtFormat<CR>
 
+" Switch between window splits easily
+nnoremap <C-J> <C-W>j
+nnoremap <C-K> <C-W>k
+nnoremap <C-L> <C-W>l
+nnoremap <C-H> <C-W>h
+
 
 
 
