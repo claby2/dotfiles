@@ -36,6 +36,7 @@ set nocompatible
 set number tabstop=4 shiftwidth=4
 set expandtab
 set termguicolors
+filetype off
 filetype plugin indent on
 
 " Remove annoying sound on errors
