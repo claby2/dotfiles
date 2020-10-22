@@ -13,16 +13,16 @@ else
 endif
 
 call plug#begin($PLUGGED)
-Plug 'preservim/nerdtree'
-Plug 'preservim/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
-Plug 'itchyny/lightline.vim'
 Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
 Plug 'claby2/virtue.vim'
 Plug 'eemed/sitruuna.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'jaredgorski/spacecamp'
+Plug 'preservim/nerdcommenter'
+Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 call plug#end()
