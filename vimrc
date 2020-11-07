@@ -17,14 +17,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'aserebryakov/vim-todo-lists'
 Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
-Plug 'claby2/virtue.vim'
-Plug 'eemed/sitruuna.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'jaredgorski/spacecamp'
 Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
+Plug 'ayu-theme/ayu-vim'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
@@ -120,7 +119,7 @@ nnoremap <C-H> <C-W>h
 " ///// PLUGIN SPECIFIC SETTINGS /////
 " Lightline configuration
 let g:lightline = {
-            \ 'colorscheme': 'virtue',
+            \ 'colorscheme': 'ayu',
             \ 'active': {
             \   'left': [ [ 'mode' ],
             \             [ 'readonly', 'filename', 'modified', 'spell'] ],
@@ -167,4 +166,5 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 " ///// COLOR SETTINGS /////
 syntax on
-colorscheme virtue
+let ayucolor="dark"
+colorscheme ayu
