@@ -23,7 +23,6 @@ Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'ayu-theme/ayu-vim'
-Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
