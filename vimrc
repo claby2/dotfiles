@@ -150,6 +150,7 @@ endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': ClangFormat(),
+            \ 'java': ClangFormat(),
             \ 'go': "gofmt",
             \ }
 let g:genfmt_enable_fallback = 1
