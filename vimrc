@@ -99,6 +99,9 @@ nnoremap <silent> <esc><esc> : nohls<cr>
 " Toggle spellchecking
 nnoremap <silent> <leader>s :set spell!<CR>
 
+" Redraw screen
+nnoremap <silent> <leader>r :redraw!<CR>
+
 " Nerd tree bind
 nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
 
