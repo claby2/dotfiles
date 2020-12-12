@@ -7,6 +7,7 @@ TARGETS= vimrc       \
 		 ripgrep     \
 		 spotify-tui \
 		 sxhkd       \
+		 zathura     \
 
 # Replace original file $(1) with new file $(2) with prompt
 define set_file
@@ -71,6 +72,11 @@ spotify-tui:
 sxhkd:
 	echo "sxhkd:"
 	$(call set_file,$(HOME)/.config/sxhkd/sxhkdrc,$(DOTFILES)/config/sxhkd/sxhkdrc)
+	echo ""
+
+zathura:
+	echo "zathura:"
+	$(call set_file,$(HOME)/.config/zathura/zathurarc,$(DOTFILES)/config/zathura/zathurarc)
 	echo ""
 
 .PHONY: $(TARGETS)
