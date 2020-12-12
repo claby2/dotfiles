@@ -23,6 +23,7 @@ Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'ayu-theme/ayu-vim'
+Plug 'fatih/vim-go'
 call plug#end()
 
 
@@ -78,9 +79,7 @@ set laststatus=2
 set scrolloff=0
 
 " Clear using current background color
-if s:windows
-    set t_ut=
-endif
+set t_ut=
 
 " Make vim always open windows maximized
 autocmd GUIEnter * simalt ~x
