@@ -1,0 +1,23 @@
+#! /bin/sh
+
+killall sxhkd; sxhkd &
+exec compton &
+feh --bg-fill ~/.config/wallpaper/wallpaper.*
+xsetroot -cursor_name arrow
+~/.config/polybar/launch.sh
+i=1
+for monitor in $(bspc query -M); do
+    echo $monitor
+    bspc monitor $monitor -n "$i" -d $i/{a,b,c}
+    ((i=i+1))
+done
+
+bspc config border_width          3
+bspc config window_gap            15
+
+bspc config split_ratio           0.50
+bspc config borderless_monocle    true
+bspc config gapless_monocle       false
+bspc config focus_follows_pointer true
+
+bspc config focused_border_color  \#e7c547
