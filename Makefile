@@ -6,6 +6,7 @@ TARGETS= vimrc       \
 		 polybar     \
 		 ripgrep     \
 		 spotify-tui \
+		 sxhkd       \
 
 # Replace original file $(1) with new file $(2) with prompt
 define set_file
@@ -67,6 +68,10 @@ spotify-tui:
 	$(call set_file,$(HOME)/.config/spotify-tui/config.yml,$(DOTFILES)/config/spotify-tui/config.yml)
 	echo ""
 
+sxhkd:
+	echo "sxhkd:"
+	$(call set_file,$(HOME)/.config/sxhkd/sxhkdrc,$(DOTFILES)/config/sxhkd/sxhkdrc)
+	echo ""
 
 .PHONY: $(TARGETS)
 .SILENT: $(TARGETS)
