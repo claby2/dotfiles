@@ -11,7 +11,7 @@ radius = 10
 
 padding = 5
 
-font-0 = fixed:pixelsize=10;1
+font-0 = Cascadia Mono:style=Regular
 
 modules-left = cpu
 modules-right = date
