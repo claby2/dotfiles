@@ -1,7 +1,7 @@
 #! /bin/sh
 
 killall sxhkd; sxhkd &
-exec compton &
+killall compton; exec compton &
 feh --bg-fill ~/.config/wallpaper/wallpaper.*
 xsetroot -cursor_name arrow
 ~/.config/polybar/launch.sh
