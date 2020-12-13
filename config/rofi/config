@@ -1,0 +1,11 @@
+rofi.dpi: 120
+rofi.font: Cascadia Mono 12
+rofi.terminal: kitty
+rofi.hide-scrollbar: true
+rofi.lines: 8
+rofi.columns: 1
+rofi.fake-transparency: false
+rofi.bw: 0
+
+rofi.color-window: argb:fc0f1419, #fc0f1419, argb:00000000
+rofi.color-normal: argb:00000000, #e6e1cf, argb:00000000, argb:00000000, #e7c547

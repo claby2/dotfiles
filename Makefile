@@ -5,6 +5,7 @@ TARGETS= vimrc       \
 		 kitty       \
 		 polybar     \
 		 ripgrep     \
+		 rofi        \
 		 spotify-tui \
 		 sxhkd       \
 		 zathura     \
@@ -63,6 +64,10 @@ ripgrep:
 	echo "ripgrep:"
 	$(call set_file,$(HOME)/.config/ripgrep/config,$(DOTFILES)/config/ripgrep/config)
 	echo ""
+
+rofi:
+	echo "rofi:"
+	$(call set_file,$(HOME)/.config/rofi/config,$(DOTFILES)/config/rofi/config)
 
 spotify-tui:
 	echo "spotify-tui:"
