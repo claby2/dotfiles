@@ -1,18 +1,17 @@
-#! /bin/sh
+#!/bin/sh
 
 killall sxhkd; sxhkd &
-killall compton; exec compton &
+killall compton; compton &
 feh --bg-fill ~/.config/wallpaper/wallpaper.*
 xsetroot -cursor_name arrow
 ~/.config/polybar/launch.sh
 i=1
 for monitor in $(bspc query -M); do
-    echo $monitor
     bspc monitor $monitor -n "$i" -d $i/{a,b,c}
     ((i=i+1))
 done
 
-bspc config border_width          3
+bspc config border_width          1
 bspc config window_gap            15
 
 bspc config split_ratio           0.50
