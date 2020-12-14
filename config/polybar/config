@@ -1,19 +1,42 @@
 [colors]
-background = #0f14193e
+color0 = #000000
+color1 = #ff3333
+color2 = #b8cc52
+color3 = #e7c547
+color4 = #36a3d9
+color5 = #f07178
+color6 = #95e6cb
+color7 = #ffffff
+color8 = #323232
+color9 = #ff6565
+color10 = #eafe84
+color11 = #fff779
+color12 = #68d5ff
+color13 = #ffa3aa
+color14 = #c7fffd
+color15 = #ffffff
+background = #0f1419
+selection_foreground = #0f1419
+cursor = #f29718
 foreground = #e6e1cf
+selection_background = #e6e1cf
 
 [bar/main]
-width = 99%
+width = 98%
+offset-x = 1%
 height = 27
 background = ${colors.background}
 foreground = ${colors.foreground}
 radius = 10
 
-padding = 5
-
 font-0 = Cascadia Mono:style=Regular
 
-modules-left = cpu
+padding = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+modules-left = cpu bspwm
 modules-right = date
 
 [module/date]
@@ -28,5 +51,25 @@ type = internal/cpu
 interval = 0.5
 format = <label>
 label = CPU %percentage%%
+
+[module/bspwm]
+type = internal/bspwm
+
+ping-workspaces = true
+
+label-focused = %name%
+label-focused-background = ${colors.color8}
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-underline = ${colors.color12}
+label-occupied-padding = 1
+
+label-urgent = %name%!
+label-urgent-background = ${colors.color1}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-padding = 1
 
 [global/wm]

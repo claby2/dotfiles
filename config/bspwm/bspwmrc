@@ -7,9 +7,9 @@ xsetroot -cursor_name arrow
 xinput --set-prop 12 "libinput Accel Speed" -0.5
 ~/.config/polybar/launch.sh
 
-xrandr --output HDMI-1 --left-of DVI-D-1
-bspc monitor 0x00200002 -n "A" -d 1 2
-bspc monitor 0x00200004 -n "B" -d 3 4
+xrandr --output HDMI-0 --left-of DVI-D-0
+bspc monitor DVI-D-0 -n "A" -d 1 2
+bspc monitor HDMI-0 -n "B" -d 3 4
 
 bspc config border_width          1
 bspc config window_gap            15
