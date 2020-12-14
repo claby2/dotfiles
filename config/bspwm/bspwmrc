@@ -4,6 +4,7 @@ killall sxhkd; sxhkd &
 killall compton; compton &
 feh --bg-fill ~/.config/wallpaper/wallpaper.*
 xsetroot -cursor_name arrow
+xinput --set-prop 12 "libinput Accel Speed" -0.5
 ~/.config/polybar/launch.sh
 
 xrandr --output HDMI-1 --left-of DVI-D-1
