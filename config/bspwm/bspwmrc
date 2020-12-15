@@ -2,14 +2,27 @@
 
 killall sxhkd; sxhkd &
 killall compton; compton &
+
+# Background
 feh --bg-fill ~/.config/wallpaper/wallpaper.*
+
+# Set cursor
 xsetroot -cursor_name arrow
+
+# Set mouse sensitivity
 xinput --set-prop 12 "libinput Accel Speed" -0.5
+
+# Launch polybar
 ~/.config/polybar/launch.sh
 
+
+# Set up monitors
+# Set HDMI-0 monitor to the left of DVI-D-0
 xrandr --output HDMI-0 --left-of DVI-D-0
-bspc monitor DVI-D-0 -n "A" -d 1 2
-bspc monitor HDMI-0 -n "B" -d 3 4
+xrandr --output DVI-D-0 --mode 1920x1080 --rate 144.00
+bspc monitor DVI-D-0 -d 3 4
+bspc monitor HDMI-0 -d 1 2
+
 
 bspc config border_width          1
 bspc config window_gap            15

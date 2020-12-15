@@ -28,14 +28,10 @@ height = 27
 background = ${colors.background}
 foreground = ${colors.foreground}
 radius = 10
-
 font-0 = Cascadia Mono:style=Regular
-
 padding = 2
-
 module-margin-left = 1
 module-margin-right = 1
-
 modules-left = cpu bspwm
 modules-right = date
 
@@ -54,21 +50,16 @@ label = CPU %percentage%%
 
 [module/bspwm]
 type = internal/bspwm
-
-ping-workspaces = true
-
+pin-workspaces = false
 label-focused = %name%
 label-focused-background = ${colors.color8}
 label-focused-padding = 1
-
 label-occupied = %name%
 label-occupied-underline = ${colors.color12}
 label-occupied-padding = 1
-
 label-urgent = %name%!
 label-urgent-background = ${colors.color1}
 label-urgent-padding = 1
-
 label-empty = %name%
 label-empty-padding = 1
 
