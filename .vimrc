@@ -171,3 +171,4 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 syntax on
 let ayucolor="dark"
 colorscheme ayu
+hi Normal guibg=NONE ctermbg=NONE
