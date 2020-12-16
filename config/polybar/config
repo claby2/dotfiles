@@ -22,6 +22,7 @@ foreground = #e6e1cf
 selection_background = #e6e1cf
 
 [bar/main]
+wm-restack = bspwm
 offset-x = 0
 offset-y = 0
 height = 27
