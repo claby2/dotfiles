@@ -35,53 +35,53 @@ all: $(TARGETS)
 
 vimrc:
 	echo "vimrc:"
-	$(call set_file,$(HOME)/.vimrc,$(DOTFILES)/vimrc)
+	$(call set_file,$(HOME)/.vimrc,$(DOTFILES)/.vimrc)
 	echo ""
 
 bat:
 	echo "bat:"
-	$(call set_file,$(HOME)/.config/bat/bat.conf,$(DOTFILES)/config/bat/bat.conf)
+	$(call set_file,$(HOME)/.config/bat/bat.conf,$(DOTFILES)/.config/bat/bat.conf)
 	echo ""
 
 bspwm:
 	echo "bspwm:"
-	$(call set_file,$(HOME)/.config/bspwm/bspwmrc,$(DOTFILES)/config/bspwm/bspwmrc)
+	$(call set_file,$(HOME)/.config/bspwm/bspwmrc,$(DOTFILES)/.config/bspwm/bspwmrc)
 	echo ""
 
 kitty:
 	echo "kitty:"
-	$(call set_file,$(HOME)/.config/kitty/kitty.conf,$(DOTFILES)/config/kitty/kitty.conf)
-	$(call set_file,$(HOME)/.config/kitty/theme.conf,$(DOTFILES)/config/kitty/theme.conf)
+	$(call set_file,$(HOME)/.config/kitty/kitty.conf,$(DOTFILES)/.config/kitty/kitty.conf)
+	$(call set_file,$(HOME)/.config/kitty/theme.conf,$(DOTFILES)/.config/kitty/theme.conf)
 	echo ""
 
 polybar:
 	echo "polybar:"
-	$(call set_file,$(HOME)/.config/polybar/config,$(DOTFILES)/config/polybar/config)
-	$(call set_file,$(HOME)/.config/polybar/launch.sh,$(DOTFILES)/config/polybar/launch.sh)
+	$(call set_file,$(HOME)/.config/polybar/config,$(DOTFILES)/.config/polybar/config)
+	$(call set_file,$(HOME)/.config/polybar/launch.sh,$(DOTFILES)/.config/polybar/launch.sh)
 	echo ""
 
 ripgrep:
 	echo "ripgrep:"
-	$(call set_file,$(HOME)/.config/ripgrep/config,$(DOTFILES)/config/ripgrep/config)
+	$(call set_file,$(HOME)/.config/ripgrep/config,$(DOTFILES)/.config/ripgrep/config)
 	echo ""
 
 rofi:
 	echo "rofi:"
-	$(call set_file,$(HOME)/.config/rofi/config,$(DOTFILES)/config/rofi/config)
+	$(call set_file,$(HOME)/.config/rofi/config,$(DOTFILES)/.config/rofi/config)
 
 spotify-tui:
 	echo "spotify-tui:"
-	$(call set_file,$(HOME)/.config/spotify-tui/config.yml,$(DOTFILES)/config/spotify-tui/config.yml)
+	$(call set_file,$(HOME)/.config/spotify-tui/config.yml,$(DOTFILES)/.config/spotify-tui/config.yml)
 	echo ""
 
 sxhkd:
 	echo "sxhkd:"
-	$(call set_file,$(HOME)/.config/sxhkd/sxhkdrc,$(DOTFILES)/config/sxhkd/sxhkdrc)
+	$(call set_file,$(HOME)/.config/sxhkd/sxhkdrc,$(DOTFILES)/.config/sxhkd/sxhkdrc)
 	echo ""
 
 zathura:
 	echo "zathura:"
-	$(call set_file,$(HOME)/.config/zathura/zathurarc,$(DOTFILES)/config/zathura/zathurarc)
+	$(call set_file,$(HOME)/.config/zathura/zathurarc,$(DOTFILES)/.config/zathura/zathurarc)
 	echo ""
 
 .PHONY: $(TARGETS)
