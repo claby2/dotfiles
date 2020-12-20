@@ -15,7 +15,7 @@ color12 = #68d5ff
 color13 = #ffa3aa
 color14 = #c7fffd
 color15 = #ffffff
-background = #0f1419
+background = #2e0f1419
 selection_foreground = #0f1419
 cursor = #f29718
 foreground = #e6e1cf
@@ -26,13 +26,13 @@ wm-restack = bspwm
 offset-x = 0
 offset-y = 0
 height = 27
-line-size = 0
+line-size = 3
 bottom = false
 background = ${colors.background}
 foreground = ${colors.foreground}
-font-0 = Cascadia Mono:style=Regular
-font-1 = Cascadia Mono:style=Bold
-font-2 = Cascadia Mono:style=SemiLight
+font-0 = Roboto:style=Regular;2
+font-1 = Roboto:style=Bold;2
+font-2 = Roboto:style=SemiLight;2
 padding = 4
 module-margin = 1
 modules-left = bspwm
@@ -41,9 +41,9 @@ modules-right = date
 [module/date]
 type = internal/date
 interval = 5
-date = %d %b %A
+date = %a %d %b
 time = %I:%M %p
-label = %time% | %date%
+label = "%date%   %time%"
 label-font = 3
 
 [module/bspwm]
@@ -51,16 +51,17 @@ type = internal/bspwm
 pin-workspaces = false
 label-focused = %name%
 label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.foreground}
 label-focused-font = 2
 label-focused-padding = 1
 label-occupied = %name%
-label-occupied-foreground = ${colors.color8}
+label-occupied-foreground = ${colors.foreground}
 label-occupied-padding = 1
 label-urgent = %name%!
 label-urgent-background = ${colors.color1}
 label-urgent-padding = 1
 label-empty = %name%
-label-empty-foreground = ${colors.color8}
+label-empty-foreground = ${colors.foreground}
 label-empty-padding = 1
 
 [global/wm]
