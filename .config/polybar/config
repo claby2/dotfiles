@@ -30,9 +30,9 @@ line-size = 3
 bottom = false
 background = ${colors.background}
 foreground = ${colors.foreground}
-font-0 = Roboto:style=Regular;2
-font-1 = Roboto:style=Bold;2
-font-2 = Roboto:style=SemiLight;2
+font-0 = Inter:style=Regular;2
+font-1 = Inter:style=Bold;2
+font-2 = Inter:style=SemiLight;2
 padding = 4
 module-margin = 1
 modules-left = bspwm
