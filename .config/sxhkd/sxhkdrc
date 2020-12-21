@@ -6,7 +6,7 @@ super + shift + s
 
 super + shift + ctrl + s
 	flameshot screen -c; \
-	dunstify "Screen captured and copied"
+	dunstify "flameshot" "Screen captured and copied"
 #
 # wm independent hotkeys
 #
@@ -23,7 +23,7 @@ super + space
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd; \
-	dunstify "Reloaded sxhkd configuration files"
+	dunstify "sxhkd" "Reloaded configuration files"
 
 #
 # bspwm hotkeys
