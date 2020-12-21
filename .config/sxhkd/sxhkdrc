@@ -3,6 +3,9 @@ super + alt + {h,l}
 
 super + shift + s
 	flameshot gui
+
+super + shift + ctrl + s
+	flameshot screen -c
 #
 # wm independent hotkeys
 #
