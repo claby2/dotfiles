@@ -5,7 +5,8 @@ super + shift + s
 	flameshot gui
 
 super + shift + ctrl + s
-	flameshot screen -c
+	flameshot screen -c; \
+	dunstify "Screen captured and copied"
 #
 # wm independent hotkeys
 #
@@ -21,7 +22,8 @@ super + space
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+	pkill -USR1 -x sxhkd; \
+	dunstify "Reloaded sxhkd configuration files"
 
 #
 # bspwm hotkeys
