@@ -17,3 +17,4 @@ text-based configuration files
 | Music Player        | [spotify-tui](https://github.com/Rigellute/spotify-tui) |
 | Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)        |
 | File Displayer      | [bat](https://github.com/sharkdp/bat)                   |
+| Shell               | [zsh](https://wiki.archlinux.org/index.php/Zsh)         |
