@@ -1,6 +1,10 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="jbergantine"
+if [[ -n $SSH_CONNECTION ]]; then
+    ZSH_THEME="jbergantine"
+else
+    ZSH_THEME="fwalch"
+fi
 
 plugins=(
     git
