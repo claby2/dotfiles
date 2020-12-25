@@ -151,8 +151,8 @@ function! ClangFormat()
 endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
-            \ 'cpp': ClangFormat(),
-            \ 'java': ClangFormat(),
+            \ 'cpp': "ClangFormat()",
+            \ 'java': "ClangFormat()",
             \ 'haskell': "stylish-haskell",
             \ 'go': "gofmt",
             \ }
