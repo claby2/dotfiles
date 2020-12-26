@@ -119,6 +119,13 @@ nnoremap <C-H> <C-W>h
 
 " ///// PLUGIN SPECIFIC SETTINGS /////
 " Lightline configuration
+function! HasSpell()
+    " Check if spell is on
+    if &spell
+        return 'spell'
+    endif
+    return ''
+endfunction
 let g:lightline = {
             \ 'colorscheme': 'ayu',
             \ 'active': {
@@ -131,14 +138,6 @@ let g:lightline = {
             \   'spell': 'HasSpell',
             \ },
             \ }
-
-" Check if spell is on
-function! HasSpell()
-    if &spell
-        return 'spell'
-    endif
-    return ''
-endfunction
 
 " genfmt.vim configuration
 function! ClangFormat()
@@ -163,6 +162,10 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" Nerd Commenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 
 
 
