@@ -148,11 +148,16 @@ function! ClangFormat()
     " No clang-format file has been found
     return "clang-format --assume-filename=".expand('%:t')." --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
 endfunction
+function! CmakeFormat()
+    return "cmake-format ".expand('%:t')
+endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': "ClangFormat()",
             \ 'java': "ClangFormat()",
             \ 'haskell': "stylish-haskell",
+            \ 'cmake': "CmakeFormat()",
+            \ 'markdown': "remark --no-color --silent",
             \ 'go': "gofmt",
             \ }
 let g:genfmt_enable_fallback = 1
