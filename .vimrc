@@ -78,6 +78,9 @@ set laststatus=2
 " No context lines before scroll
 set scrolloff=0
 
+" Mouse support
+set mouse=a
+
 " Clear using current background color
 set t_ut=
 

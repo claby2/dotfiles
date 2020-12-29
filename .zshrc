@@ -18,3 +18,5 @@ plugins=(
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 source $ZSH/oh-my-zsh.sh
+
+cd $HOME
