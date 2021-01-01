@@ -109,10 +109,10 @@ nnoremap <silent> <leader>s :set spell!<CR>
 nnoremap <silent> <leader>r :redraw!<CR>
 
 " Nerd tree bind
-nnoremap <silent> <leader>nt :NERDTreeToggle<CR>
+nnoremap <silent> <leader>t :NERDTreeToggle<CR>
 
 " genfmt.vim bind
-nnoremap <silent> <leader>gf :GenfmtFormat<CR>
+nnoremap <silent> <leader>f :GenfmtFormat<CR>
 
 " Switch between window splits easily
 nnoremap <C-J> <C-W>j
