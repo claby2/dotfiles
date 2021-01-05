@@ -24,6 +24,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'ayu-theme/ayu-vim'
 Plug 'fatih/vim-go'
+
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
 
 
@@ -158,10 +162,15 @@ endfunction
 function! CmakeFormat()
     return "cmake-format ".expand('%:t')
 endfunction
+function! Prettier()
+    return "prettier --stdin-filepath ".expand('%:p')." --tab-width 4"
+endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': "ClangFormat()",
             \ 'java': "ClangFormat()",
+            \ 'javascript': "Prettier()",
+            \ 'rust': "rustfmt",
             \ 'haskell': "stylish-haskell",
             \ 'cmake': "CmakeFormat()",
             \ 'markdown': "remark --no-color --silent",
