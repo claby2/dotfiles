@@ -12,6 +12,7 @@ plugins=(
     yarn
     cabal
     colored-man-pages
+    cargo
     alias-finder
 )
 
