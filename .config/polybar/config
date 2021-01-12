@@ -22,6 +22,7 @@ foreground = #e6e1cf
 selection_background = #e6e1cf
 
 [bar/main]
+enable-ipc = true
 wm-restack = bspwm
 offset-x = 0
 offset-y = 0
@@ -36,7 +37,7 @@ font-2 = Inter:style=SemiLight;2
 padding = 4
 module-margin = 1
 modules-left = bspwm
-modules-right = date
+modules-right = spotify-play-pause date
 
 [module/date]
 type = internal/date
@@ -63,5 +64,11 @@ label-urgent-padding = 1
 label-empty = %name%
 label-empty-foreground = ${colors.foreground}
 label-empty-padding = 1
+
+[module/spotify-play-pause]
+type = custom/ipc
+hook-0 = echo "P"
+initial = 1
+click-left = playerctl play-pause spotify
 
 [global/wm]
