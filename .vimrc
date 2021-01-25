@@ -171,7 +171,7 @@ let g:genfmt_formatters = {
             \ 'cpp': "ClangFormat()",
             \ 'java': "ClangFormat()",
             \ 'javascript': "Prettier()",
-            \ 'rust': "rustfmt",
+            \ 'rust': "rustfmt --edition 2018",
             \ 'haskell': "stylish-haskell",
             \ 'cmake': "CmakeFormat()",
             \ 'markdown': "remark --no-color --silent",
