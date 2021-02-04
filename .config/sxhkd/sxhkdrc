@@ -17,7 +17,7 @@ super + alt + space
 
 # terminal emulator
 super + Return
-	kitty
+	st	
 
 # program launcher
 # super + @space

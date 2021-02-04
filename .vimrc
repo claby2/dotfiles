@@ -25,6 +25,8 @@ Plug 'terryma/vim-smooth-scroll'
 Plug 'ayu-theme/ayu-vim'
 Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'delphinus/vim-firestore'
+Plug 'lervag/vimtex'
 
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
@@ -88,6 +90,14 @@ set mouse=a
 
 " Clear using current background color
 set t_ut=
+
+" augroup
+augroup stuff
+    autocmd!
+    autocmd BufRead,BufNewFile *.h,*.c setlocal filetype=c
+    " Recognize compile flags, mostly for coc.nvim
+    autocmd FileType cpp,c let b:coc_root_patterns=['compile_flags.txt']
+augroup END
 
 " Make vim always open windows maximized
 autocmd GUIEnter * simalt ~x
@@ -188,6 +198,13 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 " Nerd Commenter
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
+
+" vimtex Configuration
+let g:tex_flavor = 'latex'
+let g:vimtex_view_method = 'zathura'
+let g:vimtex_quickfix_mode = 0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 
 
@@ -345,6 +362,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+let g:c_syntax_for_h = 1
 
 
 

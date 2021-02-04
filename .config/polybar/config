@@ -15,31 +15,43 @@ color12 = #68d5ff
 color13 = #ffa3aa
 color14 = #c7fffd
 color15 = #ffffff
-background = #2e0f1419
+background = #ff0f1419
 selection_foreground = #0f1419
 cursor = #f29718
 foreground = #e6e1cf
 selection_background = #e6e1cf
 
+alpha = #00000000
+
 [bar/main]
 enable-ipc = true
-wm-restack = bspwm
 offset-x = 0
-offset-y = 0
+offset-y = 1%
 height = 27
 line-size = 3
 bottom = false
-background = ${colors.background}
+background = ${colors.alpha}
 foreground = ${colors.foreground}
 font-0 = Inter:style=Regular;2
 font-1 = Inter:style=Bold;2
 font-2 = Inter:style=SemiLight;2
 padding = 4
 module-margin = 1
+modules-right = date
+
+[bar/bspwm]
+inherit = bar/main
+wm-restack = bspwm
 modules-left = bspwm
-modules-right = spotify-play-pause date
+
+[bar/i3]
+inherit = bar/main
+wm-restack = i3
+modules-left = i3
 
 [module/date]
+format-background = ${colors.background}
+format-padding = 1
 type = internal/date
 interval = 5
 date = %a %d %b
@@ -48,6 +60,8 @@ label = "%date%   %time%"
 label-font = 3
 
 [module/bspwm]
+format-background = ${colors.background}
+format-padding = 1
 type = internal/bspwm
 pin-workspaces = false
 label-focused = %name%
@@ -65,10 +79,24 @@ label-empty = %name%
 label-empty-foreground = ${colors.foreground}
 label-empty-padding = 1
 
-[module/spotify-play-pause]
-type = custom/ipc
-hook-0 = echo "P"
-initial = 1
-click-left = playerctl play-pause spotify
+[module/i3]
+format-background = ${colors.background}
+format-padding = 1
+type = internal/i3
+pin-workspaces = false
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.foreground}
+label-focused-font = 2
+label-focused-padding = 1
+label-occupied = %name%
+label-occupied-foreground = ${colors.foreground}
+label-occupied-padding = 1
+label-urgent = %name%!
+label-urgent-background = ${colors.color1}
+label-urgent-padding = 1
+label-empty = %name%
+label-empty-foreground = ${colors.foreground}
+label-empty-padding = 1
 
 [global/wm]
