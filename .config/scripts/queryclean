@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Query all clean git directories in current directory
+
+echo "clean git directories:"
+for d in *; do
+    if [ -d "$d/.git" ] && [ -z "$(git --git-dir="$d/.git" --work-tree="$d" status --porcelain)" ]; then
+        echo "$d"
+    fi
+done

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Streamlined system startup script
+
+killall picom
+
+# Set wallpaper
+feh --bg-fill ~/.config/wallpaper/wallpaper.*
+
+# Set cursor
+xsetroot -cursor_name arrow
+
+# Set mouse speed
+xinput --set-prop 12 "libinput Accel Speed" -0.5
+
+# Configure monitors
+xrandr --output HDMI-0 --left-of DVI-D-0
+xrandr --output DVI-D-0 --mode 1920x1080 --rate 144.00
+
+picom &>/dev/null &

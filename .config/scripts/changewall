@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Change current wallpaper
+# This is done by copying an image file in ~/.config/wallpaper/ as ~/.config/wallpaper/wallpaper.
+
+shopt -s extglob
+
+DIRECTORY="$HOME/.config/wallpaper"
+WALLPAPERS=$(ls "$DIRECTORY")
+
+# List available wallpapers
+echo "Available wallpapers:"
+for wallpaper in $WALLPAPERS; do
+    if [[ $wallpaper != wallpaper.* ]]; then
+        echo "$wallpaper"
+    fi
+done
+echo
+
+invalid=true
+while $invalid; do
+    read -rp "New wallpaper: " input
+    for wallpaper in $WALLPAPERS; do
+        if [[ "$wallpaper" == "$input" ]]; then
+            invalid=false
+            break 
+        fi
+    done
+done
+
+OLD_WALLPAPERS=("$DIRECTORY/wallpaper".*)
+OLD_WALLPAPER="${OLD_WALLPAPERS[0]}"
+if [[ -f "$OLD_WALLPAPER" ]]; then
+    read -rp "Replace current wallpaper? [Y/n] " yn
+    case $yn in
+        [Yy]* ) 
+            echo "REMOVING $OLD_WALLPAPER"
+            rm "$OLD_WALLPAPER"
+            ;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+fi
+
+# Replace wallpaper
+cp "$DIRECTORY"/"$input" "$DIRECTORY"/wallpaper."${input##*.}"
+feh --bg-fill "$HOME"/.config/wallpaper/wallpaper.*

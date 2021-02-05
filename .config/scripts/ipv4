@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Outputs ipv4
+
+exec dig @resolver4.opendns.com myip.opendns.com +short

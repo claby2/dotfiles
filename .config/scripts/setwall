@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Change current wallpaper to ~/.config/wallpaper/wallpaper.* using feh
+
+feh --bg-fill "$HOME"/.config/wallpaper/wallpaper.*
