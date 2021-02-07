@@ -200,11 +200,16 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 let g:NERDSpaceDelims = 1
 
 " vimtex Configuration
-let g:tex_flavor = 'latex'
-let g:vimtex_view_method = 'zathura'
-let g:vimtex_quickfix_mode = 0
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
+
+" polyglot Configuration
+let g:vim_json_syntax_conceal=0
+let g:vim_markdown_conceal=0
+let g:vim_markdown_conceal_code_blocks=0
 
 
 
