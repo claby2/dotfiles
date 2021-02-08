@@ -39,7 +39,7 @@ call plug#end()
 
 " ///// GENERAL SETTINGS /////
 set nocompatible
-set number tabstop=4 shiftwidth=4
+set number relativenumber tabstop=4 shiftwidth=4
 set expandtab
 set termguicolors
 filetype off
