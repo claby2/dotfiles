@@ -11,13 +11,16 @@ super + shift + ctrl + s
 super + alt + space
 	rofi -show window
 
+super + shift + p
+	playerctl --player=spotify play-pause; \
+	dunstify "playerctl" "Toggled play/pause"
 #
 # wm independent hotkeys
 #
 
 # terminal emulator
 super + Return
-	st	
+	st
 
 # program launcher
 # super + @space
