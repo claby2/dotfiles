@@ -27,6 +27,8 @@ Plug 'fatih/vim-go'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'delphinus/vim-firestore'
 Plug 'lervag/vimtex'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'xolox/vim-colorscheme-switcher'
 Plug 'xolox/vim-misc'
@@ -115,7 +117,7 @@ endif
 
 " ///// MAPPING COMMANDS /////
 " Clear hlsearch highlights
-nnoremap <silent> <esc><esc> : nohls<cr>
+nnoremap <silent> <esc><esc> :nohls<CR>
 
 " Toggle spellchecking
 nnoremap <silent> <leader>s :set spell!<CR>
@@ -128,6 +130,9 @@ nnoremap <silent> <leader>t :NERDTreeToggle<CR>
 
 " genfmt.vim bind
 nnoremap <silent> <leader>f :GenfmtFormat<CR>
+
+" fzf bind
+nnoremap <silent> <leader><tab> :Files<CR>
 
 " Switch between window splits easily
 nnoremap <C-J> <C-W>j
