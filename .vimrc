@@ -216,6 +216,10 @@ let g:vim_json_syntax_conceal=0
 let g:vim_markdown_conceal=0
 let g:vim_markdown_conceal_code_blocks=0
 
+" vim-go Configuration
+" Disable warning on startup
+let g:go_version_warning = 0
+
 
 
 
@@ -374,7 +378,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 let g:c_syntax_for_h = 1
-
+let g:coc_disable_startup_warning = 1
 
 
 
