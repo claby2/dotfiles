@@ -1,7 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 if [[ -n $SSH_CONNECTION ]]; then
-    ZSH_THEME="jbergantine"
+    ZSH_THEME="nebirhos"
 else
     ZSH_THEME="fwalch"
 fi
