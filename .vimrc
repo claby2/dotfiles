@@ -190,6 +190,7 @@ let g:genfmt_formatters = {
             \ 'haskell': "stylish-haskell",
             \ 'cmake': "CmakeFormat()",
             \ 'markdown': "remark --no-color --silent",
+            \ 'gdscript3': "gdformat -",
             \ 'go': "gofmt",
             \ }
 let g:genfmt_enable_fallback = 1
