@@ -18,3 +18,34 @@ text-based configuration files
 | Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)                                |
 | File Displayer      | [bat](https://github.com/sharkdp/bat)                                           |
 | Shell               | [zsh](https://wiki.archlinux.org/index.php/Zsh)                                 |
+| Media Control       | [playerctl](https://github.com/altdesktop/playerctl)                            |
+
+## Ubuntu Installation
+
+### Programs
+
+Majority of programs can be installed with apt:
+
+    $ sudo apt install bspwm rofi feh zathura neovim dunst sxhkd ripgrep bat zsh playerctl
+
+Simple Terminal (my st fork):
+
+    $ git clone https://github.com/claby2/st
+    $ cd st
+    $ sudo make clean install
+
+Other programs:
+
+*   [polybar](https://github.com/polybar/polybar)
+*   [kitty](https://github.com/kovidgoyal/kitty)
+*   [picom](https://github.com/jonaburg/picom)
+*   [spotify-tui](https://github.com/Rigellute/spotify-tui)
+
+### Fonts
+
+*   Cascadia Code
+*   Inter
+
+<!---->
+
+    $ sudo apt install fonts-cascadia-code fonts-inter

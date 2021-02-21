@@ -1,0 +1,22 @@
+config.ambit => .config/ambit/config.ambit;
+
+.vimrc;
+.zshrc;
+.config/[
+    bat/bat.conf,
+    kitty/[kitty.conf, theme.conf],
+    nvim/init.vim,
+    ripgrep/config,
+    scripts/[changewall, clock, ipv4, launch, memory, queryclean, rpitemp, setwall, startup],
+    spotify-tui/config.yml,
+    {os(linux):
+        [
+            polybar/launch.sh,
+            dunst/dunstrc,
+            picom/picom.conf,
+            rofi/config,
+            sxhkd/sxhkdrc,
+            zathura/zathurarc,
+        ]
+    },
+];
