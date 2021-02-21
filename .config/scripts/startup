@@ -16,4 +16,6 @@ xinput --set-prop 12 "libinput Accel Speed" -0.5
 xrandr --output HDMI-0 --left-of DVI-D-0
 xrandr --output DVI-D-0 --mode 1920x1080 --rate 144.00
 
+xrdb ~/.Xresources
+
 picom &>/dev/null &

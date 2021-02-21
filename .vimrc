@@ -154,7 +154,7 @@ function! HasSpell()
     return ''
 endfunction
 let g:lightline = {
-            \ 'colorscheme': 'ayu',
+            \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode' ],
             \             [ 'readonly', 'filename', 'modified', 'spell'] ],
@@ -164,6 +164,8 @@ let g:lightline = {
             \ 'component_function': {
             \   'spell': 'HasSpell',
             \ },
+            \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+            \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
             \ }
 
 " genfmt.vim configuration
@@ -387,7 +389,7 @@ let g:coc_disable_startup_warning = 1
 " ///// COLOR SETTINGS /////
 syntax on
 let ayucolor="dark"
-colorscheme ayu
-hi Normal guibg=NONE ctermbg=NONE
+colorscheme gruvbox
+" hi Normal guibg=NONE ctermbg=NONE
 hi CocErrorSign ctermfg=Red guifg=#ff3333
 hi Quote ctermbg=109 guifg=#83a598
