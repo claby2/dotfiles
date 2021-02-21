@@ -1,5 +1,18 @@
 config.ambit => .config/ambit/config.ambit;
 
+.config/bspwm/{os(linux): 
+    {
+        host(claby2): bspwmrc,
+        host(lenovo): bspwmrc.lenovo,
+    }
+} => .config/bspwm/bspwmrc;
+.config/polybar/{os(linux): 
+    {
+        host(claby2): config,
+        host(lenovo): config.lenovo,
+    }
+} => .config/polybar/config;
+
 .Xresources;
 .vimrc;
 .zshrc;
@@ -12,10 +25,9 @@ config.ambit => .config/ambit/config.ambit;
     spotify-tui/config.yml,
     {os(linux):
         [
-            bspwm/bspwmrc,
             dunst/dunstrc,
             picom/picom.conf,
-            polybar/[config, launch.sh],
+            polybar/launch.sh,
             rofi/config,
             sxhkd/sxhkdrc,
             zathura/zathurarc,

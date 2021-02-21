@@ -1,0 +1,112 @@
+[colors]
+color0 = #000000
+color1 = #ff3333
+color2 = #b8cc52
+color3 = #e7c547
+color4 = #36a3d9
+color5 = #f07178
+color6 = #95e6cb
+color7 = #ffffff
+color8 = #323232
+color9 = #ff6565
+color10 = #eafe84
+color11 = #fff779
+color12 = #68d5ff
+color13 = #ffa3aa
+color14 = #c7fffd
+color15 = #ffffff
+background = #ff0f1419
+selection_foreground = #0f1419
+cursor = #f29718
+foreground = #e6e1cf
+selection_background = #e6e1cf
+
+alpha = #00000000
+
+[bar/main]
+enable-ipc = true
+offset-x = 0
+offset-y = 1%
+height = 27
+line-size = 3
+bottom = false
+background = ${colors.alpha}
+foreground = ${colors.foreground}
+font-0 = Inter:style=Regular;2
+font-1 = Inter:style=Bold;2
+font-2 = Inter:style=SemiLight;2
+padding = 4
+module-margin = 1
+modules-right = battery date
+
+[bar/bspwm]
+inherit = bar/main
+wm-restack = bspwm
+modules-left = bspwm
+
+[bar/i3]
+inherit = bar/main
+wm-restack = i3
+modules-left = i3
+
+[module/date]
+format-background = ${colors.background}
+format-padding = 1
+type = internal/date
+interval = 5
+date = %a %d %b
+time = %I:%M %p
+label = "%date%   %time%"
+label-font = 3
+
+[module/bspwm]
+format-background = ${colors.background}
+format-padding = 1
+type = internal/bspwm
+pin-workspaces = false
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.foreground}
+label-focused-font = 2
+label-focused-padding = 1
+label-occupied = %name%
+label-occupied-foreground = ${colors.foreground}
+label-occupied-padding = 1
+label-urgent = %name%!
+label-urgent-background = ${colors.color1}
+label-urgent-padding = 1
+label-empty = %name%
+label-empty-foreground = ${colors.foreground}
+label-empty-padding = 1
+
+[module/i3]
+format-background = ${colors.background}
+format-padding = 1
+type = internal/i3
+pin-workspaces = false
+label-focused = %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.foreground}
+label-focused-font = 2
+label-focused-padding = 1
+label-occupied = %name%
+label-occupied-foreground = ${colors.foreground}
+label-occupied-padding = 1
+label-urgent = %name%!
+label-urgent-background = ${colors.color1}
+label-urgent-padding = 1
+label-empty = %name%
+label-empty-foreground = ${colors.foreground}
+label-empty-padding = 1
+
+[module/battery]
+type = internal/battery
+format-background = ${colors.background}
+format-padding = 1
+battery = BAT1
+adapter = ACAD
+poll-interval = 5
+label-charging = Charging %percentage%%
+label-discharging = Discharging %percentage%%
+
+[global/wm]
