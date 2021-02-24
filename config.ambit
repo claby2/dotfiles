@@ -2,14 +2,14 @@ config.ambit => .config/ambit/config.ambit;
 
 .config/bspwm/{os(linux): 
     {
-        host(claby2): bspwmrc,
         host(lenovo): bspwmrc.lenovo,
+        default: bspwmrc,
     }
 } => .config/bspwm/bspwmrc;
 .config/polybar/{os(linux): 
     {
-        host(claby2): config,
         host(lenovo): config.lenovo,
+        default: config,
     }
 } => .config/polybar/config;
 
@@ -21,16 +21,19 @@ config.ambit => .config/ambit/config.ambit;
     kitty/[kitty.conf, theme.conf],
     nvim/init.vim,
     ripgrep/config,
-    scripts/[changewall, clock, ipv4, launch, memory, queryclean, rpitemp, setwall, startup],
+    scripts/[changewall, clock, ipv4, launch, memory, queryclean, setwall, startup],
     spotify-tui/config.yml,
     {os(linux):
-        [
-            dunst/dunstrc,
-            picom/picom.conf,
-            polybar/launch.sh,
-            rofi/config,
-            sxhkd/sxhkdrc,
-            zathura/zathurarc,
-        ]
+        {
+            !host(raspberrypi):[
+                scripts/rpitemp,
+                dunst/dunstrc,
+                picom/picom.conf,
+                polybar/launch.sh,
+                rofi/config,
+                sxhkd/sxhkdrc,
+                zathura/zathurarc,
+            ]
+        }
     },
 ];
