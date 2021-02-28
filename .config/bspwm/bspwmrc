@@ -8,8 +8,9 @@ killall sxhkd; sxhkd &
 # Launch polybar with bspwm arguments for workspace view
 ~/.config/polybar/launch.sh bspwm
 
+bspc monitor DP-2 -d 1 2
 bspc monitor DVI-D-0 -d 3 4
-bspc monitor HDMI-0 -d 1 2
+bspc monitor HDMI-0 -d 5 6
 
 bspc config border_width          3
 bspc config window_gap            15

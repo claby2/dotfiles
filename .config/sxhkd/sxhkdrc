@@ -100,7 +100,7 @@ super + {o,i}
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9}
-	bspc {desktop -f,node -d} {1-4}
+	bspc {desktop -f,node -d} {1-6}
 
 #
 # preselect

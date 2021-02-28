@@ -13,8 +13,9 @@ xsetroot -cursor_name arrow
 xinput --set-prop 12 "libinput Accel Speed" -0.5
 
 # Configure monitors
-xrandr --output HDMI-0 --left-of DVI-D-0
 xrandr --output DVI-D-0 --mode 1920x1080 --rate 144.00
+xrandr --output DP-2 --mode 3840x2160 --rate 60.0 --left-of DVI-D-0
+xrandr --output HDMI-0 --mode 1920x1080 --rate 60.0 --right-of DVI-D-0
 
 xrdb ~/.Xresources
 
