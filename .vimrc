@@ -157,12 +157,13 @@ let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode' ],
-            \             [ 'readonly', 'filename', 'modified', 'spell'] ],
+            \             [ 'readonly', 'filename', 'modified', 'cocstatus', 'spell'] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'fileformat', 'filetype' ] ]
             \ },
             \ 'component_function': {
             \   'spell': 'HasSpell',
+            \   'cocstatus': 'coc#status',
             \ },
             \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
             \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" }
