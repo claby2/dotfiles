@@ -12,7 +12,7 @@ super + alt + space
 	rofi -show window
 
 super + shift + p
-	playerctl --player=spotify play-pause; \
+	playerctl --player=spotifyd play-pause; \
 	dunstify "playerctl" "Toggled play/pause"
 #
 # wm independent hotkeys
