@@ -28,6 +28,7 @@ config.ambit => .config/ambit/config.ambit;
             !host(raspberrypi):[
                 scripts/rpitemp,
                 dunst/dunstrc,
+                gtk-3.0/settings.ini,
                 picom/picom.conf,
                 polybar/launch.sh,
                 rofi/config,
