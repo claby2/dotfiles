@@ -7,6 +7,7 @@ else
 fi
 
 plugins=(
+    archlinux
     git
     golang
     yarn
