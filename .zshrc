@@ -1,5 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+bindkey '^[[Z' reverse-menu-complete
+
 if [[ -n $SSH_CONNECTION ]]; then
     ZSH_THEME="nebirhos"
 else
