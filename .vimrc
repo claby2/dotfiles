@@ -182,13 +182,15 @@ function! CmakeFormat()
     return "cmake-format ".expand('%:t')
 endfunction
 function! Prettier()
-    return "prettier --stdin-filepath ".expand('%:p')." --tab-width 4"
+    return "prettier --stdin-filepath ".expand('%:p')
 endfunction
 let g:genfmt_formatters = {
             \ 'python': "yapf",
             \ 'cpp': "ClangFormat()",
             \ 'java': "ClangFormat()",
             \ 'javascript': "Prettier()",
+            \ 'typescriptreact': "Prettier()",
+            \ 'typescript': "Prettier()",
             \ 'rust': "rustfmt --edition 2018",
             \ 'haskell': "stylish-haskell",
             \ 'cmake': "CmakeFormat()",
