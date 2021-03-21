@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 # Change current wallpaper to ~/.config/wallpaper/wallpaper.* using feh
 
-feh --bg-fill "$HOME"/.config/wallpaper/wallpaper.*
+WALLPAPER="$HOME"/.config/wallpaper/wallpaper.*
+
+feh --bg-fill $WALLPAPER
+wal -c
+wal -qsi $WALLPAPER
+pywalfox update

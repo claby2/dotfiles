@@ -43,4 +43,4 @@ fi
 
 # Replace wallpaper
 cp "$DIRECTORY"/"$input" "$DIRECTORY"/wallpaper."${input##*.}"
-feh --bg-fill "$HOME"/.config/wallpaper/wallpaper.*
+exec setwall

@@ -1,7 +1,7 @@
 rofi.show-icons: true
 rofi.dpi: 120
 rofi.font: Inter 16
-rofi.terminal: kitty
+rofi.terminal: st
 rofi.hide-scrollbar: true
 rofi.lines: 4
 rofi.columns: 1
