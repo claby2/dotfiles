@@ -1,7 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-bindkey '^[[Z' reverse-menu-complete
-
 if [[ -n $SSH_CONNECTION ]]; then
     ZSH_THEME="nebirhos"
 else
@@ -22,5 +20,7 @@ plugins=(
 ZSH_ALIAS_FINDER_AUTOMATIC=true
 
 source $ZSH/oh-my-zsh.sh
+
+bindkey '^[[Z' reverse-menu-complete
 
 cd $HOME
