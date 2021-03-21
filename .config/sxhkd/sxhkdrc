@@ -12,8 +12,8 @@ super + alt + space
 	rofi -show window
 
 super + shift + p
-	playerctl --player=spotifyd play-pause; \
-	dunstify "playerctl" "Toggled play/pause"
+	spt playback --toggle; \
+	dunstify "spt" "Toggled play/pause"
 #
 # wm independent hotkeys
 #
