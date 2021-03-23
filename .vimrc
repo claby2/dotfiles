@@ -14,7 +14,6 @@ endif
 
 call plug#begin($PLUGGED)
 Plug 'airblade/vim-gitgutter'
-Plug 'aserebryakov/vim-todo-lists'
 Plug 'cespare/vim-toml'
 Plug 'claby2/genfmt.vim'
 Plug 'itchyny/lightline.vim'
@@ -30,8 +29,6 @@ Plug 'lervag/vimtex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'xolox/vim-colorscheme-switcher'
-Plug 'xolox/vim-misc'
 Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()
 
@@ -123,7 +120,7 @@ nnoremap <silent> <esc><esc> :nohls<CR>
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " Redraw screen
-nnoremap <silent> <leader>r :redraw!<CR>
+nnoremap <silent> <leader>r :redraw!<CR>:CocRestart<CR>
 
 " Nerd tree bind
 nnoremap <silent> <leader>t :NERDTreeToggle<CR>
