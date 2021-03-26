@@ -3,9 +3,6 @@
 
 killall picom
 
-# Set wallpaper
-feh --bg-fill ~/.config/wallpaper/wallpaper.*
-
 # Set cursor
 xsetroot -cursor_name left_ptr
 
@@ -20,3 +17,6 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 60.0 --right-of DVI-D-0
 xrdb ~/.Xresources
 
 picom &>/dev/null &
+
+# Set wallpaper
+exec setwall
