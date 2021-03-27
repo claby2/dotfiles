@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-# Change current wallpaper to ~/.config/wallpaper/wallpaper.* using feh
-
-WALLPAPER="$HOME"/.config/wallpaper/wallpaper.*
-
-feh --bg-fill $WALLPAPER
-wal -c
-wal -qsi $WALLPAPER --saturate 0.5 --backend haishoku
-pywalfox update

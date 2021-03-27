@@ -1,6 +1,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-fpath=("$HOME/.config/scripts" $fpath)
+# Add custom completions directory to function search path.
+fpath=("$HOME/.config/scripts/completions" $fpath)
 
 if [[ -n $SSH_CONNECTION ]]; then
 	ZSH_THEME="nebirhos"

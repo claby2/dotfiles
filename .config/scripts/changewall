@@ -1,10 +1,22 @@
 #!/usr/bin/env bash
 # Change the current wallpaper.
-# Calls upon a script named `setwall` to set the wallpaper.
 
-shopt -s extglob
-
+# Directory where wallpapers are stored. The file stored in this directory
+# which matches $wallpaper_directory/wallpaper.* is the currently set wallpaper
+# if set with -i argument.
 wallpaper_directory="$HOME/.config/wallpaper"
+
+setwall() {
+	# Set wallpaper with feh, if it exists.
+	command -v feh >/dev/null 2>&1 &&
+		feh --bg-fill $1
+	# Generate scheme from wallpaper with wal and pywalfox, if they exist.
+	command -v wal >/dev/null 2>&1 &&
+		wal -c &&
+		wal -qsni $1 --saturate 0.5 --backend haishoku &&
+		command -v pywalfox >/dev/null 2>&1 &&
+		pywalfox update
+}
 
 list() {
 	# List available wallpapers.
@@ -26,34 +38,39 @@ change() {
 		rm "$old_wallpaper"
 	fi
 
-	# Replace wallpaper
-	cp "$wallpaper_directory"/"$new_wallpaper" "$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"
-
-	# Execute external script which should set the wallpaper.
-	exec setwall
+	# Replace wallpaper with new wallpaper.
+	cp "$wallpaper_directory"/"$new_wallpaper" \
+		"$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"
 }
 
 usage() {
 	printf "%s" "\
 USAGE:
-    changewall [FLAGS]
+    changewall [FLAGS] [IMAGE]
 
 FLAGS:
-    -i image     Sets wallpaper to image
+    -i image     Sets wallpaper to image from directory
     -l, --list   Lists all available wallpapers
     -h, --help   Prints help information
 "
-	exit 1
 }
 
 case "$1" in
+"-i")
+	change "$2" && setwall "$wallpaper_directory"/wallpaper.*
+	;;
 "-l" | "--list")
 	list
 	;;
-"-i")
-	change "$2"
+"-h" | "--help")
+	usage
+	exit 0
+	;;
+"")
+	# Default.
+	setwall "$wallpaper_directory"/wallpaper.*
 	;;
 *)
-	usage
+	setwall "$1"
 	;;
 esac

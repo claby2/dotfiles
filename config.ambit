@@ -29,7 +29,6 @@ config.ambit => .config/ambit/config.ambit;
         launch,
         memory,
         queryclean,
-        setwall,
         startup
     ],
     spotify-tui/config.yml,
