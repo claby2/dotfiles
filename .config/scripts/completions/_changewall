@@ -1,0 +1,20 @@
+#compdef changewall
+
+_changewall_commands=(
+	'-i[Sets wallpaper to image]'
+	'(-l --list)'{-l,--list}'[Lists all available wallpapers]'
+	'(-h --help)'{-h,--help}'[Prints help information]'
+)
+
+_changewall() {
+	case $words[2] in
+	-i)
+		compadd "$@" - $(changewall --list)
+		;;
+	*)
+		_arguments -s : "$_changewall_commands[@]"
+		;;
+	esac
+}
+
+_changewall "$@"

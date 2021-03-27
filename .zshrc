@@ -1,20 +1,22 @@
 export ZSH="$HOME/.oh-my-zsh"
 
+fpath=("$HOME/.config/scripts" $fpath)
+
 if [[ -n $SSH_CONNECTION ]]; then
-    ZSH_THEME="nebirhos"
+	ZSH_THEME="nebirhos"
 else
-    ZSH_THEME="fwalch"
+	ZSH_THEME="fwalch"
 fi
 
 plugins=(
-    archlinux
-    git
-    golang
-    yarn
-    cabal
-    colored-man-pages
-    cargo
-    alias-finder
+	archlinux
+	git
+	golang
+	yarn
+	cabal
+	colored-man-pages
+	cargo
+	alias-finder
 )
 
 ZSH_ALIAS_FINDER_AUTOMATIC=true

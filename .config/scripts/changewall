@@ -1,46 +1,59 @@
 #!/usr/bin/env bash
-# Change current wallpaper
-# This is done by copying an image file in ~/.config/wallpaper/ as ~/.config/wallpaper/wallpaper.
+# Change the current wallpaper.
+# Calls upon a script named `setwall` to set the wallpaper.
 
 shopt -s extglob
 
-DIRECTORY="$HOME/.config/wallpaper"
-WALLPAPERS=$(ls "$DIRECTORY")
+wallpaper_directory="$HOME/.config/wallpaper"
 
-# List available wallpapers
-echo "Available wallpapers:"
-for wallpaper in $WALLPAPERS; do
-    if [[ $wallpaper != wallpaper.* ]]; then
-        echo "$wallpaper"
-    fi
-done
-echo
+list() {
+	# List available wallpapers.
+	wallpapers=$(ls "$wallpaper_directory")
+	for wallpaper in $wallpapers; do
+		# Do not include current wallpaper file.
+		if [[ $wallpaper != wallpaper.* ]]; then
+			echo "$wallpaper"
+		fi
+	done
+}
 
-invalid=true
-while $invalid; do
-    read -rp "New wallpaper: " input
-    for wallpaper in $WALLPAPERS; do
-        if [[ "$wallpaper" == "$input" ]]; then
-            invalid=false
-            break 
-        fi
-    done
-done
+change() {
+	new_wallpaper="$1"
+	old_wallpapers=("$wallpaper_directory/wallpaper".*)
+	old_wallpaper="${old_wallpapers[0]}"
+	# Remove old wallpaper.
+	if [[ -f $old_wallpaper ]]; then
+		rm "$old_wallpaper"
+	fi
 
-OLD_WALLPAPERS=("$DIRECTORY/wallpaper".*)
-OLD_WALLPAPER="${OLD_WALLPAPERS[0]}"
-if [[ -f "$OLD_WALLPAPER" ]]; then
-    read -rp "Replace current wallpaper? [Y/n] " yn
-    case $yn in
-        [Yy]* ) 
-            echo "REMOVING $OLD_WALLPAPER"
-            rm "$OLD_WALLPAPER"
-            ;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-    esac
-fi
+	# Replace wallpaper
+	cp "$wallpaper_directory"/"$new_wallpaper" "$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"
 
-# Replace wallpaper
-cp "$DIRECTORY"/"$input" "$DIRECTORY"/wallpaper."${input##*.}"
-exec setwall
+	# Execute external script which should set the wallpaper.
+	exec setwall
+}
+
+usage() {
+	printf "%s" "\
+USAGE:
+    changewall [FLAGS]
+
+FLAGS:
+    -i image     Sets wallpaper to image
+    -l, --list   Lists all available wallpapers
+    -h, --help   Prints help information
+"
+	exit 1
+}
+
+case "$1" in
+"-l" | "--list")
+	list
+	;;
+"-i")
+	change "$2"
+	;;
+*)
+	usage
+	;;
+esac

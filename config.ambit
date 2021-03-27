@@ -21,7 +21,17 @@ config.ambit => .config/ambit/config.ambit;
     kitty/[kitty.conf, theme.conf],
     nvim/init.vim,
     ripgrep/config,
-    scripts/[changewall, clock, ipv4, launch, memory, queryclean, setwall, startup],
+    scripts/[
+        completions/[_changewall],
+        changewall,
+        clock,
+        ipv4,
+        launch,
+        memory,
+        queryclean,
+        setwall,
+        startup
+    ],
     spotify-tui/config.yml,
     {os(linux):
         {
