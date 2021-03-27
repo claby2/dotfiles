@@ -194,6 +194,9 @@ let g:genfmt_formatters = {
             \ 'markdown': "remark --no-color --silent",
             \ 'gdscript3': "gdformat -",
             \ 'go': "gofmt",
+            \ 'lua': "lua-format",
+            \ 'sh': "shfmt",
+            \ 'zsh': "shfmt",
             \ }
 let g:genfmt_enable_fallback = 1
 
