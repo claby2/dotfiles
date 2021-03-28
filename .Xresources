@@ -1,3 +1,4 @@
+*.alpha: 0.8
 *.font: Cascadia Mono:size=12
 XTerm*faceName: Cascadia Mono:size=12
 UXTerm*faceName: Cascadia Mono:size=12
@@ -20,11 +21,7 @@ UXTerm*faceName: Cascadia Mono:size=12
 #define base0F #d65d0e
 
 *.foreground:   base05
-#ifdef background_opacity
-*.background:   [background_opacity]base00
-#else
 *.background:   base00
-#endif
 *.cursorColor:  base05
 
 *.color0:       base00
