@@ -4,41 +4,36 @@
 # Directory where wallpapers are stored. The file stored in this directory
 # which matches $wallpaper_directory/wallpaper.* is the currently set wallpaper
 # if set with -i argument.
-wallpaper_directory="$HOME/.config/wallpaper"
+wallpaper_directory=$HOME/.config/wallpaper
 
 setwall() {
 	# Set wallpaper with feh, if it exists.
 	command -v feh >/dev/null 2>&1 &&
-		feh --bg-fill $1
+		feh --bg-fill "$1"
 	# Generate scheme from wallpaper with wal and pywalfox, if they exist.
 	command -v wal >/dev/null 2>&1 &&
 		wal -c &&
-		wal -qsni $1 --saturate 0.5 --backend haishoku &&
+		wal -qsni "$1" --saturate 0.5 --backend haishoku &&
 		command -v pywalfox >/dev/null 2>&1 &&
 		pywalfox update
 }
 
 list() {
 	# List available wallpapers.
-	wallpapers=$(ls "$wallpaper_directory")
-	for wallpaper in $wallpapers; do
-		# Do not include current wallpaper file.
-		if [[ $wallpaper != wallpaper.* ]]; then
-			echo "$wallpaper"
-		fi
+	for f in "$wallpaper_directory"/*; do
+		file="${f##*/}"
+		case $file in
+		wallpaper.*) ;;
+		*) echo "$file" ;;
+		esac
 	done
 }
 
 change() {
-	new_wallpaper="$1"
-	old_wallpapers=("$wallpaper_directory/wallpaper".*)
-	old_wallpaper="${old_wallpapers[0]}"
-	# Remove old wallpaper.
-	if [[ -f $old_wallpaper ]]; then
-		rm "$old_wallpaper"
-	fi
-
-	# Replace wallpaper with new wallpaper.
+	# Remove old wallpaper and replace it with new wallpaper.
+	old_wallpaper=("$wallpaper_directory"/wallpaper.*)
+	rm -f "${old_wallpaper[@]}"
+	new_wallpaper=$1
 	cp "$wallpaper_directory"/"$new_wallpaper" \
 		"$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"
 }
