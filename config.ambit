@@ -40,7 +40,7 @@ config.ambit => .config/ambit/config.ambit;
                 gtk-3.0/settings.ini,
                 picom/picom.conf,
                 polybar/launch.sh,
-                rofi/config,
+                rofi/config.rasi,
                 sxhkd/sxhkdrc,
                 zathura/zathurarc,
             ]
