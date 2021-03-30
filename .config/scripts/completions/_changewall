@@ -2,23 +2,20 @@
 
 _changewall_flags=(
 	"-i[Sets wallpaper to image from directory]"
-	"(-l --list)"{-l,--list}"[Lists all available wallpapers]"
-	"(-h --help)"{-h,--help}"[Prints help information]"
+	"-w[Enables wal to generate a color scheme]"
+	"-l[Lists all available wallpapers]"
+	"-h[Prints help information]"
 )
 
 _changewall() {
 	case $words[2] in
-	-i)
+	-*i)
 		# Complete with available wallpapers.
-		compadd "$@" - $(changewall --list)
-		;;
-	-*)
-		# Complete flags.
-		_arguments -s : "$_changewall_flags[@]"
+		compadd "$@" - $(changewall -l)
 		;;
 	*)
-		# Complete with local files.
-		_arguments "*: :_files"
+		# Complete flags.
+		_arguments -s : "$_changewall_flags[@]"
 		;;
 	esac
 }
