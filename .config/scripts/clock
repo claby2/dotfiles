@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Nice clock
 
-echo -e "$(date +"%a, %B %d %l:%M%p" | sed 's/  / /g')"
+date +"%a, %B %d %l:%M%p" | sed 's/  / /g'

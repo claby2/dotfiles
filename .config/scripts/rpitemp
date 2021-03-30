@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # ssh into rpi and output GPU and CPU temperature
 
 ssh rpi '

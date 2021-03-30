@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Change the current wallpaper.
 
 # Directory where wallpapers are stored. The file stored in this directory
@@ -31,8 +31,8 @@ list() {
 
 change() {
 	# Remove old wallpaper and replace it with new wallpaper.
-	old_wallpaper=("$wallpaper_directory"/wallpaper.*)
-	rm -f "${old_wallpaper[@]}"
+	# old_wallpaper=("$wallpaper_directory"/wallpaper.*)
+	rm -f "$wallpaper_directory"/wallpaper.*
 	new_wallpaper=$1
 	cp "$wallpaper_directory"/"$new_wallpaper" \
 		"$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"

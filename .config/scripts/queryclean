@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Query all clean git directories in current directory
 
 for d in *; do

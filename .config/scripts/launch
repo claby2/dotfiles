@@ -1,7 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Launch program and immediately disown without polluting terminal
 # Example usage:
 # launch zathura document.pdf
 
-"$@" &>/dev/null &
-disown
+nohup "$@" >/dev/null 2>&1 &
