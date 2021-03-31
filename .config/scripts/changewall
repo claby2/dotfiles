@@ -75,3 +75,5 @@ while getopts "i:wlh" OPT; do
 		;;
 	esac
 done
+
+[ "$#" = 0 ] && setwall "$wallpaper_directory"/wallpaper.*
