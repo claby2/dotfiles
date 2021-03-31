@@ -16,3 +16,6 @@ theme:
 
 behavior:
     show_loading_indicator: false
+
+keybindings:
+    increase_volume: "="
