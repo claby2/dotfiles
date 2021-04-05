@@ -1,0 +1,62 @@
+#compdef ambit
+
+_help=(
+	"(-h --help)"{-h,--help}"[Prints help information]"
+)
+
+_version=(
+	{-V,--version}"[Prints version information]"
+)
+
+_force=(
+	{-f,--force}"[Overwrite currently initialized dotfile repository]"
+)
+
+_sync_flags=(
+	"--dry-run[If set, do not actually symlink the files]"
+	{-m,--move}"[Move host files into dotfile repository if needed]"
+	{-q,--quiet}"[Don't report individual symlinks]"
+	"--use-any-repo-config-found[Use first repository configuration found after recursive search]"
+	"--use-repo-config[Recursively search dotfile repository for configuration file and use it to sync]"
+	"--use-repo-config-if-required[Search for configuration file in dotfile repository if configuration in default location does not exist]"
+)
+
+_subcommands() {
+	local subcommands
+	subcommands=(
+		"check:Check ambit configuration for errors"
+		"clean:Remove all symlinks and delete host files"
+		"clone:Clone an existing dotfile repository with given origin"
+		"git:Run git commands from the dotfile repository"
+		"help:Prints this message or the help of the given subcommand(s)"
+		"init:Initialize an empty dotfile repository"
+		"sync:Sync files in dotfile repository to system through symbolic links"
+	)
+	_describe "subcommands" subcommands
+}
+
+_ambit() {
+	typeset -a commands
+
+	_arguments -C \
+		"1: :_subcommands" \
+		"*::arg:->args"
+
+	case $state in
+	args)
+		case $line[1] in
+		clone | init)
+			_arguments $_help $_force
+			;;
+		sync)
+			_arguments $_help $_sync_flags
+			;;
+		*)
+			_arguments $_help
+			;;
+		esac
+		;;
+	esac
+}
+
+_ambit "$@"
