@@ -22,20 +22,13 @@ config.ambit => .config/ambit/config.ambit;
     nvim/init.vim,
     ripgrep/config,
     scripts/[
-        completions/[_changewall, _ambit],
-        changewall,
-        clock,
-        ipv4,
-        launch,
-        memory,
-        queryclean,
-        startup
+        completions/[_*],
+        *
     ],
     spotify-tui/config.yml,
     {os(linux):
         {
             !host(raspberrypi):[
-                scripts/rpitemp,
                 dunst/dunstrc,
                 gtk-3.0/settings.ini,
                 picom/picom.conf,

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+separator=" | "
+
+separate() {
+	printf "%s" "$separator"
+}
+
+datetime() {
+	printf "%s" "$(command date +"%a %d %b %I:%M %p")"
+}
+
+sptstatus() {
+	printf "%s" "$(command spt playback -f %s || echo "o.o")"
+}
+
+bar() {
+	sptstatus
+	separate
+	datetime
+}
+
+while :; do
+	xsetroot -name " $(bar) "
+	sleep 3s
+done
