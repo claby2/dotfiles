@@ -1,24 +1,10 @@
 config.ambit => .config/ambit/config.ambit;
 
-.config/bspwm/{os(linux):
-    {
-        host(lenovo): bspwmrc.lenovo,
-        default: bspwmrc,
-    }
-} => .config/bspwm/bspwmrc;
-.config/polybar/{os(linux): 
-    {
-        host(lenovo): config.lenovo,
-        default: config,
-    }
-} => .config/polybar/config;
-
 .Xresources;
 .vimrc;
 .zshrc;
 .config/[
     bat/bat.conf,
-    kitty/[kitty.conf, theme.conf],
     nvim/init.vim,
     ripgrep/config,
     scripts/[
@@ -32,9 +18,6 @@ config.ambit => .config/ambit/config.ambit;
                 dunst/dunstrc,
                 gtk-3.0/settings.ini,
                 picom/picom.conf,
-                polybar/launch.sh,
-                rofi/config.rasi,
-                sxhkd/sxhkdrc,
                 zathura/zathurarc,
             ]
         }
