@@ -28,6 +28,7 @@ Plug 'delphinus/vim-firestore'
 Plug 'lervag/vimtex'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'rafi/awesome-vim-colorschemes'
 call plug#end()

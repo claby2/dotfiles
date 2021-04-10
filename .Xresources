@@ -1,4 +1,4 @@
-*.alpha: 0.8
+*.alpha: 1.0
 *.font: Cascadia Mono:size=12
 XTerm*faceName: Cascadia Mono:size=12
 UXTerm*faceName: Cascadia Mono:size=12
