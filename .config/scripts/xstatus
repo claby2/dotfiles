@@ -1,26 +1,37 @@
 #!/bin/sh
 
-separator=" | "
+# Separator displayed between two modules.
+separator="|"
 
-separate() {
-	printf "%s" "$separator"
+disk() {
+	df -h / | awk ' /[0-9]/ {print $3 "/" $2}'
 }
 
-datetime() {
-	printf "%s" "$(command date +"%a %d %b %I:%M %p")"
+packages() {
+	echo "$(pacman -Q | wc -l) pkgs"
 }
 
 sptstatus() {
-	printf "%s" "$(command spt playback -f %s || echo "o.o")"
+	spt playback -f "%v% %s"
+}
+
+datetime() {
+	date +"%a %d %b %I:%M %p"
 }
 
 bar() {
-	sptstatus
-	separate
-	datetime
+	module disk
+	module packages
+	module sptstatus
+	module datetime
+}
+
+module() {
+	# Only echoes if the command succeeds.
+	out=$($1 2>&1) && echo "$out"
 }
 
 while :; do
-	xsetroot -name " $(bar) "
+	xsetroot -name " $(bar | xargs -d "\n" printf "%s\n$separator\n" | head -n -1 | tr "\n" " ")"
 	sleep 3s
 done
