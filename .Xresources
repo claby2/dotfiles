@@ -2,49 +2,23 @@
 *.font: Cascadia Mono:size=12
 XTerm*faceName: Cascadia Mono:size=12
 UXTerm*faceName: Cascadia Mono:size=12
-
-#define base00 #282828
-#define base01 #3c3836
-#define base02 #504945
-#define base03 #665c54
-#define base04 #bdae93
-#define base05 #d5c4a1
-#define base06 #ebdbb2
-#define base07 #fbf1c7
-#define base08 #fb4934
-#define base09 #fe8019
-#define base0A #fabd2f
-#define base0B #b8bb26
-#define base0C #8ec07c
-#define base0D #83a598
-#define base0E #d3869b
-#define base0F #d65d0e
-
-*.foreground:   base05
-*.background:   base00
-*.cursorColor:  base05
-
-*.color0:       base00
-*.color1:       base08
-*.color2:       base0B
-*.color3:       base0A
-*.color4:       base0D
-*.color5:       base0E
-*.color6:       base0C
-*.color7:       base05
-
-*.color8:       base03
-*.color9:       base08
-*.color10:      base0B
-*.color11:      base0A
-*.color12:      base0D
-*.color13:      base0E
-*.color14:      base0C
-*.color15:      base07
-
-*.color16:      base09
-*.color17:      base0F
-*.color18:      base01
-*.color19:      base02
-*.color20:      base04
-*.color21:      base06
+*.foreground:  #dedede
+*.background:  #121212
+*.cursorColor: #ffa560
+*.color0:      #929292
+*.color8:      #bdbdbd
+*.color1:      #e27373
+*.color9:      #ffa1a1
+*.color2:      #94b979
+*.color10:     #bddeab
+*.color3:      #ffba7b
+*.color11:     #ffdca0
+*.color4:      #97bedc
+*.color12:     #b1d8f6
+*.color5:      #e1c0fa
+*.color13:     #fbdaff
+*.color6:      #00988e
+*.color14:     #1ab2a8
+*.color7:      #dedede
+*.color15:     #ffffff
+*.colorBD:     #ffffff
