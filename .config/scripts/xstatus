@@ -12,13 +12,14 @@ packages() {
 }
 
 sptstatus() {
-	spt playback -f "%v% %s"
+	spt playback -f "%v%"
 }
 
 datetime() {
 	date +"%a %d %b %I:%M %p"
 }
 
+# Set the modules to display from left to right.
 bar() {
 	module disk
 	module packages
@@ -26,12 +27,46 @@ bar() {
 	module datetime
 }
 
+# Only echoes output if the command succeeds.
 module() {
-	# Only echoes if the command succeeds.
 	out=$($1 2>&1) && echo "$out"
 }
 
+formatbar() {
+	echo " $(bar | xargs -d "\n" printf "%s\n$separator\n" | head -n -1 | tr "\n" " ")"
+}
+
+usage() {
+	printf "%s" "\
+USAGE:
+    xstatus [FLAGS]
+
+FLAGS:
+    -s    Prints bar content to stdout
+    -r    Prints current root WM_NAME
+    -h    Prints help information
+"
+}
+
+while getopts "srh" OPT; do
+	case "$OPT" in
+	s)
+		# Simply print to stdout
+		formatbar
+		exit 0
+		;;
+	r)
+		xprop -root WM_NAME | sed -e "s/.*\"\(.*\)\".*/\1/"
+		exit 0
+		;;
+	h | *)
+		usage
+		exit 0
+		;;
+	esac
+done
+
 while :; do
-	xsetroot -name " $(bar | xargs -d "\n" printf "%s\n$separator\n" | head -n -1 | tr "\n" " ")"
+	xsetroot -name "$(formatbar)" || exit 1
 	sleep 3s
 done
