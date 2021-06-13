@@ -1,11 +1,10 @@
 config.ambit => .config/ambit/config.ambit;
 
 .Xresources;
-.vimrc;
 .zshrc;
 .config/[
     bat/bat.conf,
-    nvim/init.vim,
+    nvim/[init.lua, lua/*.lua],
     ripgrep/config,
     scripts/[
         completions/[_*],
