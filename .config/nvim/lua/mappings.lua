@@ -17,7 +17,7 @@ map("n", "<leader>r", "<cmd>redraw!<CR>")
 map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
 
 -- telescope.nvim bind
-map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files()<CR>]])
+map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
 
 -- genfmt.vim bind
 map("n", "<leader>f", "<cmd>GenfmtFormat<CR>")
