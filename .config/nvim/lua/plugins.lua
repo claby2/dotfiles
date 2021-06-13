@@ -29,6 +29,7 @@ require("packer").startup(function()
     -- Misc
     use "lewis6991/gitsigns.nvim"
     use "itchyny/lightline.vim"
+    use "preservim/nerdcommenter"
 end)
 
 -- nvim-compe
