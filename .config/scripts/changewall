@@ -34,10 +34,10 @@ list() {
 change() {
 	# Remove old wallpaper and replace it with new wallpaper.
 	# old_wallpaper=("$wallpaper_directory"/wallpaper.*)
-	rm -f "$wallpaper_directory"/wallpaper.*
-	new_wallpaper=$1
-	cp "$wallpaper_directory"/"$new_wallpaper" \
-		"$wallpaper_directory"/wallpaper."${new_wallpaper##*.}"
+	[ -f "$wallpaper_directory"/"$1" ] &&
+		rm -f "$wallpaper_directory"/wallpaper.* &&
+		cp "$wallpaper_directory"/"$1" \
+			"$wallpaper_directory"/wallpaper."${1##*.}"
 }
 
 usage() {
@@ -47,16 +47,22 @@ USAGE:
 
 FLAGS:
     -i image     Sets wallpaper to image from directory
+    -s           Use sxiv to select marked wallpaper
     -w           Enables wal to generate a color scheme
     -l           Lists all available wallpapers
     -h           Prints help information
 "
 }
 
-while getopts "i:wlh" OPT; do
+while getopts "i:swlh" OPT; do
 	case "$OPT" in
 	i)
 		change "$OPTARG" && setwall "$wallpaper_directory"/wallpaper.*
+		;;
+	s)
+		command -v sxiv >/dev/null 2>&1 &&
+			change "$(basename "$(sxiv -ot "$wallpaper_directory")")" &&
+			setwall "$wallpaper_directory"/wallpaper.*
 		;;
 	w)
 		use_wal=true

@@ -2,6 +2,7 @@
 
 _changewall_flags=(
 	"-i[Sets wallpaper to image from directory]"
+	"-s[Use sxiv to select marked wallpaper]"
 	"-w[Enables wal to generate a color scheme]"
 	"-l[Lists all available wallpapers]"
 	"-h[Prints help information]"
