@@ -1,24 +1,24 @@
 *.alpha: 1.0
-*.font: Cascadia Mono:size=12
-XTerm*faceName: Cascadia Mono:size=12
-UXTerm*faceName: Cascadia Mono:size=12
-*.foreground:  #dedede
-*.background:  #121212
-*.cursorColor: #ffa560
-*.color0:      #929292
-*.color8:      #bdbdbd
-*.color1:      #e27373
-*.color9:      #ffa1a1
-*.color2:      #94b979
-*.color10:     #bddeab
-*.color3:      #ffba7b
-*.color11:     #ffdca0
-*.color4:      #97bedc
-*.color12:     #b1d8f6
-*.color5:      #e1c0fa
-*.color13:     #fbdaff
-*.color6:      #00988e
-*.color14:     #1ab2a8
-*.color7:      #dedede
+*.font: Fira Code:size=12
+XTerm*faceName: Fira Code:size=12
+UXTerm*faceName: Fira Code:size=12
+*.foreground:  #e6e1cf
+*.background:  #0f1419
+*.cursorColor: #f29718
+*.color0:      #000000
+*.color8:      #323232
+*.color1:      #ff3333
+*.color9:      #ff6565
+*.color2:      #b8cc52
+*.color10:     #eafe84
+*.color3:      #e7c547
+*.color11:     #fff779
+*.color4:      #36a3d9
+*.color12:     #68d5ff
+*.color5:      #f07178
+*.color13:     #ffa3aa
+*.color6:      #95e6cb
+*.color14:     #c7fffd
+*.color7:      #ffffff
 *.color15:     #ffffff
-*.colorBD:     #ffffff
+*.colorBD:     #e6e1cf
