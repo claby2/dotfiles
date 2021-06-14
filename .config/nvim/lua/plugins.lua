@@ -80,7 +80,7 @@ _G.s_tab_complete = function()
 end
 
 -- genfmt.vim
-ClangFormat = function()
+local clang_format = function()
     local function has_file(file) return vim.fn.len(vim.fn.findfile(file, vim.fn.expand("%:p:h") .. ";")) end
     if has_file(".clang-format") or has_file("_clang-format") then
         return "clang-format --assume-filename=" .. vim.fn.expand("%:t") .. " -style=file"
@@ -88,16 +88,16 @@ ClangFormat = function()
     return "clang-format --assume-filename=" .. vim.fn.expand("%:t") ..
                " --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
 end
-CmakeFormat = function() return "cmake-format" .. vim.fn.expand("%:t") end
-Prettier = function() return "prettier --stdin-filepath" .. vim.fn.expand("%:p") end
+local cmake_format = function() return "cmake-format" .. vim.fn.expand("%:t") end
+local prettier_format = function() return "prettier --stdin-filepath" .. vim.fn.expand("%:p") end
 vim.api.nvim_set_var("genfmt_formatters", {
     python = "yapf",
-    cpp = ClangFormat(),
-    java = ClangFormat(),
-    javascript = Prettier(),
-    typescriptreact = Prettier(),
-    typescript = Prettier(),
-    cmake = CmakeFormat(),
+    cpp = clang_format(),
+    java = clang_format(),
+    javascript = prettier_format(),
+    typescriptreact = prettier_format(),
+    typescript = prettier_format(),
+    cmake = cmake_format(),
     rust = "rustfmt --edition 2018",
     haskell = "stylish-haskell",
     markdown = "remark --no-color --silent",
