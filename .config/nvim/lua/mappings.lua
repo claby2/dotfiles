@@ -20,7 +20,7 @@ map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
 map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
 
 -- genfmt.vim bind
-map("n", "<leader>f", "<cmd>GenfmtFormat<CR>")
+map("n", "<leader>f", "<cmd>Format<CR>")
 
 -- Switch between window splits easily
 map("n", "<C-H>", "<C-W>h")

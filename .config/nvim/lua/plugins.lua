@@ -10,7 +10,7 @@ require("packer").startup(function()
     use "nvim-treesitter/nvim-treesitter"
     use "hrsh7th/vim-vsnip"
     use "hrsh7th/nvim-compe"
-    use "claby2/genfmt.vim"
+    use "mhartington/formatter.nvim"
     use "onsails/lspkind-nvim"
     use "neovim/nvim-lspconfig"
     use "kabouzeid/nvim-lspinstall"
@@ -30,6 +30,7 @@ require("packer").startup(function()
     use "lewis6991/gitsigns.nvim"
     use "itchyny/lightline.vim"
     use "preservim/nerdcommenter"
+    use "lervag/vimtex"
 end)
 
 -- nvim-compe
@@ -79,35 +80,39 @@ _G.s_tab_complete = function()
     end
 end
 
--- genfmt.vim
+-- formatter.nvim
 local clang_format = function()
-    local function has_file(file) return vim.fn.len(vim.fn.findfile(file, vim.fn.expand("%:p:h") .. ";")) end
-    if has_file(".clang-format") or has_file("_clang-format") then
-        return "clang-format --assume-filename=" .. vim.fn.expand("%:t") .. " -style=file"
-    end
-    return "clang-format --assume-filename=" .. vim.fn.expand("%:t") ..
-               " --style=\"{BasedOnStyle: Google, IndentWidth: 4}\""
+    return {exe = "clang-format", args = {"--style=file", "--fallback-style=Google"}, stdin = true}
 end
-local cmake_format = function() return "cmake-format" .. vim.fn.expand("%:t") end
-local prettier_format = function() return "prettier --stdin-filepath" .. vim.fn.expand("%:p") end
-vim.api.nvim_set_var("genfmt_formatters", {
-    python = "yapf",
-    cpp = clang_format(),
-    java = clang_format(),
-    javascript = prettier_format(),
-    typescriptreact = prettier_format(),
-    typescript = prettier_format(),
-    cmake = cmake_format(),
-    rust = "rustfmt --edition 2018",
-    haskell = "stylish-haskell",
-    markdown = "remark --no-color --silent",
-    gdscript3 = "gdformat -",
-    go = "gofmt",
-    lua = "lua-format --column-limit=120",
-    sh = "shfmt",
-    zsh = "shfmt"
+local prettier_format = function()
+    return {exe = "prettier", args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)}, stdin = true}
+end
+local shfmt = function() return {exe = "shfmt", stdin = true} end
+require("formatter").setup({
+    logging = true,
+    filetype = {
+        python = {function() return {exe = "yapf", stdin = true} end},
+        c = {clang_format},
+        cpp = {clang_format},
+        java = {clang_format},
+        javascript = {prettier_format},
+        typescriptreact = {prettier_format},
+        typescript = {prettier_format},
+        cmake = {function() return {exe = "cmake-format", stdin = true} end},
+        rust = {function() return {exe = "rustfmt", args = {"--edition", 2018, "--emit=stdout"}, stdin = true} end},
+        haskell = {function() return {exe = "stylish-haskell", stdin = true} end},
+        markdown = {function() return {exe = "remark", args = {"--no-color", "--silent"}, stdin = true} end},
+        go = {function() return {exe = "gofmt", stdin = true} end},
+        lua = {function() return {exe = "lua-format", args = {"--column-limit=120"}, stdin = true} end},
+        sh = {shfmt},
+        zsh = {shfmt},
+        tex = {
+            function()
+                return {exe = "latexindent", args = {"-sl", "-g /dev/stderr", "2>/dev/null"}, stdin = true}
+            end
+        }
+    }
 })
-vim.api.nvim_set_var("genfmt_enable_fallback", true)
 
 -- telescope.nvim
 local actions = require("telescope.actions")
@@ -128,3 +133,8 @@ vim.api.nvim_set_var("lightline", {
     separator = {left = "", right = ""},
     subseparator = {left = "", right = ""}
 })
+
+-- vimtex
+vim.api.nvim_set_var("tex_flavor", "latex")
+vim.api.nvim_set_var("vimtex_view_method", "zathura")
+vim.api.nvim_set_var("vimtex_quickfix_mode", 0)
