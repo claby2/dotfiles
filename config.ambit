@@ -4,11 +4,20 @@ config.ambit => .config/ambit/config.ambit;
 .zshrc;
 .config/[
     bat/bat.conf,
-    nvim/[init.lua, lua/*.lua],
+    nvim/init.lua,
+    nvim/lua/[lsp.lua, mappings.lua, plugins.lua, treesitter.lua],
     ripgrep/config,
     scripts/[
-        completions/[_*],
-        *
+        completions/[_ambit, _changewall],
+        changewall,
+        clock,
+        ipv4,
+        launch,
+        memory,
+        queryclean,
+        rpitemp,
+        startup,
+        xstatus
     ],
     spotify-tui/config.yml,
     {os(linux):
