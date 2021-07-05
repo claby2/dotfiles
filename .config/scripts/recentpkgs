@@ -1,0 +1,6 @@
+#!/bin/sh
+# Requires expac.
+# Lists explicitly installed packages, sorted by date.
+# Optionally pass a number to list the n latest packages (e.g. `recentpkgs 20`).
+
+expac --timefmt='%Y-%m-%d %T' '%l\t%n (%w)' | sort | grep "(explicit)" | if [ -n "$1" ]; then tail -n "$1"; else cat; fi | awk '{$NF=""}1'

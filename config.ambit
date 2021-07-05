@@ -15,6 +15,7 @@ config.ambit => .config/ambit/config.ambit;
         launch,
         memory,
         queryclean,
+        recentpkgs,
         rpitemp,
         startup,
         xstatus
