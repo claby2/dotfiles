@@ -1,24 +1,60 @@
-*.alpha: 1.0
-*.font: Fira Code:size=12
-XTerm*faceName: Fira Code:size=12
-UXTerm*faceName: Fira Code:size=12
-*.foreground:  #e6e1cf
-*.background:  #0f1419
-*.cursorColor: #f29718
-*.color0:      #000000
-*.color8:      #323232
-*.color1:      #ff3333
-*.color9:      #ff6565
-*.color2:      #b8cc52
-*.color10:     #eafe84
-*.color3:      #e7c547
-*.color11:     #fff779
-*.color4:      #36a3d9
-*.color12:     #68d5ff
-*.color5:      #f07178
-*.color13:     #ffa3aa
-*.color6:      #95e6cb
-*.color14:     #c7fffd
-*.color7:      #ffffff
-*.color15:     #ffffff
-*.colorBD:     #e6e1cf
+#define ALPHA 1.0
+
+#define FONT Fira Code:size=12
+
+#define FOREGROUND  #e6e1cf
+#define BACKGROUND  #0f1419
+#define CURSORCOLOR #f29718
+#define COLOR0      #000000
+#define COLOR8      #323232
+#define COLOR1      #ff3333
+#define COLOR9      #ff6565
+#define COLOR2      #b8cc52
+#define COLOR10     #eafe84
+#define COLOR3      #e7c547
+#define COLOR11     #fff779
+#define COLOR4      #36a3d9
+#define COLOR12     #68d5ff
+#define COLOR5      #f07178
+#define COLOR13     #ffa3aa
+#define COLOR6      #95e6cb
+#define COLOR14     #c7fffd
+#define COLOR7      #ffffff
+#define COLOR15     #ffffff
+#define COLORBD     #e6e1cf
+
+#define DWMCOLOR
+
+*.alpha: ALPHA
+
+*.font: FONT
+XTerm*faceName: FONT
+UXTerm*faceName: FONT
+
+*.foreground:  FOREGROUND
+*.background:  BACKGROUND
+*.cursorColor: CURSORCOLOR
+*.color0:      COLOR0
+*.color8:      COLOR8
+*.color1:      COLOR1
+*.color9:      COLOR9
+*.color2:      COLOR2
+*.color10:     COLOR10
+*.color3:      COLOR3
+*.color11:     COLOR11
+*.color4:      COLOR4
+*.color12:     COLOR12
+*.color5:      COLOR5
+*.color13:     COLOR13
+*.color6:      COLOR6
+*.color14:     COLOR14
+*.color7:      COLOR7
+*.color15:     COLOR15
+*.colorBD:     COLORBD
+
+dwm.normbordercolor: BACKGROUND
+dwm.normbgcolor: BACKGROUND
+dwm.normfgcolor: FOREGROUND
+dwm.selbordercolor: COLOR7
+dwm.selbgcolor: BACKGROUND
+dwm.selfgcolor: COLOR4
