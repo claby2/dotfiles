@@ -26,7 +26,6 @@ Use [`ambit`](https://github.com/plamorg/ambit) to install:
 
 Run `ambit clean` to remove all symlinks.
 
-## Fonts
+## Font
 
-*   Cascadia Mono
-*   Inter
+*   Fira Code (nerd-font patch)
