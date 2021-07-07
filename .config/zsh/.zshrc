@@ -13,14 +13,18 @@ function git_prompt_info() {
 		ref=$(__git_prompt_git rev-parse --short HEAD 2>/dev/null) ||
 		return 0
 	local dirty
-	[[ -n $(__git_prompt_git status --porcelain 2>/dev/null | tail -1) ]] && dirty="✗"
-	echo " %{$fg[yellow]%}(%{$fg[red]%}${ref}%{$fg[yellow]%}) $fg[red]%}${dirty}"
+	[[ -n $(__git_prompt_git status --porcelain 2>/dev/null | tail -1) ]] && dirty=" ✗"
+	echo " %{$fg[yellow]%}(%{$fg[red]%}${ref}%{$fg[yellow]%})$fg[red]%}${dirty}"
 }
 autoload -Uz git_prompt_info
 function precmd() {
 	git_prompt_info >/dev/null
 }
-PROMPT=' %B%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b '
+PROMPT=" %B"
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+	PROMPT="${PROMPT}%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
+fi
+PROMPT="${PROMPT}%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b "
 
 # Options
 setopt autocd   # Enter directory name to cd
@@ -61,7 +65,7 @@ alias \
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
-	rm="mv -vI" \
+	rm="rm -vI" \
 	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
