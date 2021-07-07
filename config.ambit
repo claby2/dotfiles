@@ -1,7 +1,7 @@
 config.ambit => .config/ambit/config.ambit;
 
 .Xresources;
-.zshrc;
+.zshenv;
 .config/[
     bat/bat.conf,
     nvim/init.lua,
@@ -21,6 +21,7 @@ config.ambit => .config/ambit/config.ambit;
         xstatus
     ],
     spotify-tui/config.yml,
+    zsh/.zshrc,
     {os(linux):
         {
             !host(raspberrypi):[
