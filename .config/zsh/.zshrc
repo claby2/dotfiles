@@ -24,7 +24,7 @@ PROMPT=" %B"
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	PROMPT="${PROMPT}%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
 fi
-PROMPT="${PROMPT}%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b "
+PROMPT+='%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b '
 
 # Options
 setopt autocd   # Enter directory name to cd
