@@ -1,14 +1,18 @@
 ZDOTDIR=$HOME/.config/zsh
 
-export PATH="$HOME/.config/scripts":$PATH
-export PATH="$HOME/.cargo/bin":$PATH
-export PATH="$HOME/.yarn/bin":$PATH
-export PATH="$HOME/go/bin":$PATH
+path=(
+	$HOME/.config/scripts
+	$HOME/.cargo/bin
+	$HOME/.yarn/bin
+	$HOME/go/bin
+	$path
+)
 
 export GIT_SIGNINGKEY=$(git config --get user.emptykey)
 export LESSHISTFILE=- # Disable less history file
 export _JAVA_AWT_WM_NONREPARENTING=1
 export RUST_LOG=error
+export GOPATH="$HOME/.go"
 
 export BROWSER="firefox"
 export TERM="st-256color"

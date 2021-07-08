@@ -14,7 +14,7 @@ function git_prompt_info() {
 		return 0
 	local dirty
 	[[ -n $(__git_prompt_git status --porcelain 2>/dev/null | tail -1) ]] && dirty=" ✗"
-	echo " %{$fg[yellow]%}(%{$fg[red]%}${ref}%{$fg[yellow]%})$fg[red]%}${dirty}"
+	echo " %{$fg[yellow]%}(%{$fg[red]%}${ref}%{$fg[yellow]%})%{$fg[red]%}${dirty}"
 }
 autoload -Uz git_prompt_info
 function precmd() {
@@ -22,13 +22,14 @@ function precmd() {
 }
 PROMPT=" %B"
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	PROMPT="${PROMPT}%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
+	# Add username indicator if ssh.
+	PROMPT+="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
 fi
 PROMPT+='%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b '
 
 # Options
-setopt autocd   # Enter directory name to cd
-stty stop undef # Disable ctrl+s freeze
+setopt autocd   # Enter directory name to cd.
+stty stop undef # Disable ctrl+s freeze.
 setopt interactive_comments
 
 # History
@@ -45,7 +46,7 @@ compinit
 _comp_options+=(globdots)
 bindkey '^[[Z' reverse-menu-complete
 
-# Vim keys
+# vim keys
 export KEYTIMEOUT=1
 bindkey -v
 bindkey -M menuselect 'h' vi-backward-char
@@ -53,6 +54,13 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -v '^?' backward-delete-char
+
+# History search
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
 
 # Aliases
 [ -x "$(command -v nvim)" ] && alias vim="nvim"
@@ -66,7 +74,19 @@ alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	rm="rm -vI" \
+	cip="cargo install --path" \
 	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
 	dots="cd $HOME/.config/ambit/repo"
+
+# Edit current line in $EDITOR
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# Syntax highlighting
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
+ZSH_HIGHLIGHT_STYLES[path_prefix]=none
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
