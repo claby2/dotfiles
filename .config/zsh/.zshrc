@@ -80,6 +80,15 @@ alias \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
 	dots="cd $HOME/.config/ambit/repo"
 
+# Colored man pages
+export LESS_TERMCAP_mb="${fg_bold[red]}"               # begin blink
+export LESS_TERMCAP_md="${fg_bold[cyan]}"              # begin bold
+export LESS_TERMCAP_me="${reset_color}"                # reset bold/blink
+export LESS_TERMCAP_so="${fg_bold[yellow]}${bg[blue]}" # begin reverse video
+export LESS_TERMCAP_se="${reset_color}"                # reset reverse video
+export LESS_TERMCAP_us="${fg_bold[green]}"             # begin underline
+export LESS_TERMCAP_ue="${reset_color}"                # reset underline
+
 # Edit current line in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
