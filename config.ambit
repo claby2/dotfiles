@@ -9,13 +9,16 @@ config.ambit => .config/ambit/config.ambit;
     ripgrep/config,
     scripts/[
         completions/[_ambit, _changewall],
+        batlog,
         changewall,
         clock,
+        gourcemp4,
         ipv4,
         launch,
         memory,
         queryclean,
         recentpkgs,
+        slinstall,
         rpitemp,
         startup,
         xstatus

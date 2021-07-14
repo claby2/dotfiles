@@ -1,0 +1,7 @@
+#!/bin/sh
+# Quickly install and clean suckless programs.
+
+sudo rm config.h
+sudo make clean install
+make clean
+sudo rm config.h

@@ -1,0 +1,4 @@
+#!/bin/sh
+# Use bat to open log files.
+
+[ -f "$1" ] && tail -F "$1" | bat --paging=never -l log -p

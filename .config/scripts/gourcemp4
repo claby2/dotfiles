@@ -1,0 +1,4 @@
+#!/bin/sh
+# Produces gource visualization as mp4.
+
+gource -c 4 -a 1 --output-ppm-stream - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 gource.mp4
