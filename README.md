@@ -6,7 +6,7 @@ text-based configuration files
 |---------------------|------------------------------------------------------------------------------------ |
 | Window Manager      | [dwm](https://github.com/claby2/dwm)                                                |
 | Program Launcher    | [dmenu](https://tools.suckless.org/dmenu/)                                          |
-| Wallpaper Setter    | [feh](https://github.com/derf/feh)                                                  |
+| Wallpaper Setter    | [xwallpaper](https://github.com/stoeckmann/xwallpaper)                              |
 | Terminal Emulator   | [st](https://github.com/claby2/st)                                                  |
 | Document Viewer     | [zathura](https://pwmt.org/projects/zathura/)                                       |
 | Code Editor         | [neovim](https://github.com/neovim/neovim)                                          |
