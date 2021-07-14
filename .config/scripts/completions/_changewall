@@ -1,22 +1,17 @@
 #compdef changewall
 
 _changewall_flags=(
-	"-i[Sets wallpaper to image from directory]"
 	"-s[Use sxiv to select marked wallpaper]"
-	"-w[Enables wal to generate a color scheme]"
-	"-l[Lists all available wallpapers]"
 	"-h[Prints help information]"
 )
 
 _changewall() {
 	case $words[2] in
-	-*i)
-		# Complete with available wallpapers.
-		compadd "$@" - $(changewall -l)
+	-*)
+		_arguments -s : "$_changewall_flags[@]"
 		;;
 	*)
-		# Complete flags.
-		_arguments -s : "$_changewall_flags[@]"
+		_files
 		;;
 	esac
 }

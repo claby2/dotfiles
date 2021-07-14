@@ -1,43 +1,17 @@
 #!/bin/sh
 # Change the current wallpaper.
 
-# Directory where wallpapers are stored. The file stored in this directory
-# which matches $wallpaper_directory/wallpaper.* is the currently set wallpaper
-# if it was set with -i argument.
-wallpaper_directory=$HOME/.config/wallpaper
+WALLDIR=$HOME/.config/wallpaper
 
-use_wal=false
+# Wrapper function to identify if given program exists.
+has() {
+	_cmd=$(command -v "$1") 2>/dev/null || return 1
+	[ -x "$_cmd" ] || return 1
+}
 
 setwall() {
-	# Set wallpaper with feh, if it exists.
-	command -v feh >/dev/null 2>&1 &&
-		feh --bg-fill "$1"
-	# Generate scheme from wallpaper with wal and pywalfox, if they exist.
-	[ "$use_wal" = true ] && command -v wal >/dev/null 2>&1 &&
-		wal -c &&
-		wal -qsni "$1" --saturate 0.5 --backend haishoku &&
-		command -v pywalfox >/dev/null 2>&1 &&
-		pywalfox update
-}
-
-list() {
-	# List available wallpapers.
-	for f in "$wallpaper_directory"/*; do
-		file="${f##*/}"
-		case $file in
-		wallpaper.*) ;;
-		*) echo "$file" ;;
-		esac
-	done
-}
-
-change() {
-	# Remove old wallpaper and replace it with new wallpaper.
-	# old_wallpaper=("$wallpaper_directory"/wallpaper.*)
-	[ -f "$wallpaper_directory"/"$1" ] &&
-		rm -f "$wallpaper_directory"/wallpaper.* &&
-		cp "$wallpaper_directory"/"$1" \
-			"$wallpaper_directory"/wallpaper."${1##*.}"
+	[ -f "$1" ] &&
+		has xwallpaper && xwallpaper --zoom "$1"
 }
 
 usage() {
@@ -46,29 +20,16 @@ USAGE:
     changewall [FLAGS] [IMAGE]
 
 FLAGS:
-    -i image     Sets wallpaper to image from directory
-    -s           Use sxiv to select marked wallpaper
-    -w           Enables wal to generate a color scheme
-    -l           Lists all available wallpapers
-    -h           Prints help information
+    -s    Use sxiv to select marked wallpaper
+    -h    Prints help information
 "
 }
 
-while getopts "i:swlh" OPT; do
+while getopts "i:slh" OPT; do
 	case "$OPT" in
-	i)
-		change "$OPTARG" && setwall "$wallpaper_directory"/wallpaper.*
-		;;
 	s)
-		command -v sxiv >/dev/null 2>&1 &&
-			change "$(basename "$(sxiv -ot "$wallpaper_directory")")" &&
-			setwall "$wallpaper_directory"/wallpaper.*
-		;;
-	w)
-		use_wal=true
-		;;
-	l)
-		list
+		has sxiv &&
+			setwall "$(sxiv -ot "$WALLDIR")"
 		exit 0
 		;;
 	h)
@@ -82,4 +43,5 @@ while getopts "i:swlh" OPT; do
 	esac
 done
 
-[ "$#" = 0 ] && setwall "$wallpaper_directory"/wallpaper.*
+# Fallback. If no valid argument was found, try set wallpaper to first argument.
+[ -n "$1" ] && setwall "$1"
