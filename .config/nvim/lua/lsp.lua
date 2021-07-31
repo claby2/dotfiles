@@ -27,16 +27,15 @@ local on_attach = function(_, bufnr)
 end
 
 local setup_servers = function()
-    require"lspinstall".setup()
-    local servers = require"lspinstall".installed_servers()
+    local servers = {'ccls', 'tsserver', 'rust_analyzer', 'sumneko_lua'}
     local lspconf = require("lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-
     for _, lsp in ipairs(servers) do
-        if lsp == "lua" then
+        if lsp == "sumneko_lua" then
             lspconf[lsp].setup {
-                capabilities = capabilities,
                 on_attach = on_attach,
+                capabilities = capabilities,
+                cmd = {"lua-language-server"},
                 root_dir = function() return vim.loop.cwd() end,
                 settings = {
                     Lua = {diagnostics = {globals = {"vim"}}},
@@ -49,16 +48,10 @@ local setup_servers = function()
                     telemetry = {enable = false}
                 }
             }
-
         else
-            lspconf[lsp].setup {on_attach = on_attach}
+            lspconf[lsp].setup {on_attach = on_attach, capabilities = capabilities}
         end
     end
 end
 
 setup_servers()
-
-require"lspinstall".post_install_hook = function()
-    setup_servers()
-    vim.cmd("bufdo e")
-end

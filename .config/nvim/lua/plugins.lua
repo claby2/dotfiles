@@ -13,7 +13,6 @@ require("packer").startup(function()
     use "mhartington/formatter.nvim"
     use "onsails/lspkind-nvim"
     use "neovim/nvim-lspconfig"
-    use "kabouzeid/nvim-lspinstall"
 
     -- Tree
     use "kyazdani42/nvim-tree.lua"
@@ -85,7 +84,11 @@ local clang_format = function()
     return {exe = "clang-format", args = {"--style=file", "--fallback-style=Google"}, stdin = true}
 end
 local prettier_format = function()
-    return {exe = "prettier", args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)}, stdin = true}
+    return {
+        exe = "prettier",
+        args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+        stdin = true
+    }
 end
 local shfmt = function() return {exe = "shfmt", stdin = true} end
 require("formatter").setup({
