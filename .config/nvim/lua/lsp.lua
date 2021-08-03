@@ -27,7 +27,7 @@ local on_attach = function(_, bufnr)
 end
 
 local setup_servers = function()
-    local servers = {'ccls', 'tsserver', 'rust_analyzer', 'sumneko_lua'}
+    local servers = {'ccls', 'tsserver', 'rust_analyzer', 'sumneko_lua', 'texlab'}
     local lspconf = require("lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     for _, lsp in ipairs(servers) do

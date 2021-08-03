@@ -27,7 +27,7 @@ require("packer").startup(function()
 
     -- Misc
     use "lewis6991/gitsigns.nvim"
-    use "itchyny/lightline.vim"
+    use "hoob3rt/lualine.nvim"
     use "preservim/nerdcommenter"
     use "lervag/vimtex"
 end)
@@ -126,16 +126,12 @@ require("telescope").setup {
 -- gitsigns.nvim
 require("gitsigns").setup()
 
--- lightline.vim
-vim.api.nvim_set_var("lightline", {
-    colorscheme = "ayu",
-    active = {
-        left = {{"mode"}, {"readonly", "filename", "modified", "spell"}},
-        right = {{"lineinfo"}, {"fileformat", "filetype"}}
-    },
-    separator = {left = "", right = ""},
-    subseparator = {left = "", right = ""}
-})
+-- lualine.nvim
+require("lualine").setup {
+    options = {theme = "ayu_dark"},
+    sections = {lualine_b = {"filename"}, lualine_c = {"branch"}},
+    extensions = {"nvim-tree"}
+}
 
 -- vimtex
 vim.api.nvim_set_var("tex_flavor", "latex")
