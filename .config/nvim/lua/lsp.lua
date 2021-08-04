@@ -31,7 +31,14 @@ local setup_servers = function()
     local lspconf = require("lspconfig")
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     for _, lsp in ipairs(servers) do
-        if lsp == "sumneko_lua" then
+        if lsp == "ccls" then
+            lspconf[lsp].setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                -- Prevent ccls from creating .ccls-cache directory in current/working directory.
+                init_options = {cache = {directory = vim.fn.expand("$HOME/.cache/ccls/")}}
+            }
+        elseif lsp == "sumneko_lua" then
             lspconf[lsp].setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
