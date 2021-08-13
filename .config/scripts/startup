@@ -17,6 +17,3 @@ xrandr --output HDMI-0 --mode 1920x1080 --rate 60.0 --right-of DVI-D-0
 xrdb ~/.Xresources
 
 picom >/dev/null 2>&1 &
-
-# Set wallpaper
-exec changewall
