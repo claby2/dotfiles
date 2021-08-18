@@ -38,6 +38,21 @@ local setup_servers = function()
                 -- Prevent ccls from creating .ccls-cache directory in current/working directory.
                 init_options = {cache = {directory = vim.fn.expand("$HOME/.cache/ccls/")}}
             }
+        elseif lsp == "rust_analyzer" then
+            lspconf[lsp].setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    ["rust-analyzer"] = {
+                        diagnostics = {
+                            disabled = {
+                                --  Keep ignoring mismatched-arg-count until https://github.com/rust-analyzer/rust-analyzer/issues/8654 is resolved.
+                                "mismatched-arg-count"
+                            }
+                        }
+                    }
+                }
+            }
         elseif lsp == "sumneko_lua" then
             lspconf[lsp].setup {
                 on_attach = on_attach,
