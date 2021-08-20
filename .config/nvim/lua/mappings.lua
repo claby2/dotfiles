@@ -5,7 +5,7 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Clear hlsearch highlights
-map("n", "<esc><esc>", "<cmd>nohls<CR>")
+map("n", "<esc>", "<cmd>nohls<CR>")
 
 -- Toggle spell checking
 map("n", "<leader>s", "<cmd>set spell!<CR>")

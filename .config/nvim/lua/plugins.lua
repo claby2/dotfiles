@@ -118,10 +118,7 @@ require("formatter").setup({
 })
 
 -- telescope.nvim
-local actions = require("telescope.actions")
-require("telescope").setup {
-    defaults = {mappings = {i = {["<leader><tab>"] = actions.close}, n = {["<leader><tab>"] = actions.close}}}
-}
+require("telescope").setup {}
 
 -- gitsigns.nvim
 require("gitsigns").setup {
