@@ -11,7 +11,7 @@ text-based configuration files
 | Document Viewer     | [zathura](https://pwmt.org/projects/zathura/)                                       |
 | Code Editor         | [neovim](https://github.com/neovim/neovim)                                          |
 | Notification Daemon | [dunst](https://github.com/dunst-project/dunst)                                     |
-| Compositor          | [picom](https://github.com/jonaburg/picom)                                          |
+| Compositor          | [picom](https://github.com/yshui/picom)                                             |
 | Music Player        | [spotify-tui](https://github.com/Rigellute/spotify-tui)                             |
 | Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)                                    |
 | File Displayer      | [bat](https://github.com/sharkdp/bat)                                               |
