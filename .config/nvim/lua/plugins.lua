@@ -30,6 +30,7 @@ require("packer").startup(function()
     use "hoob3rt/lualine.nvim"
     use "preservim/nerdcommenter"
     use "lervag/vimtex"
+    use "norcalli/nvim-colorizer.lua"
 end)
 
 -- nvim-compe
@@ -140,3 +141,6 @@ require("lualine").setup {
 vim.api.nvim_set_var("tex_flavor", "latex")
 vim.api.nvim_set_var("vimtex_view_method", "zathura")
 vim.api.nvim_set_var("vimtex_quickfix_mode", 0)
+
+-- nvim-colorizer.lua
+require("colorizer").setup {"*", "xdefaults"}
