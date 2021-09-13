@@ -75,7 +75,7 @@ alias \
 	mv="mv -iv" \
 	rm="rm -vI" \
 	cip="cargo install --path" \
-	clippy="cargo clippy --all-targets --all-features" \
+	clippy="cargo clippy --all-targets --all-features -- -W clippy::pedantic" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
 	dots="cd $HOME/.config/ambit/repo"
