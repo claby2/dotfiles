@@ -66,19 +66,31 @@ bindkey "^[[B" history-beginning-search-forward-end
 [ -x "$(command -v nvim)" ] && alias vim="nvim"
 # Color aliases
 alias \
-	ls="ls -hN --color=always --group-directories-first" \
 	grep="grep --color=always" \
 	diff="diff --color=always"
 # Abbreviation aliases
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
-	rm="rm -vI" \
 	cip="cargo install --path" \
 	clippy="cargo clippy --all-targets --all-features -- -W clippy::pedantic" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
 	dots="cd $HOME/.config/ambit/repo"
+# OS-specific aliases
+os=$(uname -s)
+case $os in
+Darwin*)
+	alias \
+		rm="rm -v" \
+		ls="ls -hG"
+	;;
+Linux*)
+	alias \
+		rm="rm -vI" \
+		ls="ls -hN --color=always --group-directories-first"
+	;;
+esac
 
 # Colored man pages
 export LESS_TERMCAP_mb="${fg_bold[red]}"               # begin blink
