@@ -22,14 +22,14 @@ function precmd() {
 }
 PROMPT=" %B"
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-	# Add username indicator if ssh.
+	# Add username indicator if ssh
 	PROMPT+="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
 fi
 PROMPT+='%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b '
 
 # Options
-setopt autocd   # Enter directory name to cd.
-stty stop undef # Disable ctrl+s freeze.
+setopt autocd   # Enter directory name to cd
+stty stop undef # Disable ctrl+s freeze
 setopt interactive_comments
 
 # History
@@ -110,4 +110,12 @@ bindkey '\C-x\C-e' edit-command-line
 typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 ZSH_HIGHLIGHT_STYLES[path_prefix]=none
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+# zsh-syntax-highlighting location is dependent on os
+case $os in
+Darwin*)
+	source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+	;;
+Linux*)
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+	;;
+esac
