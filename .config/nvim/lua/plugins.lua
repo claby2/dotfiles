@@ -118,6 +118,9 @@ require("formatter").setup({
     }
 })
 
+-- nvim-tree.lua
+require("nvim-tree").setup {}
+
 -- telescope.nvim
 require("telescope").setup {}
 
