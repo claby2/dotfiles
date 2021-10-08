@@ -1,5 +1,6 @@
 config.ambit => .config/ambit/config.ambit;
 
+.xinitrc;
 .Xresources;
 .zshenv;
 .config/[
