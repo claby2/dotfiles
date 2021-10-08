@@ -76,7 +76,7 @@ alias \
 	clippy="cargo clippy --all-targets --all-features -- -W clippy::pedantic" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
-	dots="cd $HOME/.config/ambit/repo"
+	dots="cd $HOME/.config/dotfiles"
 # OS-specific aliases
 os=$(uname -s)
 case $os in
