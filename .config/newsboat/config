@@ -1,0 +1,33 @@
+auto-reload yes
+reload-threads 100
+
+bind-key j down
+bind-key k up
+bind-key l open
+bind-key h quit
+bind-key G end
+bind-key g home
+bind-key d pagedown
+bind-key u pageup
+bind-key U show-urls
+bind-key a toggle-article-read
+
+browser handlelink
+
+highlight article "(^Feed:|^Title:|^Author:|^Link:|^Date:)" yellow default bold
+highlight article "\\[[0-9][0-9]*\\]" yellow default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
+highlight feedlist "---.*---" yellow default bold
+highlight feedlist ".*0/0.." default default invis
+
+color background default default
+color listnormal default default
+color listnormal_unread default default bold
+color listfocus black yellow
+color listfocus_unread black yellow bold
+color info yellow default
+color article default default

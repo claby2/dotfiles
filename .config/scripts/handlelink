@@ -1,0 +1,35 @@
+#!/bin/sh
+# Execute program based on given link.
+# This is mostly useful in conjunction with newsboat.
+
+notify() {
+	notify-send "handlelink" "$1"
+}
+
+[ -z "$1" ] && notify "No link given"
+
+url="$1"
+
+tmp() {
+	tmpfile="/tmp/$(echo "$url" | sed "s/.*\///;s/%20/ /g")"
+	curl -sL "$url" >$tmpfile
+	echo "$1 $tmpfile"
+	$1 $tmpfile
+	rm $tmpfile
+}
+
+case $(echo "$url" | tr '[:upper:]' '[:lower:]') in
+*png | *jpg | *jpe | *jpeg | *gif | *webp)
+	notify "Opened picture"
+	tmp "sxiv -qa" &
+	;;
+*pdf | *cbz | *cbr)
+	notify "Opened document"
+	tmp "zathura" &
+	;;
+*)
+	[ -f "$url" ] &&
+		setsid -f $TERMINAL -e $EDITOR $url >/dev/null 2>&1 ||
+		setsid -f $BROWSER $url >/dev/null 2>&1
+	;;
+esac
