@@ -21,7 +21,7 @@ text-based configuration files
 
 Use [`stow`](https://www.gnu.org/software/stow/) to install:
 
-    $ git clone https://github.com/claby2/dotfiles
+    $ git clone --recurse-submodules https://github.com/claby2/dotfiles
     $ cd dotfiles
     $ stow -v . -t ~
 
