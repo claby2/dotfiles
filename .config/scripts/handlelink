@@ -12,10 +12,10 @@ url="$1"
 
 tmp() {
 	tmpfile="/tmp/$(echo "$url" | sed "s/.*\///;s/%20/ /g")"
-	curl -sL "$url" >$tmpfile
+	curl -sL "$url" >"$tmpfile"
 	echo "$1 $tmpfile"
-	$1 $tmpfile
-	rm $tmpfile
+	$1 "$tmpfile"
+	rm "$tmpfile"
 }
 
 case $(echo "$url" | tr '[:upper:]' '[:lower:]') in
@@ -28,8 +28,10 @@ case $(echo "$url" | tr '[:upper:]' '[:lower:]') in
 	tmp "zathura" &
 	;;
 *)
-	[ -f "$url" ] &&
-		setsid -f $TERMINAL -e $EDITOR $url >/dev/null 2>&1 ||
-		setsid -f $BROWSER $url >/dev/null 2>&1
+	if [ -f "$url" ]; then
+		setsid -f "$TERMINAL" -e "$EDITOR" "$url" >/dev/null 2>&1
+	else
+		setsid -f "$BROWSER" "$url" >/dev/null 2>&1
+	fi
 	;;
 esac

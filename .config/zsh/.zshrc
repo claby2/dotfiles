@@ -73,7 +73,7 @@ alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
 	cip="cargo install --path" \
-	clippy="cargo clippy --all-targets --all-features -- -W clippy::pedantic" \
+	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
 	dots="cd $HOME/.config/dotfiles"

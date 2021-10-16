@@ -11,7 +11,6 @@ path=(
 export GIT_SIGNINGKEY=$(git config --get user.emptykey)
 export LESSHISTFILE=- # Disable less history file
 export _JAVA_AWT_WM_NONREPARENTING=1
-export RUST_LOG=error
 export GOPATH="$HOME/.go"
 export MANWIDTH=80
 
