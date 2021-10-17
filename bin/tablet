@@ -1,0 +1,6 @@
+#!/bin/sh
+# Map tablet pen to a specified display.
+
+device="XP-PEN STAR G640 Pen Pen (0)"
+display="DVI-D-0"
+xinput map-to-output "$device" "$display" && echo "Mapped '$device' to '$display'"
