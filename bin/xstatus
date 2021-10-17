@@ -1,18 +1,24 @@
 #!/bin/sh
+# Script to continuously set WM_NAME X11 property for dwm status bar.
+# This script uses status2d dwm patch and xrdb colors for color output.
 
 # Separator displayed between two modules.
-separator="|"
+separator=" "
+
+volume() {
+	lvolume=$(amixer get Master | grep 'Left:' | awk -F'[][]' '{ print $2 }')
+	rvolume=$(amixer get Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
+	# Display both lvolume and rvolume if they differ.
+	[ "$lvolume" != "$rvolume" ] && lvolume="$lvolume-$rvolume"
+	printf "^C4^%s 墳" "$lvolume"
+}
 
 disk() {
-	df -h / | awk ' /[0-9]/ {print $3 "/" $2}'
+	printf "%s 🖴" "$(df -h / | awk ' /[0-9]/ {print $3 "/" $2}')"
 }
 
 packages() {
-	echo "$(pacman -Q | wc -l) pkgs"
-}
-
-sptstatus() {
-	spt playback -f "%v%"
+	printf "^C4^%s 📦" "$(pacman -Q | wc -l)"
 }
 
 datetime() {
@@ -21,15 +27,16 @@ datetime() {
 
 # Set the modules to display from left to right.
 bar() {
+	module volume
 	module disk
 	module packages
-	module sptstatus
 	module datetime
 }
 
 # Only echoes output if the command succeeds.
 module() {
-	out=$($1 2>&1) && echo "$out"
+	# Append ^d^ to reset status2d colors.
+	out=$($1 2>&1) && echo "$out^d^"
 }
 
 formatbar() {
@@ -51,7 +58,7 @@ FLAGS:
 while getopts "srh" OPT; do
 	case "$OPT" in
 	s)
-		# Simply print to stdout
+		# Simply print to stdout.
 		formatbar
 		exit 0
 		;;
