@@ -1,0 +1,7 @@
+#!/bin/sh
+# Write the contents of a file in a github repository to a local file.
+# Example usage:
+# gitfile https://github.com/claby2/dotfiles/blob/master/README.md
+
+link="$(echo $1 | sed 's/github/raw.githubusercontent/' | sed 's/blob\///')"
+curl -O "$link"
