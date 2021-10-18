@@ -3,5 +3,6 @@
 # Example usage:
 # gitfile https://github.com/claby2/dotfiles/blob/master/README.md
 
-link="$(echo $1 | sed 's/github/raw.githubusercontent/' | sed 's/blob\///')"
+link="$(echo "$1" | sed 's/github/raw.githubusercontent/' | sed 's/blob\///')"
+echo "Fetching from '$link'"
 curl -O "$link"

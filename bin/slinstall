@@ -1,7 +1,14 @@
 #!/bin/sh
 # Quickly install and clean suckless programs.
 
-sudo rm config.h
-sudo make clean install
-make clean
-sudo rm config.h
+# Colorful output to echo progress status.
+progress() {
+	echo "\033[1;34m::\033[1;37m $1 \033[0m"
+}
+
+[ -f config.h ] && sudo rm config.h
+progress "Building..."
+sudo make install | sed "s/^/ /"
+progress "Cleaning..."
+make clean | sed "s/^/ /"
+[ -f config.h ] && sudo rm config.h

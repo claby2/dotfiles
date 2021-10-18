@@ -13,9 +13,9 @@ volume() {
 	printf "%s  " "$lvolume"
 }
 
+# Display number of unread newsboat articles (rss).
 rss() {
-	unread=$(newsboat -x print-unread)
-	if [ $? -eq 0 ]; then
+	if unread=$(newsboat -x print-unread); then
 		# Command succeeded, parse number of unread articles.
 		unread=$(echo "$unread" | head -n1 | cut -d " " -f1)
 	else
@@ -30,6 +30,7 @@ disk() {
 	printf "%s 﫭 " "$(df -h / | awk ' /[0-9]/ {print $3 "/" $2}')"
 }
 
+# Number of installed packages.
 packages() {
 	printf "^C4^%s  " "$(pacman -Q | wc -l)"
 }
