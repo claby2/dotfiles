@@ -29,4 +29,4 @@ Run `stow -Dv . -t ~` to remove all symlinks.
 
 ## Font
 
-- Fira Code (nerd-font patch)
+- JetBrains Mono (nerd-font patch)

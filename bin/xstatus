@@ -10,15 +10,28 @@ volume() {
 	rvolume=$(amixer get Master | grep 'Right:' | awk -F'[][]' '{ print $2 }')
 	# Display both lvolume and rvolume if they differ.
 	[ "$lvolume" != "$rvolume" ] && lvolume="$lvolume-$rvolume"
-	printf "^C4^%s 墳" "$lvolume"
+	printf "%s  " "$lvolume"
+}
+
+rss() {
+	unread=$(newsboat -x print-unread)
+	if [ $? -eq 0 ]; then
+		# Command succeeded, parse number of unread articles.
+		unread=$(echo "$unread" | head -n1 | cut -d " " -f1)
+	else
+		# Error upon newsboat query...
+		# Most likely means that newsboat is already open.
+		unread="Reading…"
+	fi
+	printf "^C4^%s  " "$unread"
 }
 
 disk() {
-	printf "%s 🖴" "$(df -h / | awk ' /[0-9]/ {print $3 "/" $2}')"
+	printf "%s 﫭 " "$(df -h / | awk ' /[0-9]/ {print $3 "/" $2}')"
 }
 
 packages() {
-	printf "^C4^%s 📦" "$(pacman -Q | wc -l)"
+	printf "^C4^%s  " "$(pacman -Q | wc -l)"
 }
 
 datetime() {
@@ -28,6 +41,7 @@ datetime() {
 # Set the modules to display from left to right.
 bar() {
 	module volume
+	module rss
 	module disk
 	module packages
 	module datetime

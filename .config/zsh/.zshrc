@@ -38,7 +38,7 @@ SAVEHIST=10000000
 HISTFILE=$HOME/.config/zsh/history
 
 # Completions
-fpath=($HOME/.config/scripts/completions $fpath)
+fpath=($HOME/bin/completions $fpath)
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
