@@ -1,4 +1,5 @@
 import qualified Data.Map as M
+import GHC.IO.Handle.Types (Handle)
 import Graphics.X11.ExtraTypes.XF86
 import System.Posix.Unistd
 import XMonad
@@ -12,12 +13,14 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.LayoutModifier
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Renamed
 import XMonad.Layout.Spacing
 import XMonad.Layout.ToggleLayouts
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 
 myTerminal :: String
 myTerminal = "st"
@@ -30,6 +33,26 @@ myFocusedBorderColor = "#E6E1CF"
 
 myWorkspaces :: [PhysicalWorkspace]
 myWorkspaces = withScreens 3 ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+barColor :: String
+barColor = "#36A3D9"
+
+barUnderline :: String -> String
+barUnderline =
+  wrap ("<box type=Bottom width=2 mb=2 color=" ++ barColor ++ ">") "</box>"
+
+barPP :: Handle -> ScreenId -> PP
+barPP handle screen =
+  marshallPP -- Turns a naive pretty-printer into one that is aware of the independent screens.
+    screen
+    def
+      { ppOrder = \(wss:layout:_:_) -> [wss, layout]
+      , ppHidden = id
+      , ppHiddenNoWindows = id
+      , ppCurrent = xmobarColor barColor "" . barUnderline
+      , ppVisible = xmobarColor barColor ""
+      , ppOutput = hPutStrLn handle
+      }
 
 setFullscreenSupport :: X ()
 setFullscreenSupport =
@@ -54,17 +77,20 @@ setFullscreenSupport =
     io $ changeProperty32 dpy r a c propModeReplace (fmap fromIntegral supp)
 
 myStartupHook :: X ()
-myStartupHook = setFullscreenSupport
+myStartupHook = do
+  setFullscreenSupport
+  spawnOnce "startup"
 
 windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
 windowSpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+     --ModifiedLayout Spacing (ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) Tall)) Window
 
 myLayoutHook ::
-     ModifiedLayout Spacing (ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) Tall)) Window
-myLayoutHook =
-  windowSpacing 10 $ avoidStruts $ toggleLayouts (noBorders Full) tiled
+     ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Rename (ModifiedLayout Spacing Tall))) Window
+myLayoutHook = avoidStruts $ toggleLayouts (noBorders Full) tiled
   where
-    tiled = Tall nmaster delta ratio
+    tiled =
+      renamed [Replace "[]="] $ windowSpacing 10 $ Tall nmaster delta ratio
     nmaster = 1
     ratio = 1 / 2
     delta = 3 / 100
@@ -133,7 +159,7 @@ main = do
     mapM
       (\i ->
          spawnPipe $ "xmobar -x " ++ show i ++ " " ++ xmobarConfigPath hostname)
-      [0 .. nScreens - 1 :: Integer]
+      [0 .. nScreens - 1 :: Int]
   xmonad $
     ewmh $
     docks
@@ -144,10 +170,7 @@ main = do
         , workspaces = myWorkspaces
         , modMask = mod4Mask
         , logHook =
-            mapM_
-              (\handle ->
-                 dynamicLogWithPP $ xmobarPP {ppOutput = hPutStrLn handle})
-              xmprocs >>
+            mapM_ dynamicLogWithPP (zipWith barPP xmprocs [0 .. (S nScreens)]) >>
             updatePointer (0.5, 0.5) (0, 0)
         , startupHook = myStartupHook
         , layoutHook = myLayoutHook
