@@ -6,10 +6,14 @@ import XMonad.Actions.CopyWindow
 import XMonad.Actions.CycleWS
 import XMonad.Actions.UpdatePointer
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.IndependentScreens
 import XMonad.Layout.LayoutModifier
+import XMonad.Layout.NoBorders
 import XMonad.Layout.Spacing
+import XMonad.Layout.ToggleLayouts
 import XMonad.Prompt
 import XMonad.Prompt.Shell
 import qualified XMonad.StackSet as W
@@ -18,26 +22,62 @@ import XMonad.Util.Run
 myTerminal :: String
 myTerminal = "st"
 
-myWorkspaces :: [PhysicalWorkspace]
-myWorkspaces = withScreens 3 ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
-mySpacing ::
-     Integer -> l a -> XMonad.Layout.LayoutModifier.ModifiedLayout Spacing l a
-mySpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
-
-myLayoutHook :: ModifiedLayout Spacing (ModifiedLayout AvoidStruts Tall) a
-myLayoutHook = mySpacing 10 $ avoidStruts $ tiled
-  where
-    tiled = Tall nmaster delta ratio
-    nmaster = 1
-    delta = 3 / 100
-    ratio = 1 / 2
-
 myNormalBorderColor :: String
 myNormalBorderColor = "#282C34"
 
 myFocusedBorderColor :: String
 myFocusedBorderColor = "#E6E1CF"
+
+myWorkspaces :: [PhysicalWorkspace]
+myWorkspaces = withScreens 3 ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+setFullscreenSupport :: X ()
+setFullscreenSupport =
+  withDisplay $ \dpy -> do
+    r <- asks theRoot
+    a <- getAtom "_NET_SUPPORTED"
+    c <- getAtom "ATOM"
+    supp <-
+      mapM
+        getAtom
+        [ "_NET_WM_STATE_HIDDEN"
+        , "_NET_WM_STATE_FULLSCREEN"
+        , "_NET_NUMBER_OF_DESKTOPS"
+        , "_NET_CLIENT_LIST"
+        , "_NET_CLIENT_LIST_STACKING"
+        , "_NET_CURRENT_DESKTOP"
+        , "_NET_DESKTOP_NAMES"
+        , "_NET_ACTIVE_WINDOW"
+        , "_NET_WM_DESKTOP"
+        , "_NET_WM_STRUT"
+        ]
+    io $ changeProperty32 dpy r a c propModeReplace (fmap fromIntegral supp)
+
+myStartupHook :: X ()
+myStartupHook = setFullscreenSupport
+
+windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
+windowSpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
+
+myLayoutHook ::
+     ModifiedLayout Spacing (ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) Tall)) Window
+myLayoutHook =
+  windowSpacing 10 $ avoidStruts $ toggleLayouts (noBorders Full) tiled
+  where
+    tiled = Tall nmaster delta ratio
+    nmaster = 1
+    ratio = 1 / 2
+    delta = 3 / 100
+
+myManageHook :: ManageHook
+myManageHook =
+  composeAll
+    [ manageDocks
+    -- Check to see if a window is transient, and then move it to its parent.
+    , transience'
+    -- Float the window and makes it use the whole screen when a window requests to be fullscreen.
+    , isFullscreen --> doFullFloat
+    ]
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {modMask = modm}) =
@@ -61,6 +101,7 @@ myKeys conf@(XConfig {modMask = modm}) =
   , ( (modm, xK_q)
     , spawn
         "xmonad --recompile && xmonad --restart && notify-send \"xmonad Info\" \"Recompiled and restarted.\"")
+  , ((modm .|. shiftMask, xK_f), sendMessage $ Toggle "Full")
   -- Multiple monitor handling.
   , ((modm, xK_o), nextScreen)
   , ((modm .|. shiftMask, xK_o), shiftNextScreen >> nextScreen)
@@ -94,9 +135,12 @@ main = do
          spawnPipe $ "xmobar -x " ++ show i ++ " " ++ xmobarConfigPath hostname)
       [0 .. nScreens - 1 :: Integer]
   xmonad $
+    ewmh $
     docks
       def
         { terminal = myTerminal
+        , normalBorderColor = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
         , workspaces = myWorkspaces
         , modMask = mod4Mask
         , logHook =
@@ -105,8 +149,9 @@ main = do
                  dynamicLogWithPP $ xmobarPP {ppOutput = hPutStrLn handle})
               xmprocs >>
             updatePointer (0.5, 0.5) (0, 0)
-        , keys = \c -> myKeys c `M.union` (keys def c)
+        , startupHook = myStartupHook
         , layoutHook = myLayoutHook
-        , normalBorderColor = myNormalBorderColor
-        , focusedBorderColor = myFocusedBorderColor
+        , manageHook = myManageHook <+> manageHook def
+        , handleEventHook = docksEventHook <+> fullscreenEventHook
+        , keys = \c -> myKeys c `M.union` (keys def c)
         }
