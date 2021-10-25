@@ -1,26 +1,64 @@
 import qualified Data.Map as M
 import GHC.IO.Handle.Types (Handle)
 import Graphics.X11.ExtraTypes.XF86
-import System.Posix.Unistd
+  ( xF86XK_MonBrightnessDown
+  , xF86XK_MonBrightnessUp
+  )
+import Prompt.Bluetooth (bluetoothPrompt)
+import System.Posix.Unistd (getSystemID, nodeName)
 import XMonad
-import XMonad.Actions.CopyWindow
+import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS
-import XMonad.Actions.UpdatePointer
+  ( nextScreen
+  , prevScreen
+  , prevScreen
+  , shiftNextScreen
+  , shiftPrevScreen
+  )
+import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
+  ( PP
+  , dynamicLogWithPP
+  , ppCurrent
+  , ppHidden
+  , ppHiddenNoWindows
+  , ppOrder
+  , ppOutput
+  , ppVisible
+  , wrap
+  , xmobarColor
+  )
+import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
 import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers
+  ( AvoidStruts
+  , avoidStruts
+  , docks
+  , docksEventHook
+  , manageDocks
+  )
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen, transience')
 import XMonad.Layout.IndependentScreens
-import XMonad.Layout.LayoutModifier
-import XMonad.Layout.NoBorders
-import XMonad.Layout.Renamed
-import XMonad.Layout.Spacing
+  ( PhysicalWorkspace
+  , countScreens
+  , marshallPP
+  , onCurrentScreen
+  , withScreens
+  , workspaces'
+  )
+import XMonad.Layout.LayoutModifier (ModifiedLayout)
+import XMonad.Layout.NoBorders (WithBorder, noBorders)
+import XMonad.Layout.Renamed (Rename(Replace), renamed)
+import XMonad.Layout.Spacing (Border(Border), Spacing, spacingRaw)
 import XMonad.Layout.ToggleLayouts
+  ( ToggleLayout(Toggle)
+  , ToggleLayouts
+  , toggleLayouts
+  )
 import XMonad.Prompt
-import XMonad.Prompt.Shell
+import XMonad.Prompt.Shell (shellPrompt)
 import qualified XMonad.StackSet as W
-import XMonad.Util.Run
-import XMonad.Util.SpawnOnce
+import XMonad.Util.Run (hPutStrLn, spawnPipe)
+import XMonad.Util.SpawnOnce (spawnOnce)
 
 myTerminal :: String
 myTerminal = "st"
@@ -37,9 +75,10 @@ myWorkspaces = withScreens 3 ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 barColor :: String
 barColor = "#36A3D9"
 
-barUnderline :: String -> String
-barUnderline =
-  wrap ("<box type=Bottom width=2 mb=2 color=" ++ barColor ++ ">") "</box>"
+barUnderline :: Maybe String -> String -> String
+barUnderline Nothing = wrap "<box type=Bottom width=2 mb=2>" "</box>"
+barUnderline (Just color) =
+  wrap ("<box type=Bottom width=2 mb=2 color=" ++ color ++ ">") "</box>"
 
 barPP :: Handle -> ScreenId -> PP
 barPP handle screen =
@@ -47,9 +86,9 @@ barPP handle screen =
     screen
     def
       { ppOrder = \(wss:layout:_:_) -> [wss, layout]
-      , ppHidden = id
+      , ppHidden = barUnderline Nothing
       , ppHiddenNoWindows = id
-      , ppCurrent = xmobarColor barColor "" . barUnderline
+      , ppCurrent = xmobarColor barColor "" . barUnderline (Just barColor)
       , ppVisible = xmobarColor barColor ""
       , ppOutput = hPutStrLn handle
       }
@@ -83,7 +122,6 @@ myStartupHook = do
 
 windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
 windowSpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
-     --ModifiedLayout Spacing (ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) Tall)) Window
 
 myLayoutHook ::
      ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Rename (ModifiedLayout Spacing Tall))) Window
@@ -105,6 +143,19 @@ myManageHook =
     , isFullscreen --> doFullFloat
     ]
 
+promptConfig :: XPConfig
+promptConfig =
+  def
+    { font = "xft:JetBrainsMono Nerd Font"
+    , position = Top
+    , promptBorderWidth = 0
+    , height = 25
+    }
+
+-- List of prompts and their associated key bindings.
+promptList :: [(KeySym, XPConfig -> X ())]
+promptList = [(xK_space, shellPrompt), (xK_b, bluetoothPrompt)]
+
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {modMask = modm}) =
   M.fromList $
@@ -113,15 +164,10 @@ myKeys conf@(XConfig {modMask = modm}) =
   | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_9]
   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
   ] ++
+  -- Generate prompt binds from list.
+  [((modm, k), f promptConfig) | (k, f) <- promptList] ++
+  -- Rest of the binds.
   [ ((modm, xK_Return), spawn myTerminal)
-  , ( (modm, xK_space)
-    , shellPrompt
-        def
-          { font = "xft:JetBrainsMono Nerd Font"
-          , position = Top
-          , promptBorderWidth = 0
-          , height = 25
-          })
   , ((modm, xK_w), kill1)
   , ((modm, xK_z), windows W.swapMaster)
   , ( (modm, xK_q)
