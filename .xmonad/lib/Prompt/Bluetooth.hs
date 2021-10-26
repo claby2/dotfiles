@@ -15,7 +15,7 @@ data Bluetooth =
   Bluetooth
 
 instance XPrompt Bluetooth where
-  showXPrompt Bluetooth = "Connect: "
+  showXPrompt Bluetooth = "Bluetooth device: "
 
 getBluetoothCompl :: IO [String]
 getBluetoothCompl = do

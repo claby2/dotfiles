@@ -18,6 +18,7 @@ import XMonad.Actions.CycleWS
   , shiftNextScreen
   , shiftPrevScreen
   )
+import XMonad.Actions.Submap (submap)
 import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Hooks.DynamicLog
   ( PP
@@ -39,7 +40,7 @@ import XMonad.Hooks.ManageDocks
   , docksEventHook
   , manageDocks
   )
-import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen, transience')
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
 import XMonad.Layout.IndependentScreens
   ( PhysicalWorkspace
   , countScreens
@@ -58,7 +59,9 @@ import XMonad.Layout.ToggleLayouts
   , toggleLayouts
   )
 import XMonad.Prompt
+import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Shell (shellPrompt)
+import XMonad.Prompt.Ssh (sshPrompt)
 import qualified XMonad.StackSet as W
 import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
@@ -140,8 +143,6 @@ myManageHook :: ManageHook
 myManageHook =
   composeAll
     [ manageDocks
-    -- Check to see if a window is transient, and then move it to its parent.
-    , transience'
     -- Float the window and makes it use the whole screen when a window requests to be fullscreen.
     , isFullscreen --> doFullFloat
     ]
@@ -157,7 +158,7 @@ promptConfig =
 
 -- List of prompts and their associated key bindings.
 promptList :: [(KeySym, XPConfig -> X ())]
-promptList = [(xK_space, shellPrompt), (xK_b, bluetoothPrompt)]
+promptList = [(xK_b, bluetoothPrompt), (xK_m, manPrompt), (xK_s, sshPrompt)]
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {modMask = modm}) =
@@ -168,9 +169,14 @@ myKeys conf@(XConfig {modMask = modm}) =
   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
   ] ++
   -- Generate prompt binds from list.
-  [((modm, k), f promptConfig) | (k, f) <- promptList] ++
+  -- Uses submap to allow sub-mapping of key bindings:
+  -- modm + xK_p + <PROMPT_BIND>
+  [ ( (modm, xK_p)
+    , submap . M.fromList $ [((modm, k), f promptConfig) | (k, f) <- promptList])
+  ] ++
   -- Rest of the binds.
   [ ((modm, xK_Return), spawn myTerminal)
+  , ((modm, xK_space), shellPrompt promptConfig)
   , ((modm, xK_w), kill1)
   , ((modm, xK_z), windows W.swapMaster)
   , ( (modm, xK_q)
