@@ -1,3 +1,7 @@
+module Main
+  ( main
+  ) where
+
 import qualified Data.Map as M
 import GHC.IO.Handle.Types (Handle)
 import Graphics.X11.ExtraTypes.XF86
@@ -10,7 +14,6 @@ import XMonad
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS
   ( nextScreen
-  , prevScreen
   , prevScreen
   , shiftNextScreen
   , shiftPrevScreen
@@ -70,7 +73,7 @@ myFocusedBorderColor :: String
 myFocusedBorderColor = "#E6E1CF"
 
 myWorkspaces :: [PhysicalWorkspace]
-myWorkspaces = withScreens 3 ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+myWorkspaces = withScreens 3 $ fmap show [1 .. 9 :: Int]
 
 barColor :: String
 barColor = "#36A3D9"
@@ -222,5 +225,5 @@ main = do
         , layoutHook = myLayoutHook
         , manageHook = myManageHook <+> manageHook def
         , handleEventHook = docksEventHook <+> fullscreenEventHook
-        , keys = \c -> myKeys c `M.union` (keys def c)
+        , keys = \c -> myKeys c `M.union` keys def c
         }

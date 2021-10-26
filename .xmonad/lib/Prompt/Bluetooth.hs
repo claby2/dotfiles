@@ -1,7 +1,6 @@
 -- A prompt for connecting to bluetooth devices.
 module Prompt.Bluetooth where
 
-import Control.Exception as E
 import XMonad (X, io)
 import XMonad.Prompt
   ( XPConfig
@@ -11,9 +10,6 @@ import XMonad.Prompt
   , showXPrompt
   )
 import XMonad.Util.Run (runProcessWithInput, safeSpawn)
-
-econst :: Monad m => a -> IOException -> m a
-econst = const . return
 
 data Bluetooth =
   Bluetooth
