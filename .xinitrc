@@ -17,5 +17,4 @@ startup
 # Start status bar.
 xstatus &
 
-# Allow live reloading dwm. Simply `$ killall dwm` to exit (as per usual).
-while type dwm >/dev/null; do dwm && continue || break; done
+exec xmonad

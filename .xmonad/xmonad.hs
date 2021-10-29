@@ -184,10 +184,10 @@ myKeys conf@(XConfig {modMask = modm}) =
         "xmonad --recompile && xmonad --restart && notify-send \"xmonad Info\" \"Recompiled and restarted.\"")
   , ((modm .|. shiftMask, xK_f), sendMessage $ Toggle "Full")
   -- Multiple monitor handling.
-  , ((modm, xK_o), nextScreen)
-  , ((modm .|. shiftMask, xK_o), shiftNextScreen >> nextScreen)
-  , ((modm .|. controlMask, xK_o), prevScreen)
-  , ((modm .|. shiftMask .|. controlMask, xK_o), shiftPrevScreen >> prevScreen)
+  , ((modm, xK_minus), prevScreen)
+  , ((modm, xK_equal), nextScreen)
+  , ((modm .|. shiftMask, xK_minus), shiftPrevScreen >> prevScreen)
+  , ((modm .|. shiftMask, xK_equal), shiftNextScreen >> nextScreen)
   -- Toggle spotify playback.
   , ( (modm .|. shiftMask, xK_p)
     , spawn "notify-send \"spotify-tui\" \"$(spt playback --toggle)\"")

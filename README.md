@@ -4,8 +4,8 @@ text-based configuration files
 
 | Program             | Name                                                    |
 | ------------------- | ------------------------------------------------------- |
-| Window Manager      | [dwm](https://github.com/claby2/dwm)                    |
-| Program Launcher    | [dmenu](https://tools.suckless.org/dmenu/)              |
+| Window Manager      | [xmonad](https://github.com/xmonad/xmonad)              |
+| Program Launcher    | [xmobar](https://github.com/jaor/xmobar)                |
 | Wallpaper Setter    | [xwallpaper](https://github.com/stoeckmann/xwallpaper)  |
 | Terminal Emulator   | [st](https://github.com/claby2/st)                      |
 | Document Viewer     | [zathura](https://pwmt.org/projects/zathura/)           |

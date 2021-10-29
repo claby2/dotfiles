@@ -8,14 +8,14 @@ progress() {
 
 check() {
 	# shellcheck disable=SC2086
-	progress "Running hlint..." &&
-		hlint --cross $1 &&
-		progress "Compiling..." &&
+	progress "Compiling..." &&
 		ghc -Wall -Werror \
 			-fwarn-tabs -funbox-strict-fields \
 			-i -ilib -dynamic -fforce-recomp \
 			-no-keep-o-files -no-keep-hi-files \
 			$1 -o /dev/null &&
+		progress "Running hlint..." &&
+		hlint --cross $1 &&
 		progress "Success!"
 }
 
