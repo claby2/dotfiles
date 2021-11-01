@@ -18,6 +18,11 @@ import XMonad.Actions.CycleWS
   , shiftNextScreen
   , shiftPrevScreen
   )
+import XMonad.Actions.EasyMotion
+  ( EasyMotionConfig(bgCol, cancelKey, emFont, overlayF)
+  , bar
+  , selectWindow
+  )
 import XMonad.Actions.Submap (submap)
 import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Hooks.DynamicLog
@@ -135,6 +140,15 @@ promptConfig =
 promptList :: [(KeySym, XPConfig -> X ())]
 promptList = [(xK_b, bluetoothPrompt), (xK_m, manPrompt), (xK_s, sshPrompt)]
 
+easyMotionConfig :: EasyMotionConfig
+easyMotionConfig =
+  def
+    { bgCol = "#0f1419"
+    , cancelKey = xK_Escape
+    , emFont = "xft:JetBrainsMono Nerd Font:pixelsize=30"
+    , overlayF = bar (0.2 :: Double)
+    }
+
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {modMask = modm}) =
   M.fromList $
@@ -154,6 +168,8 @@ myKeys conf@(XConfig {modMask = modm}) =
   , ((modm, xK_space), shellPrompt promptConfig)
   , ((modm, xK_w), kill1)
   , ((modm, xK_z), windows W.swapMaster)
+  , ( (modm, xK_f)
+    , selectWindow easyMotionConfig >>= (`whenJust` windows . W.focusWindow))
   , ( (modm, xK_q)
     , spawn
         "xmonad --recompile && xmonad --restart && notify-send \"xmonad Info\" \"Recompiled and restarted.\"")
