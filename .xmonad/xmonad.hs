@@ -3,7 +3,6 @@ module Main
   ) where
 
 import qualified Data.Map as M
-import GHC.IO.Handle.Types (Handle)
 import Graphics.X11.ExtraTypes.XF86
   ( xF86XK_MonBrightnessDown
   , xF86XK_MonBrightnessUp
@@ -25,24 +24,22 @@ import XMonad.Actions.EasyMotion
   )
 import XMonad.Actions.Submap (submap)
 import XMonad.Actions.UpdatePointer (updatePointer)
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
+import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
+import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
+import XMonad.Hooks.StatusBar (StatusBarConfig, dynamicSBs, statusBarPipe)
+import XMonad.Hooks.StatusBar.PP
   ( PP
-  , dynamicLogWithPP
   , ppCurrent
   , ppHidden
   , ppHiddenNoWindows
   , ppOrder
-  , ppOutput
   , ppVisible
   , wrap
   , xmobarColor
   )
-import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
-import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
-import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
 import XMonad.Layout.IndependentScreens
   ( PhysicalWorkspace
-  , countScreens
   , marshallPP
   , onCurrentScreen
   , withScreens
@@ -62,7 +59,6 @@ import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Shell (shellPrompt)
 import XMonad.Prompt.Ssh (sshPrompt)
 import qualified XMonad.StackSet as W
-import XMonad.Util.Run (hPutStrLn, spawnPipe)
 import XMonad.Util.SpawnOnce (spawnOnce)
 
 myTerminal :: String
@@ -85,8 +81,8 @@ barUnderline Nothing = wrap "<box type=Bottom width=2 mb=2>" "</box>"
 barUnderline (Just color) =
   wrap ("<box type=Bottom width=2 mb=2 color=" ++ color ++ ">") "</box>"
 
-barPP :: Handle -> ScreenId -> PP
-barPP handle screen =
+barPP :: ScreenId -> PP
+barPP screen =
   marshallPP -- Turns a naive pretty-printer into one that is aware of the independent screens.
     screen
     def
@@ -95,7 +91,6 @@ barPP handle screen =
       , ppHiddenNoWindows = id
       , ppCurrent = xmobarColor barColor "" . barUnderline (Just barColor)
       , ppVisible = xmobarColor barColor ""
-      , ppOutput = hPutStrLn handle
       }
 
 myStartupHook :: X ()
@@ -196,19 +191,19 @@ xmobarConfigPath hostname
   | hostname == "antique" = "~/.config/xmobar/xmobar.laptop.config"
   | otherwise = "~/.config/xmobar/xmobar.config"
 
+barSpawner :: String -> ScreenId -> IO StatusBarConfig
+barSpawner hostname s =
+  statusBarPipe
+    ("xmobar -x " ++ [last (show s)] ++ " " ++ xmobarConfigPath hostname) $
+  pure (barPP s)
+
 main :: IO ()
 main = do
-  nScreens <- countScreens
   hostname <- fmap nodeName getSystemID
-  -- Dynamically spawn xmobar to each screen.
-  xmprocs <-
-    mapM
-      (\i ->
-         spawnPipe $ "xmobar -x " ++ show i ++ " " ++ xmobarConfigPath hostname)
-      [0 .. nScreens - 1 :: Int]
   xmonad $
     ewmh $
     ewmhFullscreen $
+    dynamicSBs (barSpawner hostname) $
     docks $
     def
       { terminal = myTerminal
@@ -216,9 +211,7 @@ main = do
       , focusedBorderColor = myFocusedBorderColor
       , workspaces = myWorkspaces
       , modMask = mod4Mask
-      , logHook =
-          mapM_ dynamicLogWithPP (zipWith barPP xmprocs [0 .. (S nScreens)]) >>
-          updatePointer (0.5, 0.5) (0, 0)
+      , logHook = updatePointer (0.5, 0.5) (0, 0) -- Automatic cursor warp.
       , startupHook = myStartupHook
       , layoutHook = myLayoutHook
       , manageHook = myManageHook <+> manageHook def
