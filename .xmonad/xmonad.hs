@@ -32,14 +32,8 @@ import XMonad.Hooks.DynamicLog
   , wrap
   , xmobarColor
   )
-import XMonad.Hooks.EwmhDesktops (ewmh, fullscreenEventHook)
-import XMonad.Hooks.ManageDocks
-  ( AvoidStruts
-  , avoidStruts
-  , docks
-  , docksEventHook
-  , manageDocks
-  )
+import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
+import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
 import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
 import XMonad.Layout.IndependentScreens
   ( PhysicalWorkspace
@@ -99,31 +93,8 @@ barPP handle screen =
       , ppOutput = hPutStrLn handle
       }
 
-setFullscreenSupport :: X ()
-setFullscreenSupport =
-  withDisplay $ \dpy -> do
-    r <- asks theRoot
-    a <- getAtom "_NET_SUPPORTED"
-    c <- getAtom "ATOM"
-    supp <-
-      mapM
-        getAtom
-        [ "_NET_WM_STATE_HIDDEN"
-        , "_NET_WM_STATE_FULLSCREEN"
-        , "_NET_NUMBER_OF_DESKTOPS"
-        , "_NET_CLIENT_LIST"
-        , "_NET_CLIENT_LIST_STACKING"
-        , "_NET_CURRENT_DESKTOP"
-        , "_NET_DESKTOP_NAMES"
-        , "_NET_ACTIVE_WINDOW"
-        , "_NET_WM_DESKTOP"
-        , "_NET_WM_STRUT"
-        ]
-    io $ changeProperty32 dpy r a c propModeReplace (fmap fromIntegral supp)
-
 myStartupHook :: X ()
 myStartupHook = do
-  setFullscreenSupport
   spawnOnce "startup"
 
 windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
@@ -154,6 +125,10 @@ promptConfig =
     , position = Top
     , promptBorderWidth = 0
     , height = 25
+    , bgColor = "#0f1419"
+    , fgColor = "#e6e1cf"
+    , fgHLight = "#e6e1cf"
+    , bgHLight = "#36a3d9"
     }
 
 -- List of prompts and their associated key bindings.
@@ -217,19 +192,19 @@ main = do
       [0 .. nScreens - 1 :: Int]
   xmonad $
     ewmh $
-    docks
-      def
-        { terminal = myTerminal
-        , normalBorderColor = myNormalBorderColor
-        , focusedBorderColor = myFocusedBorderColor
-        , workspaces = myWorkspaces
-        , modMask = mod4Mask
-        , logHook =
-            mapM_ dynamicLogWithPP (zipWith barPP xmprocs [0 .. (S nScreens)]) >>
-            updatePointer (0.5, 0.5) (0, 0)
-        , startupHook = myStartupHook
-        , layoutHook = myLayoutHook
-        , manageHook = myManageHook <+> manageHook def
-        , handleEventHook = docksEventHook <+> fullscreenEventHook
-        , keys = \c -> myKeys c `M.union` keys def c
-        }
+    ewmhFullscreen $
+    docks $
+    def
+      { terminal = myTerminal
+      , normalBorderColor = myNormalBorderColor
+      , focusedBorderColor = myFocusedBorderColor
+      , workspaces = myWorkspaces
+      , modMask = mod4Mask
+      , logHook =
+          mapM_ dynamicLogWithPP (zipWith barPP xmprocs [0 .. (S nScreens)]) >>
+          updatePointer (0.5, 0.5) (0, 0)
+      , startupHook = myStartupHook
+      , layoutHook = myLayoutHook
+      , manageHook = myManageHook <+> manageHook def
+      , keys = \c -> myKeys c `M.union` keys def c
+      }

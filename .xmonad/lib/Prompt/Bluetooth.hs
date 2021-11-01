@@ -30,5 +30,5 @@ bluetoothPrompt c = do
   mkXPrompt
     Bluetooth
     c
-    (mkComplFunFromList' devices)
+    (mkComplFunFromList' c devices)
     (\x -> safeSpawn "bluetoothctl" ["connect", x])

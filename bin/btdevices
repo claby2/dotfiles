@@ -1,0 +1,7 @@
+#!/bin/sh
+# Output basic information of currently available bluetooth devices.
+
+bluetoothctl devices |
+	cut -f2 -d' ' |
+	xargs -I{} bluetoothctl info {} |
+	grep "Device\|Name\|Connected"
