@@ -9,6 +9,7 @@ import Graphics.X11.ExtraTypes.XF86
   )
 import Prompt.Bluetooth (bluetoothPrompt)
 import System.Posix.Unistd (getSystemID, nodeName)
+import Util.Xres (xColor, xColorBg, xColorFg, xFont, xFontSized)
 import XMonad
 import XMonad.Actions.CopyWindow (kill1)
 import XMonad.Actions.CycleWS
@@ -40,6 +41,7 @@ import XMonad.Hooks.StatusBar.PP
   )
 import XMonad.Layout.IndependentScreens
   ( PhysicalWorkspace
+  , countScreens
   , marshallPP
   , onCurrentScreen
   , withScreens
@@ -64,22 +66,8 @@ import XMonad.Util.SpawnOnce (spawnOnce)
 myTerminal :: String
 myTerminal = "st"
 
-myNormalBorderColor :: String
-myNormalBorderColor = "#282C34"
-
-myFocusedBorderColor :: String
-myFocusedBorderColor = "#E6E1CF"
-
-myWorkspaces :: [PhysicalWorkspace]
-myWorkspaces = withScreens 3 $ fmap show [1 .. 9 :: Int]
-
-barColor :: String
-barColor = "#36A3D9"
-
-barUnderline :: Maybe String -> String -> String
-barUnderline Nothing = wrap "<box type=Bottom width=2 mb=2>" "</box>"
-barUnderline (Just color) =
-  wrap ("<box type=Bottom width=2 mb=2 color=" ++ color ++ ">") "</box>"
+myWorkspaces :: ScreenId -> [PhysicalWorkspace]
+myWorkspaces nScreens = withScreens nScreens $ fmap show [1 .. 9 :: Int]
 
 barPP :: ScreenId -> PP
 barPP screen =
@@ -92,13 +80,17 @@ barPP screen =
       , ppCurrent = xmobarColor barColor "" . barUnderline (Just barColor)
       , ppVisible = xmobarColor barColor ""
       }
+  where
+    barUnderline :: Maybe String -> String -> String -- Add underline box.
+    barUnderline Nothing = wrap "<box type=Bottom width=2 mb=2>" "</box>"
+    barUnderline (Just color) =
+      wrap ("<box type=Bottom width=2 mb=2 color=" ++ color ++ ">") "</box>"
+    barColor :: String
+    barColor = xColor "4"
 
 myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "startup"
-
-windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
-windowSpacing i = spacingRaw False (Border i i i i) True (Border i i i i) True
 
 myLayoutHook ::
      ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Rename (ModifiedLayout Spacing Tall))) Window
@@ -109,6 +101,10 @@ myLayoutHook = avoidStruts $ toggleLayouts (noBorders Full) tiled
     nmaster = 1
     ratio = 1 / 2
     delta = 3 / 100
+    -- Create window gaps.
+    windowSpacing :: Integer -> l a -> ModifiedLayout Spacing l a
+    windowSpacing i =
+      spacingRaw False (Border i i i i) True (Border i i i i) True
 
 myManageHook :: ManageHook
 myManageHook =
@@ -117,32 +113,6 @@ myManageHook =
     -- Float the window and makes it use the whole screen when a window requests to be fullscreen.
     , isFullscreen --> doFullFloat
     ]
-
-promptConfig :: XPConfig
-promptConfig =
-  def
-    { font = "xft:JetBrainsMono Nerd Font"
-    , position = Top
-    , promptBorderWidth = 0
-    , height = 25
-    , bgColor = "#0f1419"
-    , fgColor = "#e6e1cf"
-    , fgHLight = "#e6e1cf"
-    , bgHLight = "#36a3d9"
-    }
-
--- List of prompts and their associated key bindings.
-promptList :: [(KeySym, XPConfig -> X ())]
-promptList = [(xK_b, bluetoothPrompt), (xK_m, manPrompt), (xK_s, sshPrompt)]
-
-easyMotionConfig :: EasyMotionConfig
-easyMotionConfig =
-  def
-    { bgCol = "#0f1419"
-    , cancelKey = xK_Escape
-    , emFont = "xft:JetBrainsMono Nerd Font:pixelsize=30"
-    , overlayF = bar (0.2 :: Double)
-    }
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {modMask = modm}) =
@@ -184,21 +154,53 @@ myKeys conf@(XConfig {modMask = modm}) =
   , ((0, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 10")
   , ((0, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10")
   ]
-
--- xmobar config file is dependent on host.
-xmobarConfigPath :: String -> String
-xmobarConfigPath hostname
-  | hostname == "antique" = "~/.config/xmobar/xmobar.laptop.config"
-  | otherwise = "~/.config/xmobar/xmobar.config"
+  where
+    promptConfig :: XPConfig
+    promptConfig =
+      def
+        { font = xFont
+        , position = Top
+        , promptBorderWidth = 0
+        , height = 25
+        , bgColor = xColorBg
+        , fgColor = xColorFg
+        , fgHLight = xColorFg
+        , bgHLight = xColor "4"
+        }
+    -- List of prompts and their associated key bindings.
+    promptList :: [(KeySym, XPConfig -> X ())]
+    promptList = [(xK_b, bluetoothPrompt), (xK_m, manPrompt), (xK_s, sshPrompt)]
+    easyMotionConfig :: EasyMotionConfig
+    easyMotionConfig =
+      def
+        { bgCol = xColorBg
+        , cancelKey = xK_Escape
+        , emFont = xFontSized "20"
+        , overlayF = bar (0.2 :: Double)
+        }
 
 barSpawner :: String -> ScreenId -> IO StatusBarConfig
-barSpawner hostname s =
+barSpawner hostname screen =
   statusBarPipe
-    ("xmobar -x " ++ [last (show s)] ++ " " ++ xmobarConfigPath hostname) $
-  pure (barPP s)
+    ("xmobar" ++
+     xmobarArg "B" xColorBg ++ -- The background color.
+     xmobarArg "F" xColorFg ++ -- The foreground color.
+     xmobarArg "f" (xFontSized "12") ++ -- Font name.
+     xmobarArg "N" (xFontSized "15") ++ -- Add to the list of additional fonts.
+     xmobarArg "x" [last (show screen)] ++ " " ++ xmobarConfigPath) $
+  pure (barPP screen)
+  where
+    xmobarArg :: String -> String -> String
+    xmobarArg flag value = " -" ++ flag ++ " \"" ++ value ++ "\""
+    -- xmobar config file is dependent on host.
+    xmobarConfigPath :: String
+    xmobarConfigPath
+      | hostname == "antique" = "~/.config/xmobar/xmobar.laptop.config"
+      | otherwise = "~/.config/xmobar/xmobar.config"
 
 main :: IO ()
 main = do
+  nScreens <- countScreens
   hostname <- fmap nodeName getSystemID
   xmonad $
     ewmh $
@@ -207,9 +209,9 @@ main = do
     docks $
     def
       { terminal = myTerminal
-      , normalBorderColor = myNormalBorderColor
-      , focusedBorderColor = myFocusedBorderColor
-      , workspaces = myWorkspaces
+      , normalBorderColor = xColorBg
+      , focusedBorderColor = xColorFg
+      , workspaces = myWorkspaces nScreens
       , modMask = mod4Mask
       , logHook = updatePointer (0.5, 0.5) (0, 0) -- Automatic cursor warp.
       , startupHook = myStartupHook
