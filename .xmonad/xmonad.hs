@@ -138,6 +138,9 @@ myKeys conf@(XConfig {modMask = modm}) =
   , ( (modm, xK_q)
     , spawn
         "xmonad --recompile && xmonad --restart && notify-send \"xmonad Info\" \"Recompiled and restarted.\"")
+  , ( (modm, xK_x)
+    , spawn
+        "xrdb ~/.Xresources && notify-send \"xrdb\" \"Loaded ~/.Xresources.\"")
   , ((modm .|. shiftMask, xK_f), sendMessage $ Toggle "Full")
   -- Multiple monitor handling.
   , ((modm, xK_minus), prevScreen)
