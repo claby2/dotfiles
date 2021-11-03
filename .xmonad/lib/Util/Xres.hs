@@ -6,6 +6,7 @@ import Data.Char as DC
 import Data.List as DL
 import Data.Maybe (catMaybes, fromMaybe)
 import System.IO.Unsafe (unsafePerformIO)
+import XMonad.Core (installSignalHandlers)
 import XMonad.Util.Run (runProcessWithInput)
 
 splitAtColon :: String -> Maybe (String, String)
@@ -17,7 +18,8 @@ splitAtColon str = splitAtTrimming str <$> DL.elemIndex ':' str
     trim = DL.dropWhileEnd DC.isSpace . DL.dropWhile DC.isSpace
 
 getFromXres :: String -> IO String
-getFromXres key =
+getFromXres key = do
+  installSignalHandlers
   fromMaybe "" . findValue key <$> runProcessWithInput "xrdb" ["-query"] ""
   where
     findValue :: String -> String -> Maybe String

@@ -203,9 +203,9 @@ main = do
   nScreens <- countScreens
   hostname <- fmap nodeName getSystemID
   xmonad $
+    dynamicSBs (barSpawner hostname) $
     ewmh $
     ewmhFullscreen $
-    dynamicSBs (barSpawner hostname) $
     docks $
     def
       { terminal = myTerminal
