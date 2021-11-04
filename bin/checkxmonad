@@ -9,9 +9,10 @@ progress() {
 check() {
 	# shellcheck disable=SC2086
 	progress "Compiling..." &&
-		ghc -Wall -Werror \
+		cd ~/.xmonad &&
+		stack ghc -- -Wall -Werror \
 			-fwarn-tabs -funbox-strict-fields \
-			-i -ilib -dynamic -fforce-recomp \
+			-fforce-recomp \
 			-no-keep-o-files -no-keep-hi-files \
 			$1 -o /dev/null &&
 		progress "Running hlint..." &&
@@ -20,7 +21,7 @@ check() {
 }
 
 # Recursively finds *.hs files in xmonad directory.
-files=$(find ~/.xmonad/ -type f -name "*.hs")
+files=$(find ~/.xmonad/src ~/.xmonad/app -type f -name "*.hs")
 
 while getopts "f" opt; do
 	case "$opt" in
