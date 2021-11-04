@@ -1,6 +1,7 @@
 ZDOTDIR=$HOME/.config/zsh
 
 path=(
+	$HOME/.local/bin
 	$HOME/.cargo/bin
 	$HOME/.yarn/bin
 	$HOME/go/bin

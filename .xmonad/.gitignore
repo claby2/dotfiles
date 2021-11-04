@@ -4,3 +4,5 @@ xmonad.errors
 *.hi
 *.o
 xmonad
+xmonad-contrib
+.stack-work
