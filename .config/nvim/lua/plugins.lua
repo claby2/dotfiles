@@ -8,11 +8,18 @@ require("packer").startup(function()
 
     -- Language
     use "nvim-treesitter/nvim-treesitter"
-    use "hrsh7th/vim-vsnip"
-    use "hrsh7th/nvim-compe"
+    use "neovim/nvim-lspconfig"
     use "mhartington/formatter.nvim"
     use "onsails/lspkind-nvim"
-    use "neovim/nvim-lspconfig"
+
+    -- Completion
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "L3MON4D3/LuaSnip"
+    use "saadparwaiz1/cmp_luasnip"
 
     -- Tree
     use "kyazdani42/nvim-tree.lua"
@@ -33,61 +40,57 @@ require("packer").startup(function()
     use "norcalli/nvim-colorizer.lua"
 end)
 
--- nvim-compe
-require("compe").setup {
-    enabled = true,
-    autocomplete = true,
-    debug = false,
-    min_length = 1,
-    preselect = 'enable',
-    throttle_time = 80,
-    source_timeout = 200,
-    incomplete_delay = 400,
-    max_abbr_width = 100,
-    max_kind_width = 100,
-    max_menu_width = 100,
-    documentation = true,
-    source = {path = true, buffer = true, calc = true, nvim_lsp = true, nvim_lua = true, vsnip = true}
-}
-local t = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
-local check_back_space = function()
-    local col = vim.fn.col('.') - 1
-    if col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        return true
-    else
-        return false
-    end
-end
-_G.tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-n>"
-    elseif vim.fn.call("vsnip#available", {1}) == 1 then
-        return t "<Plug>(vsnip-expand-or-jump)"
-    elseif check_back_space() then
-        return t "<Tab>"
-    else
-        return vim.fn['compe#complete']()
-    end
-end
-_G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-        return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-        return t "<Plug>(vsnip-jump-prev)"
-    else
-        -- If <S-Tab> is not working in your terminal, change it to <C-h>
-        return t "<S-Tab>"
-    end
-end
+-- nvim-cmp
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+
+cmp.setup({
+    snippet = {
+        expand = function(args) require('luasnip').lsp_expand(args.body) end
+    },
+    mapping = {
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<Tab>"] = cmp.mapping.select_next_item(),
+        ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+        ["<CR>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+        })
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = true,
+            -- Show completion source.
+            menu = ({
+                buffer = "[Buffer]",
+                luasnip = "[Snip]",
+                nvim_lsp = "[LSP]",
+                nvim_lua = "[Lua]",
+                path = "[Path]"
+            })
+        })
+    },
+    sources = {
+        {name = "buffer"}, {name = "luasnip"}, {name = "nvim_lsp"},
+        {name = "nvim_lua"}, {name = "path"}
+    }
+})
 
 -- formatter.nvim
 local clang_format = function()
-    return {exe = "clang-format", args = {"--style=file", "--fallback-style=Google"}, stdin = true}
+    return {
+        exe = "clang-format",
+        args = {"--style=file", "--fallback-style=Google"},
+        stdin = true
+    }
 end
 local prettier_format = function()
     return {
         exe = "prettier",
-        args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))},
+        args = {
+            "--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0))
+        },
         stdin = true
     }
 end
@@ -105,15 +108,27 @@ require("formatter").setup({
         markdown = {prettier_format},
         yaml = {prettier_format},
         cmake = {function() return {exe = "cmake-format", stdin = true} end},
-        rust = {function() return {exe = "rustfmt", args = {"--edition", 2021, "--emit=stdout"}, stdin = true} end},
+        rust = {
+            function()
+                return {
+                    exe = "rustfmt",
+                    args = {"--edition", 2021, "--emit=stdout"},
+                    stdin = true
+                }
+            end
+        },
         haskell = {function() return {exe = "hindent", stdin = true} end},
         go = {function() return {exe = "gofmt", stdin = true} end},
-        lua = {function() return {exe = "lua-format", args = {"--column-limit=120"}, stdin = true} end},
+        lua = {function() return {exe = "lua-format", stdin = true} end},
         sh = {shfmt},
         zsh = {shfmt},
         tex = {
             function()
-                return {exe = "latexindent", args = {"-sl", "-g /dev/stderr", "2>/dev/null"}, stdin = true}
+                return {
+                    exe = "latexindent",
+                    args = {"-sl", "-g /dev/stderr", "2>/dev/null"},
+                    stdin = true
+                }
             end
         }
     }
