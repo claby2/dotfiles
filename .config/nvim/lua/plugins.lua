@@ -103,6 +103,7 @@ require("formatter").setup({
         typescriptreact = {prettier_format},
         typescript = {prettier_format},
         markdown = {prettier_format},
+        yaml = {prettier_format},
         cmake = {function() return {exe = "cmake-format", stdin = true} end},
         rust = {function() return {exe = "rustfmt", args = {"--edition", 2021, "--emit=stdout"}, stdin = true} end},
         haskell = {function() return {exe = "hindent", stdin = true} end},
