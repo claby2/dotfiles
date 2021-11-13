@@ -60,3 +60,4 @@ _ambit() {
 }
 
 _ambit "$@"
+# vim:ft=zsh
