@@ -14,13 +14,13 @@ function git_prompt_info() {
 		return 0
 	local dirty
 	[[ -n $(__git_prompt_git status --porcelain 2>/dev/null | tail -1) ]] && dirty=" ✗"
-	echo " %{$fg[yellow]%}(%{$fg[red]%}${ref}%{$fg[yellow]%})%{$fg[red]%}${dirty}"
+	echo " %{$fg[yellow]%}git:(%{$fg[red]%}${ref}%{$fg[yellow]%})%{$fg[red]%}${dirty}"
 }
 autoload -Uz git_prompt_info
 function precmd() {
 	git_prompt_info >/dev/null
 }
-PROMPT=" %B"
+PROMPT=" %B%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) "
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	# Add username indicator if ssh
 	PROMPT+="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
@@ -72,6 +72,7 @@ alias \
 alias \
 	cp="cp -iv" \
 	mv="mv -iv" \
+	ip="ip --color=always" \
 	cip="cargo install --path" \
 	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
