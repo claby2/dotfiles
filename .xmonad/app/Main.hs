@@ -20,8 +20,8 @@ import XMonad.Actions.CycleWS
   )
 import XMonad.Actions.EasyMotion
   ( EasyMotionConfig(bgCol, cancelKey, emFont, overlayF)
-  , bar
   , selectWindow
+  , textSize
   )
 import XMonad.Actions.Submap (submap)
 import XMonad.Actions.UpdatePointer (updatePointer)
@@ -90,7 +90,7 @@ barPP screen =
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "startup"
+  spawnOnce "startup" -- Custom startup script.
 
 myLayoutHook ::
      ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Rename (ModifiedLayout Spacing Tall))) Window
@@ -162,13 +162,14 @@ myKeys conf@(XConfig {modMask = modm}) =
     promptConfig =
       def
         { font = xFont
-        , position = Top
+        , position = CenteredAt (1 / 4) (3 / 7)
         , promptBorderWidth = 0
-        , height = 25
+        , height = 30
         , bgColor = xColorBg
         , fgColor = xColorFg
         , fgHLight = xColorFg
         , bgHLight = xColor "4"
+        , historySize = 0
         }
     -- List of prompts and their associated key bindings.
     promptList :: [(KeySym, XPConfig -> X ())]
@@ -178,19 +179,21 @@ myKeys conf@(XConfig {modMask = modm}) =
       def
         { bgCol = xColorBg
         , cancelKey = xK_Escape
-        , emFont = xFontSized "20"
-        , overlayF = bar (0.2 :: Double)
+        , emFont = xFontSized "30"
+        , overlayF = textSize
         }
 
 barSpawner :: String -> ScreenId -> IO StatusBarConfig
 barSpawner hostname screen =
   statusBarPipe
     ("xmobar" ++
+     -- Set xmobar color and font through command line arguments.
      xmobarArg "B" xColorBg ++ -- The background color.
      xmobarArg "F" xColorFg ++ -- The foreground color.
      xmobarArg "f" (xFontSized "12") ++ -- Font name.
      xmobarArg "N" (xFontSized "15") ++ -- Add to the list of additional fonts.
-     xmobarArg "x" [last (show screen)] ++ " " ++ xmobarConfigPath) $
+     xmobarArg "x" [last (show screen)] ++ -- On which X screen number to start.
+     " " ++ xmobarConfigPath) $
   pure (barPP screen)
   where
     xmobarArg :: String -> String -> String
@@ -203,17 +206,17 @@ barSpawner hostname screen =
 
 main :: IO ()
 main = do
-  nScreens <- countScreens
+  nScreens <- countScreens -- Number of monitors.
   hostname <- fmap nodeName getSystemID
   xmonad $
     dynamicSBs (barSpawner hostname) $
-    ewmh $
-    ewmhFullscreen $
+    ewmh . ewmhFullscreen $
     docks $
     def
       { terminal = myTerminal
       , normalBorderColor = xColorBg
       , focusedBorderColor = xColorFg
+      , borderWidth = 2
       , workspaces = myWorkspaces nScreens
       , modMask = mod4Mask
       , logHook = updatePointer (0.5, 0.5) (0, 0) -- Automatic cursor warp.
