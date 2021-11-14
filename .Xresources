@@ -58,3 +58,7 @@ dwm.normfgcolor: FOREGROUND
 dwm.selbordercolor: COLOR7
 dwm.selbgcolor: BACKGROUND
 dwm.selfgcolor: COLOR4
+
+# File containing custom Xresources theme.
+# xrdb returns a fatal error if this file does not exist, but colors should be synced nonetheless.
+#include ".config/Xresources-theme"
