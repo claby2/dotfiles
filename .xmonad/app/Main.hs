@@ -18,6 +18,7 @@ import XMonad.Actions.CycleWS
   , shiftNextScreen
   , shiftPrevScreen
   )
+import XMonad.Actions.DwmPromote (dwmpromote)
 import XMonad.Actions.EasyMotion
   ( EasyMotionConfig(bgCol, cancelKey, emFont, overlayF)
   , selectWindow
@@ -39,6 +40,7 @@ import XMonad.Hooks.StatusBar.PP
   , wrap
   , xmobarColor
   )
+import XMonad.Layout.CenteredIfSingle (CenteredIfSingle, centeredIfSingle)
 import XMonad.Layout.IndependentScreens
   ( PhysicalWorkspace
   , countScreens
@@ -93,11 +95,14 @@ myStartupHook = do
   spawnOnce "startup" -- Custom startup script.
 
 myLayoutHook ::
-     ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (ModifiedLayout Rename (ModifiedLayout Spacing Tall))) Window
-myLayoutHook = avoidStruts $ toggleLayouts (noBorders Full) tiled
+     ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (Choose (ModifiedLayout Rename (ModifiedLayout Spacing Tall)) (ModifiedLayout Rename (ModifiedLayout Spacing (ModifiedLayout CenteredIfSingle Tall))))) Window
+myLayoutHook = avoidStruts $ toggleLayouts (noBorders Full) (tiled ||| centered)
   where
     tiled =
       renamed [Replace "[]="] $ windowSpacing 10 $ Tall nmaster delta ratio
+    centered =
+      renamed [Replace "Centered"] $
+      windowSpacing 10 $ centeredIfSingle 0.7 $ Tall nmaster delta ratio
     nmaster = 1
     ratio = 1 / 2
     delta = 3 / 100
@@ -132,7 +137,7 @@ myKeys conf@(XConfig {modMask = modm}) =
   [ ((modm, xK_Return), spawn myTerminal)
   , ((modm, xK_space), shellPrompt promptConfig)
   , ((modm, xK_w), kill1)
-  , ((modm, xK_z), windows W.swapMaster)
+  , ((modm, xK_z), dwmpromote)
   , ( (modm, xK_f)
     , selectWindow easyMotionConfig >>= (`whenJust` windows . W.focusWindow))
   , ( (modm, xK_q)
@@ -142,6 +147,7 @@ myKeys conf@(XConfig {modMask = modm}) =
     , spawn
         "xrdb ~/.Xresources && notify-send \"xrdb\" \"Loaded ~/.Xresources.\"")
   , ((modm .|. shiftMask, xK_f), sendMessage $ Toggle "Full")
+  , ((modm, xK_Tab), sendMessage NextLayout)
   -- Multiple monitor handling.
   , ((modm, xK_minus), prevScreen)
   , ((modm, xK_equal), nextScreen)

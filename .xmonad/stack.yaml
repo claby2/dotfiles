@@ -1,4 +1,10 @@
-resolver: nightly-2021-10-29
+resolver: lts-18.16
 
 packages:
   - .
+
+extra-deps:
+  - github: xmonad/xmonad
+    commit: master
+  - github: xmonad/xmonad-contrib
+    commit: master
