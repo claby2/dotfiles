@@ -8,6 +8,7 @@ import Graphics.X11.ExtraTypes.XF86
   , xF86XK_MonBrightnessUp
   )
 import Prompt.Bluetooth (bluetoothPrompt)
+import Prompt.Volume (volumePrompt)
 import System.Posix.Unistd (getSystemID, nodeName)
 import Util.Xres (xColor, xColorBg, xColorFg, xFont, xFontSized)
 import XMonad
@@ -179,7 +180,12 @@ myKeys conf@(XConfig {modMask = modm}) =
         }
     -- List of prompts and their associated key bindings.
     promptList :: [(KeySym, XPConfig -> X ())]
-    promptList = [(xK_b, bluetoothPrompt), (xK_m, manPrompt), (xK_s, sshPrompt)]
+    promptList =
+      [ (xK_b, bluetoothPrompt)
+      , (xK_m, manPrompt)
+      , (xK_s, sshPrompt)
+      , (xK_v, volumePrompt)
+      ]
     easyMotionConfig :: EasyMotionConfig
     easyMotionConfig =
       def

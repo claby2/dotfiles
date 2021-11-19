@@ -11,6 +11,7 @@ build-type:     Simple
 library
   exposed-modules:
       Prompt.Bluetooth
+      Prompt.Volume
       Util.Xres
   other-modules:
       Paths_xmonad_config
