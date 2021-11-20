@@ -28,7 +28,13 @@ import XMonad.Actions.EasyMotion
 import XMonad.Actions.Submap (submap)
 import XMonad.Actions.UpdatePointer (updatePointer)
 import XMonad.Hooks.EwmhDesktops (ewmh, ewmhFullscreen)
-import XMonad.Hooks.ManageDocks (AvoidStruts, avoidStruts, docks, manageDocks)
+import XMonad.Hooks.ManageDocks
+  ( AvoidStruts
+  , ToggleStruts(ToggleStruts)
+  , avoidStruts
+  , docks
+  , manageDocks
+  )
 import XMonad.Hooks.ManageHelpers (doFullFloat, isFullscreen)
 import XMonad.Hooks.StatusBar (StatusBarConfig, dynamicSBs, statusBarPipe)
 import XMonad.Hooks.StatusBar.PP
@@ -51,14 +57,17 @@ import XMonad.Layout.IndependentScreens
   , workspaces'
   )
 import XMonad.Layout.LayoutModifier (ModifiedLayout)
-import XMonad.Layout.NoBorders (WithBorder, noBorders)
+import XMonad.Layout.MultiToggle
+  ( EOT()
+  , HCons
+  , MultiToggle
+  , Toggle(Toggle)
+  , mkToggle
+  , single
+  )
+import XMonad.Layout.MultiToggle.Instances (StdTransformers(NBFULL))
 import XMonad.Layout.Renamed (Rename(Replace), renamed)
 import XMonad.Layout.Spacing (Border(Border), Spacing, spacingRaw)
-import XMonad.Layout.ToggleLayouts
-  ( ToggleLayout(Toggle)
-  , ToggleLayouts
-  , toggleLayouts
-  )
 import XMonad.Prompt
 import XMonad.Prompt.Man (manPrompt)
 import XMonad.Prompt.Shell (shellPrompt)
@@ -96,8 +105,8 @@ myStartupHook = do
   spawnOnce "startup" -- Custom startup script.
 
 myLayoutHook ::
-     ModifiedLayout AvoidStruts (ToggleLayouts (ModifiedLayout WithBorder Full) (Choose (ModifiedLayout Rename (ModifiedLayout Spacing Tall)) (ModifiedLayout Rename (ModifiedLayout Spacing (ModifiedLayout CenteredIfSingle Tall))))) Window
-myLayoutHook = avoidStruts $ toggleLayouts (noBorders Full) (tiled ||| centered)
+     ModifiedLayout AvoidStruts (MultiToggle (HCons StdTransformers EOT) (Choose (ModifiedLayout Rename (ModifiedLayout Spacing Tall)) (ModifiedLayout Rename (ModifiedLayout Spacing (ModifiedLayout CenteredIfSingle Tall))))) Window
+myLayoutHook = avoidStruts $ mkToggle (single NBFULL) (tiled ||| centered)
   where
     tiled =
       renamed [Replace "[]="] $ windowSpacing 10 $ Tall nmaster delta ratio
@@ -147,7 +156,8 @@ myKeys conf@XConfig {modMask = modm} =
   , ( (modm, xK_x)
     , spawn
         "xrdb ~/.Xresources && notify-send \"xrdb\" \"Loaded ~/.Xresources.\"")
-  , ((modm .|. shiftMask, xK_f), sendMessage $ Toggle "Full")
+  , ( (modm .|. shiftMask, xK_f)
+    , sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
   , ((modm, xK_Tab), sendMessage NextLayout)
   -- Multiple monitor handling.
   , ((modm, xK_minus), prevScreen)
