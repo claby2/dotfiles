@@ -121,7 +121,7 @@ myManageHook =
     ]
 
 myKeys :: XConfig Layout -> M.Map (KeyMask, KeySym) (X ())
-myKeys conf@(XConfig {modMask = modm}) =
+myKeys conf@XConfig {modMask = modm} =
   M.fromList $
   -- Workspace binds for IndependentScreens.
   [ ((m .|. modm, k), windows $ onCurrentScreen f i)
