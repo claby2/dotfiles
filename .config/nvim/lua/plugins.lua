@@ -107,6 +107,7 @@ require("formatter").setup({
         typescript = {prettier_format},
         markdown = {prettier_format},
         yaml = {prettier_format},
+        html = {prettier_format},
         cmake = {function() return {exe = "cmake-format", stdin = true} end},
         rust = {
             function()
