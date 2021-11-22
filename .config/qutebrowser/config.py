@@ -41,8 +41,6 @@ c.statusbar.padding = {
     'right': 5,
 }
 
-c.statusbar.show = 'in-mode'
-
 c.tabs.padding = {
     'bottom': 10,
     'left': 5,
