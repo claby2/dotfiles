@@ -15,7 +15,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 export GOPATH="$HOME/.go"
 export MANWIDTH=80
 
-export BROWSER="firefox"
+export BROWSER="qutebrowser"
 export TERM="st-256color"
 export EDITOR="nvim"
 export MANPAGER="nvim +Man!"
