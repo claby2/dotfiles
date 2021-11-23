@@ -184,7 +184,7 @@ myKeys conf@XConfig {modMask = modm} =
         , height = 30
         , bgColor = xColorBg
         , fgColor = xColorFg
-        , fgHLight = xColorFg
+        , fgHLight = xColorBg
         , bgHLight = xColor "4"
         , historySize = 0
         }
