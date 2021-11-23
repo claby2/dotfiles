@@ -1,3 +1,11 @@
+// ==UserScript==
+// @name         Auto Skip YouTube Ads
+// @version      1.0.0
+// @description  Speed up and skip YouTube ads automatically
+// @match        *://*.youtube.com/*
+// @exclude      *://*.youtube.com/subscribe_embed?*
+// ==/UserScript==
+
 let main = new MutationObserver(() => {
   // Fetch skip button and click it.
   let btn = document
