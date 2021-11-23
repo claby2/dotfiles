@@ -138,25 +138,25 @@ def load_colors(xresources):
     c.colors.keyhint.bg = background
 
     # Foreground color of an error message.
-    c.colors.messages.error.fg = background
+    c.colors.messages.error.fg = base09
 
     # Background color of an error message.
-    c.colors.messages.error.bg = base08
+    c.colors.messages.error.bg = background
 
     # Border color of an error message.
-    c.colors.messages.error.border = base08
+    c.colors.messages.error.border = background
 
     # Foreground color of a warning message.
-    c.colors.messages.warning.fg = background
+    c.colors.messages.warning.fg = base03
 
     # Background color of a warning message.
-    c.colors.messages.warning.bg = base0E
+    c.colors.messages.warning.bg = background
 
     # Border color of a warning message.
-    c.colors.messages.warning.border = base0E
+    c.colors.messages.warning.border = background
 
     # Foreground color of an info message.
-    c.colors.messages.info.fg = base05
+    c.colors.messages.info.fg = foreground
 
     # Background color of an info message.
     c.colors.messages.info.bg = background
@@ -275,28 +275,28 @@ def load_colors(xresources):
     c.colors.tabs.even.bg = background
 
     # Background color of pinned unselected even tabs.
-    c.colors.tabs.pinned.even.bg = base0C
+    c.colors.tabs.pinned.even.bg = background
 
     # Foreground color of pinned unselected even tabs.
-    c.colors.tabs.pinned.even.fg = base07
+    c.colors.tabs.pinned.even.fg = foreground
 
     # Background color of pinned unselected odd tabs.
-    c.colors.tabs.pinned.odd.bg = base0B
+    c.colors.tabs.pinned.odd.bg = background
 
     # Foreground color of pinned unselected odd tabs.
-    c.colors.tabs.pinned.odd.fg = base07
+    c.colors.tabs.pinned.odd.fg = foreground
 
     # Background color of pinned selected even tabs.
-    c.colors.tabs.pinned.selected.even.bg = base02
+    c.colors.tabs.pinned.selected.even.bg = background
 
     # Foreground color of pinned selected even tabs.
-    c.colors.tabs.pinned.selected.even.fg = base05
+    c.colors.tabs.pinned.selected.even.fg = base04
 
     # Background color of pinned selected odd tabs.
-    c.colors.tabs.pinned.selected.odd.bg = base02
+    c.colors.tabs.pinned.selected.odd.bg = background
 
     # Foreground color of pinned selected odd tabs.
-    c.colors.tabs.pinned.selected.odd.fg = base05
+    c.colors.tabs.pinned.selected.odd.fg = base04
 
     # Foreground color of selected odd tabs.
     c.colors.tabs.selected.odd.fg = base04
