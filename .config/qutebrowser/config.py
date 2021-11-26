@@ -1,4 +1,4 @@
-config.load_autoconfig(False)
+config.load_autoconfig()
 
 c.aliases = {
     'gr': 'greasemonkey-reload',
@@ -48,7 +48,7 @@ c.tabs.padding = {
     'right': 5,
 }
 
-c.tabs.title.alignment = 'center'
+c.tabs.last_close = "close"
 
 c.fonts.default_size = '12pt'
 
