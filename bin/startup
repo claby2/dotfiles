@@ -1,7 +1,7 @@
 #!/bin/sh
 # Streamlined system startup script
 
-pkill xcompmgr
+pkill picom
 
 # Set cursor
 xsetroot -cursor_name left_ptr
@@ -14,6 +14,6 @@ xrandr --output DVI-D-0 --mode 1920x1080 --primary --rate 144.00
 xrandr --output DP-2 --mode 1920x1080 --rate 60.0 --left-of DVI-D-0
 xrandr --output HDMI-0 --mode 1920x1080 --rate 60.0 --right-of DVI-D-0
 
-xrdb -quiet ~/.Xresources
+xrdb ~/.Xresources
 
-xcompmgr -cC &
+picom >/dev/null 2>&1 &
