@@ -16,6 +16,7 @@ text-based configuration files
 | Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)        |
 | File Displayer      | [bat](https://github.com/sharkdp/bat)                   |
 | Shell               | [zsh](https://wiki.archlinux.org/index.php/Zsh)         |
+| Browser             | [qutebrowser](https://qutebrowser.org/)                 |
 
 ## Dotfile Installation
 

@@ -23,7 +23,7 @@ c.url.searchengines = {
     'arch': 'https://wiki.archlinux.org/?search={}'
 }
 
-startpage = '~/.config/qutebrowser/start.html'
+startpage = 'https://edwardwibowo.com'
 c.url.default_page = startpage
 c.url.start_pages = [startpage]
 
