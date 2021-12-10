@@ -21,4 +21,5 @@ bluetoothPrompt c = do
           ""
       return $ lines devices -- Return list of bluetooth devices.
     connectDevice :: String -> X ()
-    connectDevice dev = safeSpawn "bluetoothctl" ["connect", dev]
+    -- Use custom btconnect script to connect to device.
+    connectDevice dev = safeSpawn "btconnect" [dev]

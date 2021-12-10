@@ -1,0 +1,26 @@
+#!/bin/sh
+# Script to connect to a bluetooth device and print status through notify-send or echo.
+# Use -s flag to print with echo rather than notify-send.
+
+out="notify-send" # Program to use to print status.
+dev=$1
+
+while getopts "s" OPT; do
+	case "$OPT" in
+	s)
+		# Print out to echo rather than notify-send.
+		out="echo"
+		dev=$2
+		;;
+	*) ;;
+	esac
+done
+
+# Attempt to connect to device.
+res=$(bluetoothctl connect "$dev") &&
+	$out "btconnect Success" "Connected to $(bluetoothctl info "$dev" | grep "Alias" | cut -d' ' -f2-)" &&
+	exit 0
+
+# Cannot cannot to given device. Print error message.
+$out "btconnect Failure" "$res"
+exit 1
