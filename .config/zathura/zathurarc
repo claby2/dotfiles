@@ -7,8 +7,6 @@ map J zoom out
 map r reload
 map R rotate
 
-set recolor "true"
-
 set completion-bg "#0f1419"
 set completion-fg "#e6e1cf"
 set completion-group-bg "#0f1419"
