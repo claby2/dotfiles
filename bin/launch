@@ -3,4 +3,9 @@
 # Example usage:
 # launch zathura document.pdf
 
-nohup "$@" >/dev/null 2>&1 &
+if command -v "$1" >/dev/null; then
+	nohup "$@" >/dev/null 2>&1 &
+else
+	echo "Program not found: $1"
+	exit 127
+fi
