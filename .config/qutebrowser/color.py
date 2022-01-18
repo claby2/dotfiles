@@ -251,7 +251,7 @@ def load_colors(xresources):
     c.colors.statusbar.url.warn.fg = base0E
 
     # Background color of the tab bar.
-    c.colors.tabs.bar.bg = background
+    c.colors.tabs.bar.bg = foreground
 
     # Color gradient start for the tab indicator.
     c.colors.tabs.indicator.start = background
@@ -263,28 +263,28 @@ def load_colors(xresources):
     c.colors.tabs.indicator.error = base08
 
     # Foreground color of unselected odd tabs.
-    c.colors.tabs.odd.fg = foreground
+    c.colors.tabs.odd.fg = background
 
     # Background color of unselected odd tabs.
-    c.colors.tabs.odd.bg = background
+    c.colors.tabs.odd.bg = foreground
 
     # Foreground color of unselected even tabs.
-    c.colors.tabs.even.fg = foreground
+    c.colors.tabs.even.fg = background
 
     # Background color of unselected even tabs.
-    c.colors.tabs.even.bg = background
+    c.colors.tabs.even.bg = foreground
 
     # Background color of pinned unselected even tabs.
-    c.colors.tabs.pinned.even.bg = background
+    c.colors.tabs.pinned.even.bg = foreground
 
     # Foreground color of pinned unselected even tabs.
-    c.colors.tabs.pinned.even.fg = foreground
+    c.colors.tabs.pinned.even.fg = background
 
     # Background color of pinned unselected odd tabs.
-    c.colors.tabs.pinned.odd.bg = background
+    c.colors.tabs.pinned.odd.bg = foreground
 
     # Foreground color of pinned unselected odd tabs.
-    c.colors.tabs.pinned.odd.fg = foreground
+    c.colors.tabs.pinned.odd.fg = background
 
     # Background color of pinned selected even tabs.
     c.colors.tabs.pinned.selected.even.bg = background
@@ -299,13 +299,13 @@ def load_colors(xresources):
     c.colors.tabs.pinned.selected.odd.fg = base04
 
     # Foreground color of selected odd tabs.
-    c.colors.tabs.selected.odd.fg = base04
+    c.colors.tabs.selected.odd.fg = foreground
 
     # Background color of selected odd tabs.
     c.colors.tabs.selected.odd.bg = background
 
     # Foreground color of selected even tabs.
-    c.colors.tabs.selected.even.fg = base04
+    c.colors.tabs.selected.even.fg = foreground
 
     # Background color of selected even tabs.
     c.colors.tabs.selected.even.bg = background
