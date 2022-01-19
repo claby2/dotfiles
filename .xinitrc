@@ -17,4 +17,4 @@ startup
 # Start status bar.
 xstatus &
 
-exec bspwm 
+exec bspwm
