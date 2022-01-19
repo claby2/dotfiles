@@ -1,4 +1,4 @@
 #!/bin/sh
-# Nice clock
+# Formatted date output.
 
-date +"%a, %B %d %l:%M%p" | sed 's/  / /g'
+date +"%a %d %b %I:%M:%S %p"

@@ -4,8 +4,8 @@ text-based configuration files
 
 | Program             | Name                                                    |
 | ------------------- | ------------------------------------------------------- |
-| Window Manager      | [xmonad](https://github.com/xmonad/xmonad)              |
-| Program Launcher    | [xmobar](https://github.com/jaor/xmobar)                |
+| Window Manager      | [bspwm](https://github.com/baskerville/bspwm)           |
+| Program Launcher    | [dmenu](https://tools.suckless.org/dmenu/)              |
 | Wallpaper Setter    | [xwallpaper](https://github.com/stoeckmann/xwallpaper)  |
 | Terminal Emulator   | [st](https://github.com/claby2/st)                      |
 | Document Viewer     | [zathura](https://pwmt.org/projects/zathura/)           |

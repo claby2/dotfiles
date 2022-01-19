@@ -77,8 +77,7 @@ alias \
 	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
-	dots="cd $HOME/.config/dotfiles" \
-	entrxmonad="echo \"$(checkxmonad -f)\" | entr -c checkxmonad"
+	dots="cd $HOME/.config/dotfiles"
 # OS-specific aliases
 os=$(uname -s)
 case $os in

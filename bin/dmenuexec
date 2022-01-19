@@ -1,0 +1,63 @@
+#!/bin/sh
+
+xres() {
+	xrdb -query | grep "$1" | cut -f2
+}
+
+font="$(xres "*.font")"
+background="$(xres "*.background")"
+foreground="$(xres "*.foreground")"
+dmenu=""
+list=""
+prompt=""
+
+start() {
+	echo "$list" | $dmenu -fn "$font" \
+		-nb "$background" \
+		-nf "$foreground" \
+		-sb "$foreground" \
+		-sf "$background" \
+		-p "$prompt"
+}
+
+run() {
+	dmenu="dmenu_run"
+	start
+}
+
+bluetooth() {
+	dmenu="dmenu"
+	list="$(bluetoothctl devices | cut -d' ' -f2)"
+	prompt="Bluetooth device:"
+	device=$(start)
+	[ -n "$device" ] && btconnect "$device"
+}
+
+volume() {
+	dmenu="dmenu"
+	prompt="Volume (%):"
+	volume=$(start)
+	[ -n "$volume" ] && amixer set Master "${volume}%"
+}
+
+while getopts "rbv" OPT; do
+	case "$OPT" in
+	r)
+		run
+		exit 0
+		;;
+	b)
+		bluetooth
+		exit 0
+		;;
+	v)
+		volume
+		exit 0
+		;;
+	*)
+		exit 1
+		;;
+	esac
+done
+
+run
