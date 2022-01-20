@@ -25,12 +25,15 @@ FLAGS:
 "
 }
 
-while getopts "i:slh" OPT; do
+while getopts "srh" OPT; do
 	case "$OPT" in
 	s)
 		has sxiv &&
 			setwall "$(sxiv -ot "$WALLDIR")"
 		exit 0
+		;;
+	r)
+		setwall "$(find "$WALLDIR" | sort -R | tail -1)"
 		;;
 	h)
 		usage
