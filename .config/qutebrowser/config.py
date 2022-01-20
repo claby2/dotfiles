@@ -19,8 +19,8 @@ bind_chained('gr', 'greasemonkey-reload --quiet',
 
 c.url.searchengines = {
     'DEFAULT': 'https://www.google.com/search?q={}',
-    'reddit': 'https://old.reddit.com/r/{}',
-    'arch': 'https://wiki.archlinux.org/?search={}'
+    'reddit': 'https://reddit.com/r/{}',
+    'shellcheck': 'https://www.shellcheck.net/wiki/SC{}'
 }
 
 startpage = 'https://edwardwibowo.com'
