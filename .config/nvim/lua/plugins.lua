@@ -33,11 +33,13 @@ require("packer").startup(function()
     use "ayu-theme/ayu-vim"
 
     -- Misc
-    use "lewis6991/gitsigns.nvim"
+    use "elkowar/yuck.vim"
+    use "baskerville/vim-sxhkdrc"
     use "hoob3rt/lualine.nvim"
-    use "preservim/nerdcommenter"
     use "lervag/vimtex"
+    use "lewis6991/gitsigns.nvim"
     use "norcalli/nvim-colorizer.lua"
+    use "preservim/nerdcommenter"
 end)
 
 -- nvim-cmp
