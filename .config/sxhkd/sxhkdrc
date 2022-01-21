@@ -1,4 +1,5 @@
 #
+
 # wm independent hotkeys
 #
 
@@ -15,6 +16,9 @@ super + Escape
 	pkill -USR1 -x sxhkd && \
         notify-send "sxhkd" "Reloaded configuration"
 
+super + shift + r
+    changewall -r
+
 super + shift + p
     notify-send "spotify-tui" "$(spt playback --toggle)"
 
@@ -28,8 +32,8 @@ super + x
     xrdb ~/.Xresources && \
         notify-send "xrdb" "Loaded ~/.Xresources"
 
-super + shift + {b,v}
-    dmenuexec -{b,v}
+super + p ; {b,v,m}
+    dmenuexec -{b,v,m}
 
 #
 # bspwm hotkeys
@@ -75,9 +79,9 @@ super + ctrl + {m,x,y,z}
 # focus/swap
 #
 
-# focus the node in the given direction
-super + {_,shift + }{h,l}
-	bspc node -{f,s} {west,east}
+# swap the node in the given direction
+super + shift + {h,l}
+	bspc node -s {west,east}
 
 # focus the previous window in the current desktop
 super + k
@@ -136,12 +140,13 @@ super + ctrl + shift + space
 # move/resize
 #
 
-# contract a window by moving one of its side inward
-super + alt + {h,j,k,l}
-  bspc node -z {left -20 0 || bspc node -z right -20 0, \
-                bottom 0 20 || bspc node -z top 0 20,\
-                top 0 -20 || bspc node -z bottom 0 -20,\
-                right 20 0 || bspc node -z left 20 0}
+super + alt + {j,k}
+  bspc node -z {bottom 0 40 || bspc node -z top 0 40, \
+                top 0 -40 || bspc node -z bottom 0 -40}
+
+super + {h,l}
+  bspc node -z {left -40 0 || bspc node -z right -40 0, \
+                right 40 0 || bspc node -z left 40 0}
 
 # move a floating window
 super + {Left,Down,Up,Right}

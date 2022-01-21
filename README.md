@@ -5,6 +5,8 @@ text-based configuration files
 | Program             | Name                                                    |
 | ------------------- | ------------------------------------------------------- |
 | Window Manager      | [bspwm](https://github.com/baskerville/bspwm)           |
+| Status Bar          | [polybar](https://github.com/polybar/polybar)           |
+| Hotkey Daemon       | [sxhkd](https://github.com/baskerville/sxhkd)           |
 | Program Launcher    | [dmenu](https://tools.suckless.org/dmenu/)              |
 | Wallpaper Setter    | [xwallpaper](https://github.com/stoeckmann/xwallpaper)  |
 | Terminal Emulator   | [st](https://github.com/claby2/st)                      |
