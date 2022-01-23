@@ -8,47 +8,34 @@ xres() {
 font="$(xres "*.font")"
 background="$(xres "*.background")"
 foreground="$(xres "*.foreground")"
-dmenu=""
-lines=""
-list=""
-prompt=""
 
 start() {
-	echo "$list" | $dmenu -fn "$font" \
-		-l "$lines" \
+	bin="$1"
+	shift
+	$bin -fn "$font" \
 		-nb "$background" \
 		-nf "$foreground" \
 		-sb "$foreground" \
 		-sf "$background" \
-		-p "$prompt"
+		"$@"
 }
 
 run() {
-	dmenu="dmenu_run"
-	start
+	start "dmenu_run"
 }
 
 bluetooth() {
-	dmenu="dmenu"
-	list="$(bluetoothctl devices | cut -d' ' -f2)"
-	prompt="Bluetooth device:"
-	device=$(start)
+	device=$(bluetoothctl devices | cut -d" " -f2 | start "dmenu" -p "Bluetooth device:")
 	[ -n "$device" ] && btconnect "$device"
 }
 
 volume() {
-	dmenu="dmenu"
-	prompt="Volume (%):"
-	volume=$(start)
+	volume=$(start "dmenu" -p "Volume (%):")
 	[ -n "$volume" ] && amixer set Master "${volume}%"
 }
 
 mansearch() {
-	dmenu="dmenu"
-	lines=5
-	list="$(man -k .)"
-	prompt="Manual page:"
-	page=$(start | awk '{print $1}')
+	page=$(man -k . | start "dmenu" -p "Manual page:" -l 5 | awk '{print $1}')
 	[ -n "$page" ] && $TERMINAL -e man "$page"
 }
 
