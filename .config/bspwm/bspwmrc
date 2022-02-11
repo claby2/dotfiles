@@ -27,5 +27,6 @@ bspc config pointer_follows_focus true
 bspc config focus_follows_pointer true
 
 bspc rule -a Zathura state=tiled
+bspc config external_rules_command "$HOME"/bin/bspwmexternal
 
 exec startup
