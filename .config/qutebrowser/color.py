@@ -110,7 +110,7 @@ def load_colors(xresources):
     c.colors.downloads.start.bg = background
 
     # Color gradient end for download text.
-    c.colors.downloads.stop.fg = background
+    c.colors.downloads.stop.fg = foreground
 
     # Color gradient stop for download backgrounds.
     c.colors.downloads.stop.bg = background
