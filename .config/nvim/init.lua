@@ -1,6 +1,8 @@
-local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
 
-local function opt(scope, key, value) scopes[scope][key] = value end
+local function opt(scope, key, value)
+	scopes[scope][key] = value
+end
 
 opt("o", "number", true)
 opt("o", "relativenumber", true)
@@ -20,9 +22,9 @@ opt("o", "scrolloff", 0)
 opt("o", "mouse", "a")
 opt("o", "inccommand", "nosplit")
 
-require "plugins"
-require "mappings"
-require "treesitter"
-require "lsp"
+require("plugins")
+require("mappings")
+require("treesitter")
+require("lsp")
 
 vim.cmd([[colorscheme ayu]])

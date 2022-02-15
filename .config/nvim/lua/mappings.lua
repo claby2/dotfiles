@@ -1,7 +1,9 @@
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true}
-    if opts then options = vim.tbl_extend("force", options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 -- Clear hlsearch highlights
@@ -17,8 +19,7 @@ map("n", "<leader>r", "<cmd>redraw!<CR>")
 map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
 
 -- telescope.nvim bind
-map("n", "<leader><tab>",
-    [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
+map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
 
 -- genfmt.vim bind
 map("n", "<leader>f", "<cmd>Format<CR>")
