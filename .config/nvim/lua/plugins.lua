@@ -11,6 +11,7 @@ require("packer").startup(function()
 	use("neovim/nvim-lspconfig")
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
+	use("j-hui/fidget.nvim")
 
 	-- Completion
 	use("hrsh7th/nvim-cmp")
@@ -77,13 +78,16 @@ cmp.setup({
 		}),
 	},
 	sources = {
-		{ name = "buffer" },
-		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
 		{ name = "nvim_lua" },
+		{ name = "luasnip" },
+		{ name = "buffer" },
 		{ name = "path" },
 	},
 })
+
+-- fidget.nvim
+require("fidget").setup({})
 
 -- formatter.nvim
 local clang_format = function()
@@ -178,7 +182,7 @@ require("toggleterm").setup({
 	direction = "float",
 	float_opts = {
 		border = "curved",
-        winblend = 10,
+		winblend = 10,
 	},
 })
 
