@@ -55,6 +55,9 @@ local setup_servers = function()
 				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
+						checkOnSave = {
+							command = "clippy",
+						},
 						diagnostics = {
 							disabled = {
 								--  Keep ignoring mismatched-arg-count until https://github.com/rust-analyzer/rust-analyzer/issues/8654 is resolved.
