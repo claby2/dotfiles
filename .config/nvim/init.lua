@@ -27,4 +27,5 @@ require("mappings")
 require("treesitter")
 require("lsp")
 
+vim.cmd([[let ayucolor="mirage"]])
 vim.cmd([[colorscheme ayu]])

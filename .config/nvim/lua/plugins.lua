@@ -188,7 +188,7 @@ require("toggleterm").setup({
 
 -- lualine.nvim
 require("lualine").setup({
-	options = { theme = "ayu_dark" },
+	options = { theme = "ayu_mirage" },
 	sections = { lualine_b = { "filename" }, lualine_c = { "branch" } },
 	extensions = { "nvim-tree" },
 })
