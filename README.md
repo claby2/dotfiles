@@ -22,13 +22,23 @@ text-based configuration files
 
 ## Dotfile Installation
 
-Use [`stow`](https://www.gnu.org/software/stow/) to install:
+### Install dotfiles
+
+Use [`just`](https://github.com/casey/just) to install the dotfiles with ease.
+Installation requires [`stow`](https://www.gnu.org/software/stow/).
 
     $ git clone --recurse-submodules https://github.com/claby2/dotfiles
     $ cd dotfiles
-    $ stow -v . -t ~
+    $ just stow
 
-Run `stow -Dv . -t ~` to remove all symlinks.
+`just unstow` to remove all symlinks.
+
+### Install suckless Programs
+
+To install any suckless program, `just install DIRECTORY`.
+For example:
+
+    $ just install .config/st
 
 ## Font
 

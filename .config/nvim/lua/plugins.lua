@@ -12,6 +12,7 @@ require("packer").startup(function()
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
 	use("j-hui/fidget.nvim")
+	use("NoahTheDuke/vim-just")
 
 	-- Completion
 	use("hrsh7th/nvim-cmp")

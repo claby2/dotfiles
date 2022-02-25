@@ -2,3 +2,4 @@
 \.gitignore
 \.gitmodules
 /README.md
+/justfile
