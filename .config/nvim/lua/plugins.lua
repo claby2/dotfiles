@@ -175,7 +175,14 @@ require("formatter").setup({
 require("nvim-tree").setup({})
 
 -- telescope.nvim
-require("telescope").setup({})
+require("telescope").setup({
+	pickers = {
+		find_files = {
+			hidden = true,
+			file_ignore_patterns = { ".git/" },
+		},
+	},
+})
 
 -- toggleterm.nvim
 require("toggleterm").setup({
@@ -189,7 +196,6 @@ require("toggleterm").setup({
 
 -- lualine.nvim
 require("lualine").setup({
-	options = { theme = "ayu_mirage" },
 	sections = { lualine_b = { "filename" }, lualine_c = { "branch" } },
 	extensions = { "nvim-tree" },
 })
