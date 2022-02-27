@@ -8,6 +8,7 @@ c.aliases = {
     'wq': 'quit --save',
 }
 
+config.bind('~', 'mode-leave', mode='passthrough')
 
 def bind_chained(key, *commands):
     config.bind(key, ' ;; '.join(commands))
