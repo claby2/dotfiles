@@ -1,4 +1,4 @@
-#define ALPHA 1.0
+#define ALPHA 0.9
 
 #define FONT JetBrainsMono Nerd Font:size=12
 
