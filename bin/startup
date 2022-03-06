@@ -7,7 +7,9 @@ pkill picom
 xsetroot -cursor_name left_ptr
 
 # Set mouse speed
-xinput set-prop 14 299 -0.5
+device="pointer:Razer Razer Viper Mini"
+device_id="$(xinput list --id-only "$device")"
+xinput set-prop "$device_id" 299 -0.5
 
 # Configure monitors
 xrandr --output DVI-D-0 --mode 1920x1080 --primary --rate 144.00
