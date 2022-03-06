@@ -14,7 +14,5 @@ amixer sset 'Master' 5%
 xset s 3600
 
 startup
-# Start status bar.
-xstatus &
 
 exec bspwm
