@@ -1,7 +1,3 @@
-[submodule ".config/dwm"]
-	path = .config/dwm
-	url = https://github.com/claby2/dwm
-	branch = master
 [submodule ".config/st"]
 	path = .config/st
 	url = https://github.com/claby2/st
