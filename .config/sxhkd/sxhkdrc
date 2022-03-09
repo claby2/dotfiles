@@ -20,7 +20,7 @@ super + shift + r
     changewall -r
 
 super + shift + p
-    notify-send "spotify-tui" "$(spt playback --toggle)"
+    notify-send "mpc" "$(mpc toggle | head -1)"
 
 super + shift + s
     flameshot gui

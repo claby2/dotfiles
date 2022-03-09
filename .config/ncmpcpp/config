@@ -1,0 +1,24 @@
+# Configuration for ncmpcpp
+# vim:ft=conf
+
+user_interface = alternative
+
+# Colors
+main_window_color = white
+header_window_color = cyan
+volume_color = green
+
+# Display Modes
+playlist_display_mode = columns
+browser_display_mode = columns
+search_engine_display_mode = columns
+playlist_editor_display_mode = columns
+
+## Navigation
+cyclic_scrolling = yes
+
+## Now Playing
+now_playing_prefix = "> "
+
+## Song List
+song_columns_list_format = (5)[blue]{l} (15)[green]{a} (50)[yellow]{t|f:Title} (30)[magenta]{b}

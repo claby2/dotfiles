@@ -77,7 +77,8 @@ alias \
 	clippy="cargo clippy --all-targets --all-features" \
 	clip="xclip -selection clipboard" \
 	grip="grip --pass=$GIT_SIGNINGKEY" \
-	dots="cd $HOME/.config/dotfiles"
+	dots="cd $HOME/.config/dotfiles" \
+	music="ncmpcpp -q"
 # OS-specific aliases
 os=$(uname -s)
 case $os in
