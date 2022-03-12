@@ -3,3 +3,4 @@
 \.gitmodules
 /README.md
 /justfile
+/install.sh
