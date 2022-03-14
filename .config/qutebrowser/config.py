@@ -9,7 +9,7 @@ c.aliases = {
 }
 
 config.bind('~', 'mode-leave', mode='passthrough')
-config.bind('M', 'hint links spawn mpv {hint-url}')
+config.bind('M', 'hint links spawn --detach mpv {hint-url}')
 
 def bind_chained(key, *commands):
     config.bind(key, ' ;; '.join(commands))

@@ -46,7 +46,7 @@ installpkg libxft
 just install .config/st
 
 # Install programs
-installpkg bspwm sxhkd dmenu xwallpaper zathura neovim dunst libnotify picom mpd ncmpcpp ripgrep bat zsh zsh-syntax-highlighting qutebrowser python-adblock
+installpkg bspwm sxhkd dmenu xwallpaper zathura neovim dunst libnotify picom mpv mpd ncmpcpp ripgrep bat zsh zsh-syntax-highlighting qutebrowser python-adblock
 installaurpkg polybar
 
 # Install other required packages

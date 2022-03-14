@@ -7,4 +7,25 @@ wm_name=$(xprop WM_NAME -id "$WID" | cut -d '"' -f2)
 # If bevy window, start in floating state.
 if [ "$wm_name" = "bevy" ]; then
 	echo "state=floating"
+	exit 0
 fi
+
+wm_class=$(xprop WM_CLASS -id "$WID")
+
+case "$wm_class" in
+*mpv*)
+	monrect="$(bspc query -T -m focused |
+		jq ".rectangle | .x, .y, .width, .height" |
+		paste -sd,)"
+	IFS=, read -r monx mony monw monh <<END
+    $monrect
+END
+	width=544
+	height=306
+	margin="$(bspc config border_width)"
+	xpos=$((monw - width - (margin * 2) + monx))
+	ypos=$((monh - height - (margin * 2) + mony))
+	echo "rectangle=${width}x${height}+${xpos}+${ypos}"
+	;;
+*) ;;
+esac

@@ -14,6 +14,7 @@ text-based configuration files
 | Code Editor         | [neovim](https://github.com/neovim/neovim)             |
 | Notification Daemon | [dunst](https://github.com/dunst-project/dunst)        |
 | Compositor          | [picom](https://github.com/yshui/picom)                |
+| Media Player        | [mpv](https://github.com/mpv-player/mpv)               |
 | Music Player Daemon | [mpd](https://musicpd.org/)                            |
 | Music Player Client | [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp)          |
 | Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)       |
