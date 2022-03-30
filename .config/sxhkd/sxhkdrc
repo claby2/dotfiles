@@ -16,6 +16,9 @@ super + Escape
 	pkill -USR1 -x sxhkd && \
         notify-send "sxhkd" "Reloaded configuration"
 
+super + shift + i
+    notify-send "ipv4" "$(ipv4)"
+
 super + shift + r
     changewall -r
 
