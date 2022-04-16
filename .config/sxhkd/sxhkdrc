@@ -17,13 +17,13 @@ super + Escape
         notify-send "sxhkd" "Reloaded configuration"
 
 super + shift + i
-    notify-send "ipv4" "$(ipv4)"
+    ipv4 -n
 
 super + shift + r
     changewall -r
 
 super + shift + p
-    notify-send "mpc" "$(mpc toggle | head -1)"
+    notify-send "mpc" "$(mpc toggle | head -2)"
 
 super + shift + s
     flameshot gui

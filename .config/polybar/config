@@ -28,4 +28,4 @@ padding = 1
 module-margin = 1
 modules-left = bspwm
 modules-center = date
-modules-right = volume bluetooth filesystem packages exit
+modules-right = vpn volume bluetooth filesystem packages exit

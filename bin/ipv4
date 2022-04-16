@@ -1,4 +1,19 @@
 #!/bin/sh
 # Outputs ipv4
 
-exec dig @resolver4.opendns.com myip.opendns.com +short
+ip="$(exec dig @resolver4.opendns.com myip.opendns.com +short)"
+
+while getopts "n" OPT; do
+	case "$OPT" in
+	n)
+		notify-send "ipv4" "$ip"
+		exit 0
+		;;
+
+	*)
+		exit 1
+		;;
+	esac
+done
+
+echo "$ip"
