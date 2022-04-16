@@ -25,7 +25,13 @@ run() {
 }
 
 bluetooth() {
-	device=$(bluetoothctl devices | cut -d" " -f2 | start "dmenu" -p "Bluetooth device:")
+	device=$(bluetoothctl devices |
+		# Remove "Device" qualifier.
+		cut -d ' ' -f 2- |
+		# Wrap device name with ().
+		sed -e 's/ / (/' -e 's/$/)/' |
+		start "dmenu" -p "Bluetooth device:" |
+		cut -d ' ' -f 1)
 	[ -n "$device" ] && btconnect "$device"
 }
 
