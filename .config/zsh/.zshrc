@@ -23,7 +23,7 @@ function precmd() {
 PROMPT=" %B%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ ) "
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	# Add username indicator if ssh
-	PROMPT+="%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[red]%}] "
+	PROMPT+="%{$fg[red]%}[%{$fg[yellow]%}%M%{$fg[red]%}] "
 fi
 PROMPT+='%{$fg[cyan]%}%1~$(git_prompt_info)%{$reset_color%}%b '
 
