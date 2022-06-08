@@ -18,9 +18,8 @@ let main = new MutationObserver(() => {
   // Skip button does not exist.
   const ad = [...document.querySelectorAll(".ad-showing")][0];
   if (ad) {
-    // Speed up and mute ad.
-    document.querySelector("video").playbackRate = 16;
-    document.querySelector("video").muted = true;
+    const video = document.querySelector("video");
+    video.currentTime = video.duration;
   }
 });
 

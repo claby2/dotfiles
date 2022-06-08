@@ -1,3 +1,6 @@
+config = config  # type: ignore
+c = c  # type: ignore
+
 config.load_autoconfig()
 
 c.aliases = {
@@ -11,6 +14,7 @@ c.aliases = {
 config.bind('~', 'mode-leave', mode='passthrough')
 config.bind('M', 'hint links spawn --detach mpv {hint-url}')
 
+
 def bind_chained(key, *commands):
     config.bind(key, ' ;; '.join(commands))
 
@@ -22,8 +26,13 @@ bind_chained('gr', 'greasemonkey-reload --quiet',
 c.url.searchengines = {
     'DEFAULT': 'https://www.google.com/search?q={}',
     'reddit': 'https://reddit.com/r/{}',
+    'libreddit': 'https://libreddit.edwardwibowo.com/r/{}',
+    'gmaps': 'https://maps.google.com/?q={}',
     'shellcheck': 'https://www.shellcheck.net/wiki/SC{}'
 }
+
+# https://github.com/qutebrowser/qutebrowser/issues/7118#issuecomment-1111951853
+c.qt.workarounds.remove_service_workers = True
 
 startpage = 'https://edwardwibowo.com'
 c.url.default_page = startpage
@@ -55,5 +64,7 @@ c.tabs.last_close = "close"
 c.fonts.default_size = '12pt'
 
 c.colors.webpage.preferred_color_scheme = 'dark'
+
+c.downloads.position = "bottom"
 
 config.source('color.py')
