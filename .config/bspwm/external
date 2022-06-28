@@ -5,7 +5,7 @@ WID="$1"
 wm_name=$(xprop WM_NAME -id "$WID" | cut -d '"' -f2)
 
 # If bevy window, start in floating state.
-if [ "$wm_name" = "bevy" ]; then
+if [ "$wm_name" = "app" ]; then
 	echo "state=floating"
 	exit 0
 fi
