@@ -35,6 +35,7 @@ require("packer").startup(function()
 	use("ayu-theme/ayu-vim")
 
 	-- Misc
+	use("aklt/plantuml-syntax")
 	use("akinsho/toggleterm.nvim")
 	use("baskerville/vim-sxhkdrc")
 	use("elkowar/yuck.vim")
@@ -126,8 +127,15 @@ require("formatter").setup({
 		typescriptreact = { prettier_format },
 		typescript = { prettier_format },
 		markdown = { prettier_format },
+		astro = { prettier_format },
 		yaml = { prettier_format },
 		html = { prettier_format },
+		css = { prettier_format },
+		scheme = {
+			function()
+				return { exe = "raco fmt", stdin = true }
+			end,
+		},
 		cmake = {
 			function()
 				return { exe = "cmake-format", stdin = true }
@@ -216,3 +224,10 @@ vim.api.nvim_set_var("vimtex_quickfix_mode", 0)
 
 -- nvim-colorizer.lua
 require("colorizer").setup({ "*", "xdefaults" })
+
+-- nerdcommenter
+vim.api.nvim_set_var("NERDCustomDelimiters", {
+	pyret = {
+		left = "# ",
+	},
+})

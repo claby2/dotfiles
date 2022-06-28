@@ -2,6 +2,7 @@ local ts_config = require("nvim-treesitter.configs")
 
 ts_config.setup({
 	ensure_installed = {
+		"astro",
 		"bash",
 		"c",
 		"c_sharp",

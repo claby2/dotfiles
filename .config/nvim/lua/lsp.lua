@@ -30,18 +30,35 @@ end
 
 local setup_servers = function()
 	local servers = {
+		"astro",
 		"ccls",
 		"hls",
+		"pyright",
 		"rust_analyzer",
 		"sumneko_lua",
 		"texlab",
 		"tsserver",
-		"pyright",
 	}
 	local lspconfig = require("lspconfig")
+	local util = require("lspconfig").util
 	local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 	for _, lsp in ipairs(servers) do
-		if lsp == "ccls" then
+		if lsp == "astro" then
+			lspconfig[lsp].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+				cmd = { "astro-ls", "--stdio" },
+				filetypes = { "astro" },
+				root_dir = function(fname)
+					return util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")(fname)
+				end,
+				docs = {
+					description = "https://github.com/withastro/language-tools",
+					root_dir = [[root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git")]],
+				},
+				settings = {},
+			})
+		elseif lsp == "ccls" then
 			lspconfig[lsp].setup({
 				on_attach = on_attach,
 				capabilities = capabilities,

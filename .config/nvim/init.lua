@@ -29,3 +29,4 @@ require("lsp")
 
 vim.cmd([[let ayucolor="mirage"]])
 vim.cmd([[colorscheme ayu]])
+vim.cmd([[ autocmd BufRead,BufNewFile *.astro set filetype=astro ]])
