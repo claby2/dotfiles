@@ -45,6 +45,8 @@ c.content.blocking.adblock.lists = [
     'https://easylist-downloads.adblockplus.org/antiadblockfilters.txt'
 ]
 
+c.content.javascript.can_access_clipboard = True
+
 c.statusbar.padding = {
     'bottom': 5,
     'left': 5,
