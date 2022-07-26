@@ -1,3 +1,5 @@
+from qutebrowser.api import interceptor
+
 config = config  # type: ignore
 c = c  # type: ignore
 
@@ -25,7 +27,6 @@ bind_chained('gr', 'greasemonkey-reload --quiet',
 
 c.url.searchengines = {
     'DEFAULT': 'https://www.google.com/search?q={}',
-    'reddit': 'https://reddit.com/r/{}',
     'libreddit': 'https://libreddit.edwardwibowo.com/r/{}',
     'gmaps': 'https://maps.google.com/?q={}',
     'shellcheck': 'https://www.shellcheck.net/wiki/SC{}'
@@ -67,6 +68,24 @@ c.fonts.default_size = '12pt'
 
 c.colors.webpage.preferred_color_scheme = 'dark'
 
-c.downloads.position = "bottom"
+c.downloads.position = 'bottom'
+
+
+def redirect(request: interceptor.Request):
+    rewrite_map = {
+        "www.reddit.com": "libreddit.edwardwibowo.com",
+        "old.reddit.com": "libreddit.edwardwibowo.com"
+    }
+
+    for original_link, new_link in rewrite_map.items():
+        if request.request_url.host() == original_link:
+            request.request_url.setHost(new_link)
+            try:
+                request.redirect(request.request_url)
+            except:
+                pass
+
+
+interceptor.register(redirect)
 
 config.source('color.py')
