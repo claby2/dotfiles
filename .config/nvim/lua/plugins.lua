@@ -133,7 +133,7 @@ require("formatter").setup({
 		css = { prettier_format },
 		scheme = {
 			function()
-				return { exe = "raco fmt", stdin = true }
+				return { exe = "raco fmt --width 70", stdin = true }
 			end,
 		},
 		cmake = {
