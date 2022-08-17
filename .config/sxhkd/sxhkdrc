@@ -38,6 +38,15 @@ super + x
 super + p ; {b,v,m}
     dmenuexec -{b,v,m}
 
+XF86Audio{Lower,Raise}Volume
+    amixer set "Master" 10%{-,+}
+
+XF86AudioMute
+    amixer set "Master" 0%
+
+XF86MonBrightness{Down,Up}
+    xbacklight -{dec,inc} 10
+
 #
 # bspwm hotkeys
 #

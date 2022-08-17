@@ -13,6 +13,7 @@ color5 = ${xrdb:color5}
 color6 = ${xrdb:color6}
 
 [bar/bar]
+dpi = ${xrdb:Xft.dpi:-1}
 monitor = ${env:MONITOR:}
 foreground = ${colors.foreground}
 background = ${colors.background}
@@ -28,4 +29,4 @@ padding = 1
 module-margin = 1
 modules-left = bspwm
 modules-center = date
-modules-right = vpn volume bluetooth filesystem packages exit
+modules-right = vpn volume bluetooth filesystem packages battery exit
