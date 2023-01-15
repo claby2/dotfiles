@@ -19,22 +19,22 @@ def load_xresources(prefix):
 
 def load_colors(xresources):
 
-    background = xresources['*.background']
-    foreground = xresources['*.foreground']
-    base02 = xresources['*.color2']
-    base03 = xresources['*.color3']
-    base04 = xresources['*.color4']
-    base05 = xresources['*.color5']
-    # base06 = xresources['*.color6']
-    # base07 = xresources['*.color7']
-    base08 = xresources['*.color8']
-    base09 = xresources['*.color9']
-    # base0A = xresources['*.color10']
-    base0B = xresources['*.color11']
-    base0C = xresources['*.color12']
-    base0D = xresources['*.color14']
-    base0E = xresources['*.color15']
-    # base0F = xresources['*.color15']
+    background = xresources.get('*.background', '#0f1419')
+    foreground = xresources.get('*.foreground', '#e6e1cf')
+    base02 = xresources.get('*.color2', '#b8cc52')
+    base03 = xresources.get('*.color3', '#e7c547')
+    base04 = xresources.get('*.color4', '#36a3d9')
+    base05 = xresources.get('*.color5', '#f07178')
+    # base06 = xresources.get('*.color6', '#95e6cb')
+    # base07 = xresources.get('*.color7', '#ffffff')
+    base08 = xresources.get('*.color8', '#323232')
+    base09 = xresources.get('*.color9', '#ff6565')
+    # base0A = xresources.get('*.color10', '#eafe84')
+    base0B = xresources.get('*.color11', '#fff779')
+    base0C = xresources.get('*.color12', '#68d5ff')
+    base0D = xresources.get('*.color14', '#c7fffd')
+    base0E = xresources.get('*.color15', '#ffffff')
+    # base0F = xresources.get('*.color15', '#ffffff')
 
     # set qutebrowser colors
 
