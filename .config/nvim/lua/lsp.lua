@@ -41,7 +41,7 @@ local setup_servers = function()
 	}
 	local lspconfig = require("lspconfig")
 	local util = require("lspconfig").util
-	local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	for _, lsp in ipairs(servers) do
 		if lsp == "astro" then
 			lspconfig[lsp].setup({
