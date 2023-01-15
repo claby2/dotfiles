@@ -33,7 +33,7 @@ require("packer").startup(function()
 	use("nvim-telescope/telescope.nvim")
 
 	-- Theme
-	use("ayu-theme/ayu-vim")
+	use("Shatur/neovim-ayu")
 
 	-- Misc
 	use("aklt/plantuml-syntax")
@@ -193,6 +193,13 @@ require("telescope").setup({
 	},
 })
 
+-- neovim-ayu
+require("ayu").setup({
+	mirage = true,
+	overrides = {},
+})
+require("ayu").colorscheme()
+
 -- toggleterm.nvim
 require("toggleterm").setup({
 	open_mapping = [[<leader><space>]],
@@ -207,6 +214,9 @@ require("toggleterm").setup({
 require("lualine").setup({
 	sections = { lualine_b = { "filename" }, lualine_c = { "branch" } },
 	extensions = { "nvim-tree" },
+	options = {
+		theme = "ayu",
+	},
 })
 
 -- gitsigns.nvim
