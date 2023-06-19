@@ -35,7 +35,6 @@ local setup_servers = function()
 		"hls",
 		"pyright",
 		"rust_analyzer",
-		"sumneko_lua",
 		"texlab",
 		"tsserver",
 	}
@@ -83,25 +82,6 @@ local setup_servers = function()
 							},
 						},
 					},
-				},
-			})
-		elseif lsp == "sumneko_lua" then
-			lspconfig[lsp].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				cmd = { "lua-language-server" },
-				root_dir = function()
-					return vim.loop.cwd()
-				end,
-				settings = {
-					Lua = { diagnostics = { globals = { "vim" } } },
-					workspace = {
-						library = {
-							[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							[vim.fn.expand("$VIMRUNTIME/luavim/lsp")] = true,
-						},
-					},
-					telemetry = { enable = false },
 				},
 			})
 		else

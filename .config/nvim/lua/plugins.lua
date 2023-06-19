@@ -11,7 +11,7 @@ require("packer").startup(function()
 	use("neovim/nvim-lspconfig")
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
-	use("j-hui/fidget.nvim")
+	use({ "j-hui/fidget.nvim", tag = "legacy" })
 	use("NoahTheDuke/vim-just")
 	use("rachitnigam/pyret-lang.vim")
 
@@ -125,6 +125,7 @@ require("formatter").setup({
 		cpp = { clang_format },
 		java = { clang_format },
 		javascript = { prettier_format },
+		javascriptreact = { prettier_format },
 		typescriptreact = { prettier_format },
 		typescript = { prettier_format },
 		markdown = { prettier_format },
@@ -221,11 +222,19 @@ require("lualine").setup({
 
 -- gitsigns.nvim
 require("gitsigns").setup({
-	keymaps = {
-		["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-		["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-		["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
-	},
+	on_attach = function(bufnr)
+		local gs = package.loaded.gitsigns
+		local function map(mode, l, r, opts)
+			opts = opts or {}
+			opts.buffer = bufnr
+			vim.keymap.set(mode, l, r, opts)
+		end
+		map("n", "<leader>hr", gs.reset_hunk)
+		map("n", "<leader>hr", gs.preview_hunk)
+		map("n", "<leader>hr", function()
+			gs.blame_line({ full = true })
+		end)
+	end,
 })
 
 -- vimtex
