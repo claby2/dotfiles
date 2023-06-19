@@ -230,8 +230,8 @@ require("gitsigns").setup({
 			vim.keymap.set(mode, l, r, opts)
 		end
 		map("n", "<leader>hr", gs.reset_hunk)
-		map("n", "<leader>hr", gs.preview_hunk)
-		map("n", "<leader>hr", function()
+		map("n", "<leader>hp", gs.preview_hunk)
+		map("n", "<leader>hb", function()
 			gs.blame_line({ full = true })
 		end)
 	end,
