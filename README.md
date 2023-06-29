@@ -2,26 +2,6 @@
 
 text-based configuration files
 
-| Program             | Name                                                   |
-| ------------------- | ------------------------------------------------------ |
-| Window Manager      | [bspwm](https://github.com/baskerville/bspwm)          |
-| Status Bar          | [polybar](https://github.com/polybar/polybar)          |
-| Hotkey Daemon       | [sxhkd](https://github.com/baskerville/sxhkd)          |
-| Program Launcher    | [dmenu](https://tools.suckless.org/dmenu/)             |
-| Wallpaper Setter    | [xwallpaper](https://github.com/stoeckmann/xwallpaper) |
-| Terminal Emulator   | [st](https://github.com/claby2/st)                     |
-| Document Viewer     | [zathura](https://pwmt.org/projects/zathura/)          |
-| Code Editor         | [neovim](https://github.com/neovim/neovim)             |
-| Notification Daemon | [dunst](https://github.com/dunst-project/dunst)        |
-| Compositor          | [picom](https://github.com/yshui/picom)                |
-| Media Player        | [mpv](https://github.com/mpv-player/mpv)               |
-| Music Player Daemon | [mpd](https://musicpd.org/)                            |
-| Music Player Client | [ncmpcpp](https://github.com/ncmpcpp/ncmpcpp)          |
-| Search Tool         | [ripgrep](https://github.com/BurntSushi/ripgrep)       |
-| File Displayer      | [bat](https://github.com/sharkdp/bat)                  |
-| Shell               | [zsh](https://wiki.archlinux.org/index.php/Zsh)        |
-| Browser             | [qutebrowser](https://qutebrowser.org/)                |
-
 ## Installation
 
 ### Sync dotfiles
