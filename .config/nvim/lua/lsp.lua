@@ -37,6 +37,7 @@ local setup_servers = function()
 		"rust_analyzer",
 		"texlab",
 		"tsserver",
+		"gopls",
 	}
 	local lspconfig = require("lspconfig")
 	local util = require("lspconfig").util
