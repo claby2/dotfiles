@@ -45,7 +45,7 @@ XF86AudioMute
     amixer set "Master" 0%
 
 XF86MonBrightness{Down,Up}
-    xbacklight -{dec,inc} 10
+    light -{U,A} 20
 
 #
 # bspwm hotkeys
