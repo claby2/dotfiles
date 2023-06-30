@@ -1,0 +1,6 @@
+[flags]
+
+[[row]]
+    [[row.child]]
+        type="proc"
+        default=true
