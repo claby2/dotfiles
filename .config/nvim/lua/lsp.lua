@@ -38,6 +38,7 @@ local setup_servers = function()
 		"texlab",
 		"tsserver",
 		"gopls",
+		"cssls",
 	}
 	local lspconfig = require("lspconfig")
 	local util = require("lspconfig").util
