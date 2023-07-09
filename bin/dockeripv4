@@ -1,0 +1,24 @@
+#!/bin/bash
+
+error() {
+	echo "ERROR: $1" >&2
+	exit 1
+}
+
+# Check if Docker is installed
+command -v docker >/dev/null || error "Docker is not installed"
+
+# Check if jq is installed
+command -v jq >/dev/null || error "jq is not installed"
+
+# Check if the Docker network argument is provided
+if [[ "$1" == "-l" ]]; then
+	docker network ls --format "{{.Name}}" | tr '\n' '\n'
+	exit 0
+fi
+
+# Check if the Docker network argument is provided
+[ -z "$1" ] && error "Usage: $0 <docker_network>"
+
+# Retrieve and display the Name and IPv4Address fields
+docker network inspect "$1" | jq -r '.[].Containers[] | "\(.Name): \(.IPv4Address)"'
