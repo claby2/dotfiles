@@ -27,7 +27,6 @@ bind_chained('gr', 'greasemonkey-reload --quiet',
 
 c.url.searchengines = {
     'DEFAULT': 'https://www.google.com/search?q={}',
-    'libreddit': 'https://libreddit.edwardwibowo.com/r/{}',
     'gmaps': 'https://maps.google.com/?q={}',
     'shellcheck': 'https://www.shellcheck.net/wiki/SC{}'
 }
@@ -73,8 +72,7 @@ c.downloads.position = 'bottom'
 
 def redirect(request: interceptor.Request):
     rewrite_map = {
-        "www.reddit.com": "libreddit.edwardwibowo.com",
-        "old.reddit.com": "libreddit.edwardwibowo.com"
+        "www.reddit.com": "old.reddit.com",
     }
 
     for original_link, new_link in rewrite_map.items():
