@@ -13,6 +13,8 @@ amixer sset 'Master' 5%
 # Set screen saver timeout.
 xset s 3600
 
+xset r rate 200 50
+
 startup
 
 exec bspwm
