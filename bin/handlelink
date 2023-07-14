@@ -21,7 +21,7 @@ tmp() {
 case $(echo "$url" | tr '[:upper:]' '[:lower:]') in
 *png | *jpg | *jpe | *jpeg | *gif | *webp)
 	notify "Opened picture"
-	tmp "sxiv -qa" &
+	tmp "nsxiv -qa" &
 	;;
 *pdf | *cbz | *cbr)
 	notify "Opened document"

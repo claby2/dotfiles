@@ -1,7 +1,7 @@
 #compdef changewall
 
 _changewall_flags=(
-	"-s[Use sxiv to select marked wallpaper]"
+	"-s[Use nsxiv to select marked wallpaper]"
 	"-h[Prints help information]"
 )
 

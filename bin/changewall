@@ -20,7 +20,7 @@ USAGE:
     changewall [FLAGS] [IMAGE]
 
 FLAGS:
-    -s    Use sxiv to select marked wallpaper
+    -s    Use nsxiv to select marked wallpaper
     -h    Prints help information
 "
 }
@@ -28,8 +28,8 @@ FLAGS:
 while getopts "srh" OPT; do
 	case "$OPT" in
 	s)
-		has sxiv &&
-			setwall "$(sxiv -ot "$WALLDIR")"
+		has nsxiv &&
+			setwall "$(nsxiv -ot "$WALLDIR")"
 		exit 0
 		;;
 	r)
