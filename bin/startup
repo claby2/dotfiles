@@ -6,6 +6,12 @@ pgrep picom >/dev/null && pkill picom
 # Set cursor
 xsetroot -cursor_name left_ptr
 
+# Set screen saver timeout.
+xset s 3600
+
+# Set keyboard delay and rate
+xset r rate 200 50
+
 # Configure monitors
 host=$(uname -n)
 case "$host" in
