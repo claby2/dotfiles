@@ -133,6 +133,11 @@ require("formatter").setup({
 		yaml = { prettier_format },
 		html = { prettier_format },
 		css = { prettier_format },
+		sql = {
+			function()
+				return { exe = "sql-formatter", stdin = true }
+			end,
+		},
 		scheme = {
 			function()
 				return { exe = "raco fmt --width 70", stdin = true }
