@@ -3,7 +3,7 @@
 
 # Colorful output to echo progress status.
 progress() {
-	echo "\033[1;34m::\033[1;37m $1 \033[0m"
+	printf "\033[1;34m::\033[1;37m %s \033[0m\n" "$1"
 }
 
 [ -f config.h ] && sudo rm config.h
