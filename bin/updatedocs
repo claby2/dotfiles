@@ -1,0 +1,9 @@
+#!/bin/sh
+
+update="git -C /home/claby2/docker/docs/src/ pull origin main"
+if [ "$(uname -n)" = "altaria" ]; then
+	eval "$update"
+else
+	# shellcheck disable=SC2029
+	ssh altaria "$update"
+fi
