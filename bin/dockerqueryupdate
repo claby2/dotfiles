@@ -1,0 +1,21 @@
+#!/bin/sh
+# Iterate through all current containers and check if container image's version matches latest version.
+
+digests() {
+    curl -s "https://hub.docker.com/v2/namespaces/$1/repositories/$2/tags/$3" | jq -r ".images[].digest"
+}
+
+images="$(curl -s --unix-socket /var/run/docker.sock http://localhost/containers/json | jq -r ".[].Image")"
+
+echo "Outdated:"
+
+echo "$images" | while read -r image; do
+    if echo "$image" | grep -q ":"; then
+        namespace="$(echo "$image" | grep -q "/" && echo "$image" | rev | cut -d"/" -f2 | rev || echo "library")"
+        repository="$(echo "$image" | cut -d":" -f1 | rev | cut -d"/" -f1 | rev)"
+        tag="$(echo "$image" | cut -d":" -f2)"
+        current="$(digests "$namespace" "$repository" "$tag")"
+        latest="$(digests "$namespace" "$repository" "latest")"
+        [ "$current" = "$latest" ] || echo "$image"
+    fi
+done
