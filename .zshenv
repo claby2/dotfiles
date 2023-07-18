@@ -6,6 +6,7 @@ path=(
 	$HOME/.yarn/bin
 	$HOME/go/bin
 	$HOME/bin
+	$HOME/.config/dotfiles/bin
 	$path
 )
 
