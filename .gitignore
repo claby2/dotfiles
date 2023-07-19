@@ -11,3 +11,4 @@ __pycache__
 .config/qutebrowser/quickmarks
 .config/zsh/.zcompdump
 .config/zsh/history
+.config/newsboat/password.gpg

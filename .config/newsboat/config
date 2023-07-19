@@ -31,3 +31,13 @@ color listfocus black yellow
 color listfocus_unread black yellow bold
 color info yellow default
 color article default default
+
+# https://newsboat.org/releases/2.24/docs/newsboat.html#_freshrss
+urls-source "freshrss"
+freshrss-url "https://freshrss.edwardwibowo.com/api/greader.php"
+freshrss-login "claby2"
+freshrss-flag-star "s"
+freshrss-min-items 100
+
+# https://newsboat.org/releases/2.24/docs/newsboat.html#_passwords_for_external_apis
+freshrss-passwordeval "gpg --decrypt ~/.config/newsboat/password.gpg"
