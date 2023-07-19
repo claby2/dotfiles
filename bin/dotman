@@ -3,37 +3,42 @@
 dotfiles="$HOME/.config/dotfiles"
 verbose="1"
 
+# shellcheck disable=SC2317
 stow() {
 	(cd "$dotfiles" && command stow --verbose "$verbose" . -t ~)
 }
 
+# shellcheck disable=SC2317
 unstow() {
 	(cd "$dotfiles" && command stow --verbose "$verbose" -D . -t ~)
 }
 
+# shellcheck disable=SC2317
 install() {
 	DIRECTORY="$1"
 	cd "$DIRECTORY" && "$dotfiles/bin/slinstall" "$DIRECTORY"
 }
 
+# shellcheck disable=SC2317
 uninstall() {
 	DIRECTORY="$1"
 	sudo make -C "$DIRECTORY" clean uninstall
 }
 
-# shellcheck disable=SC2032
+# shellcheck disable=SC2032,SC2317
 shellcheck() {
 	# shellcheck disable=SC2033
 	find "$dotfiles/bin/" -maxdepth 1 -type f -exec shellcheck {} \;
 }
 
+# shellcheck disable=SC2317
 packer() {
 	nvim -c "autocmd User PackerComplete quitall" -c "PackerSync"
 }
 
 list() { # ignore
 	echo "Available functions:"
-	echo "$(grep "^\w*() {$" "$0" | cut -d"(" -f1 | sed "s/^/    /")"
+	grep "^\w*() {$" "$0" | cut -d"(" -f1 | sed "s/^/    /"
 }
 
 if [ $# -eq 0 ]; then
@@ -43,7 +48,7 @@ else
 		"$@" && exit 0
 		list
 	else
-		echo "Dotfiles directory "$dotfiles" does not exist."
+		echo "Dotfiles directory $dotfiles does not exist."
 	fi
 fi
 exit 1
