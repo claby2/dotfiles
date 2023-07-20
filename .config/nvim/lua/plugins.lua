@@ -11,7 +11,7 @@ require("packer").startup(function()
 	use("neovim/nvim-lspconfig")
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
-	use({ "j-hui/fidget.nvim", tag = "legacy" })
+	use({ "j-hui/fidget.nvim", branch = "legacy" })
 	use("NoahTheDuke/vim-just")
 	use("rachitnigam/pyret-lang.vim")
 
@@ -25,15 +25,15 @@ require("packer").startup(function()
 	use("saadparwaiz1/cmp_luasnip")
 
 	-- Tree
-	use("kyazdani42/nvim-tree.lua")
+	use({ "kyazdani42/nvim-tree.lua", tag = vim.fn.has("nvim-0.8") == 1 and "*" or "compat-nvim-0.7" })
 	use("kyazdani42/nvim-web-devicons")
 	use("ryanoasis/vim-devicons")
 
 	-- Telescope
-	use("nvim-telescope/telescope.nvim")
+	use({ "nvim-telescope/telescope.nvim", tag = vim.fn.has("nvim-0.9.0") == 1 and "*" or "0.1.2" })
 
 	-- Theme
-	use("Shatur/neovim-ayu")
+	use({ "Shatur/neovim-ayu", commit = vim.fn.has("nvim-0.8") == 1 and "HEAD" or "0198dcf2d5585742220e21e002f095464874e19e" })
 
 	-- Misc
 	use("aklt/plantuml-syntax")
@@ -42,7 +42,7 @@ require("packer").startup(function()
 	use("elkowar/yuck.vim")
 	use("hoob3rt/lualine.nvim")
 	use("lervag/vimtex")
-	use("lewis6991/gitsigns.nvim")
+	use({ "lewis6991/gitsigns.nvim", tag = vim.fn.has("nvim-0.8") == 1 and "*" or "v0.6" })
 	use("norcalli/nvim-colorizer.lua")
 	use("preservim/nerdcommenter")
 end)

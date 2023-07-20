@@ -24,5 +24,5 @@ ts_config.setup({
 		"tsx",
 		"typescript",
 	},
-	highlight = { enable = true, use_languagetree = true },
+	highlight = { enable = vim.fn.has("nvim-0.9") == 1, use_languagetree = true },
 })
