@@ -42,13 +42,16 @@ list() { # ignore
 }
 
 if [ $# -eq 0 ]; then
-	list && exit 0
+	list
 else
 	if [ -d "$dotfiles" ]; then
-		"$@" && exit 0
-		list
+		case "$1" in
+		# install and uninstall use relative paths, so avoid changing directory to $dotfiles.
+		install | uninstall) "$@" ;;
+		*) (cd "$dotfiles" && "$@") ;;
+		esac
 	else
 		echo "Dotfiles directory $dotfiles does not exist."
+		exit 1
 	fi
 fi
-exit 1
