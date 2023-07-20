@@ -11,7 +11,7 @@ require("packer").startup(function()
 	use("neovim/nvim-lspconfig")
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
-	use({ "j-hui/fidget.nvim", branch = "legacy" })
+	use({ "j-hui/fidget.nvim", tag = "legacy", disable = vim.fn.has("nvim-0.9") == 0 })
 	use("NoahTheDuke/vim-just")
 	use("rachitnigam/pyret-lang.vim")
 
@@ -90,7 +90,9 @@ cmp.setup({
 })
 
 -- fidget.nvim
-require("fidget").setup({})
+if vim.fn.has("nvim-0.9") == 1 then
+    require("fidget").setup({})
+end
 
 -- formatter.nvim
 local clang_format = function()
