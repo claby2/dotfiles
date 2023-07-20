@@ -135,7 +135,7 @@ require("formatter").setup({
 		css = { prettier_format },
 		sql = {
 			function()
-				return { exe = "sql-formatter", stdin = true }
+				return { exe = "pg_format --inplace -", stdin = true }
 			end,
 		},
 		scheme = {
