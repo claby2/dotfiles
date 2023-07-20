@@ -103,6 +103,10 @@ export LESS_TERMCAP_se="${reset_color}"                # reset reverse video
 export LESS_TERMCAP_us="${fg_bold[green]}"             # begin underline
 export LESS_TERMCAP_ue="${reset_color}"                # reset underline
 
+# gpg-agent
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # Edit current line in $EDITOR
 autoload -U edit-command-line
 zle -N edit-command-line
