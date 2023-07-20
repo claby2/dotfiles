@@ -33,7 +33,10 @@ require("packer").startup(function()
 	use({ "nvim-telescope/telescope.nvim", tag = vim.fn.has("nvim-0.9.0") == 1 and "*" or "0.1.2" })
 
 	-- Theme
-	use({ "Shatur/neovim-ayu", commit = vim.fn.has("nvim-0.8") == 1 and "HEAD" or "0198dcf2d5585742220e21e002f095464874e19e" })
+	use({
+		"Shatur/neovim-ayu",
+		commit = vim.fn.has("nvim-0.8") == 1 and "HEAD" or "0198dcf2d5585742220e21e002f095464874e19e",
+	})
 
 	-- Misc
 	use("aklt/plantuml-syntax")
@@ -91,7 +94,7 @@ cmp.setup({
 
 -- fidget.nvim
 if vim.fn.has("nvim-0.9") == 1 then
-    require("fidget").setup({})
+	require("fidget").setup({})
 end
 
 -- formatter.nvim
