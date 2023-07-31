@@ -48,6 +48,7 @@ require("packer").startup(function()
 	use({ "lewis6991/gitsigns.nvim", tag = vim.fn.has("nvim-0.8") == 1 and "*" or "v0.6" })
 	use("norcalli/nvim-colorizer.lua")
 	use("preservim/nerdcommenter")
+	use("github/copilot.vim")
 end)
 
 -- nvim-cmp
@@ -261,3 +262,7 @@ vim.api.nvim_set_var("NERDCustomDelimiters", {
 		left = "# ",
 	},
 })
+
+-- copilot.vim
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
