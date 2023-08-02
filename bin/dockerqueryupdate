@@ -5,9 +5,16 @@ digests() {
 	curl -s "https://hub.docker.com/v2/namespaces/$1/repositories/$2/tags/$3" | jq -r ".images[].digest"
 }
 
-images="$(curl -s --unix-socket /var/run/docker.sock http://localhost/containers/json | jq -r ".[].Image")"
+suggestlatest() {
+	tags="$(curl -s "https://hub.docker.com/v2/repositories/$1/$2/tags?page_size=20" | jq -r -c ".results[]")"
+	echo "$tags" | while read -r tag; do
+		digest="$(echo "$tag" | jq -r ".images[].digest")"
+		name="$(echo "$tag" | jq -r ".name")"
+		[ "$name" != "latest" ] && [ "$digest" = "$3" ] && echo "$1/$2:$name" && break
+	done
+}
 
-echo "Outdated:"
+images="$(curl -s --unix-socket /var/run/docker.sock http://localhost/containers/json | jq -r ".[].Image")"
 
 echo "$images" | while read -r image; do
 	if echo "$image" | grep -q ":"; then
@@ -16,6 +23,8 @@ echo "$images" | while read -r image; do
 		tag="$(echo "$image" | cut -d":" -f2)"
 		current="$(digests "$namespace" "$repository" "$tag")"
 		latest="$(digests "$namespace" "$repository" "latest")"
-		[ "$current" = "$latest" ] || echo "$image"
+		if [ "$current" != "$latest" ]; then
+			printf "%s -> %s\n" "$image" "$(suggestlatest "$namespace" "$repository" "$latest")"
+		fi
 	fi
 done
