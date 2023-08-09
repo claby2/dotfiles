@@ -1,3 +1,9 @@
+vim.diagnostic.config({
+	severity_sort = true,
+	update_in_insert = true,
+	float = { border = "rounded", source = "always" },
+})
+
 local on_attach = function(_, bufnr)
 	local function buf_set_keymap(...)
 		vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -28,7 +34,23 @@ local on_attach = function(_, bufnr)
 	buf_set_keymap("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 end
 
+local set_floating_preview_borders = function()
+	local border = {
+		{ "╭" },
+		{ "─" },
+		{ "╮" },
+		{ "│" },
+		{ "╯" },
+		{ "─" },
+		{ "╰" },
+		{ "│" },
+	}
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+end
+
 local setup_servers = function()
+	set_floating_preview_borders()
 	local servers = {
 		"astro",
 		"ccls",

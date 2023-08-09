@@ -218,16 +218,23 @@ require("toggleterm").setup({
 	direction = "float",
 	float_opts = {
 		border = "curved",
-		winblend = 10,
 	},
 })
 
 -- lualine.nvim
 require("lualine").setup({
-	sections = { lualine_b = { "filename" }, lualine_c = { "branch" } },
+	sections = {
+		lualine_a = { "mode" },
+		lualine_b = { "filename" },
+		lualine_c = { "branch" },
+		lualine_x = { "filetype" },
+		lualine_y = { "diagnostics" },
+		lualine_z = {},
+	},
 	extensions = { "nvim-tree" },
 	options = {
-		theme = "ayu",
+		theme = "auto",
+		section_separators = { left = "", right = "" },
 	},
 })
 
@@ -252,6 +259,7 @@ require("gitsigns").setup({
 vim.api.nvim_set_var("tex_flavor", "latex")
 vim.api.nvim_set_var("vimtex_view_method", "zathura")
 vim.api.nvim_set_var("vimtex_quickfix_mode", 0)
+vim.api.nvim_set_var("vimtex_syntax_enabled", 0)
 
 -- nvim-colorizer.lua
 require("colorizer").setup({ "*", "xdefaults" })
