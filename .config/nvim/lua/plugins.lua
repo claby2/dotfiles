@@ -170,7 +170,7 @@ require("formatter").setup({
 		},
 		go = {
 			function()
-				return { exe = "gofmt", stdin = true }
+				return { exe = "gofumpt", stdin = true }
 			end,
 		},
 		lua = {
