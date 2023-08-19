@@ -1,0 +1,7 @@
+/* Avoid white flash when opening new tab */
+#tabbrowser-tabpanels,
+#webextpanels-window,
+#webext-panels-stack,
+#webext-panels-browser {
+  background: rgb(0, 0, 0) !important;
+}

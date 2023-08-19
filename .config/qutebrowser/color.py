@@ -200,10 +200,10 @@ def load_colors(xresources):
     c.colors.statusbar.passthrough.bg = base0C
 
     # Foreground color of the statusbar in private browsing mode.
-    c.colors.statusbar.private.fg = background
+    c.colors.statusbar.private.fg = foreground
 
     # Background color of the statusbar in private browsing mode.
-    c.colors.statusbar.private.bg = base04
+    c.colors.statusbar.private.bg = base08
 
     # Foreground color of the statusbar in command mode.
     c.colors.statusbar.command.fg = base05
@@ -314,7 +314,7 @@ def load_colors(xresources):
 
     # Background color for webpages if unset (or empty to use the theme's
     # color).
-    c.colors.webpage.bg = None
+    c.colors.webpage.bg = background
 
 
 load_xresources('*')

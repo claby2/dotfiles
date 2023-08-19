@@ -5,6 +5,9 @@ c = c  # type: ignore
 
 config.load_autoconfig()
 
+# https://github.com/qutebrowser/qutebrowser/issues/7489
+c.qt.args = ["disable-accelerated-2d-canvas"]
+
 c.aliases = {
     'gr': 'greasemonkey-reload',
     'cs': 'config-source',
@@ -34,7 +37,7 @@ c.url.searchengines = {
 # https://github.com/qutebrowser/qutebrowser/issues/7118#issuecomment-1111951853
 c.qt.workarounds.remove_service_workers = True
 
-startpage = 'https://edwardwibowo.com'
+startpage = 'qute://start'
 c.url.default_page = startpage
 c.url.start_pages = [startpage]
 
@@ -45,7 +48,9 @@ c.content.blocking.adblock.lists = [
     'https://easylist-downloads.adblockplus.org/antiadblockfilters.txt'
 ]
 
-c.content.javascript.can_access_clipboard = True
+c.content.javascript.clipboard = "access"
+
+c.content.user_stylesheets = ["~/.config/qutebrowser/stylesheet.css"]
 
 c.statusbar.padding = {
     'bottom': 5,
