@@ -135,7 +135,20 @@ require("formatter").setup({
 		typescriptreact = { prettier_format },
 		typescript = { prettier_format },
 		markdown = { prettier_format },
-		astro = { prettier_format },
+		astro = {
+			function()
+				return {
+					exe = "npx",
+					args = {
+						"prettier",
+						"--stdin-filepath",
+						vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+						"--plugin=prettier-plugin-astro",
+					},
+					stdin = true,
+				}
+			end,
+		},
 		yaml = { prettier_format },
 		html = { prettier_format },
 		css = { prettier_format },
