@@ -149,6 +149,11 @@ require("formatter").setup({
 				}
 			end,
 		},
+		ocaml = {
+			function()
+				return { exe = "ocamlformat --enable-outside-detected-project --impl -", stdin = true }
+			end,
+		},
 		yaml = { prettier_format },
 		html = { prettier_format },
 		css = { prettier_format },

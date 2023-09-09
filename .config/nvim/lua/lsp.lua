@@ -61,6 +61,7 @@ local setup_servers = function()
 		"tsserver",
 		"gopls",
 		"cssls",
+		"ocamllsp",
 	}
 	local lspconfig = require("lspconfig")
 	local util = require("lspconfig").util

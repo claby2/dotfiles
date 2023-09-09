@@ -16,7 +16,7 @@ map("n", "<leader>s", "<cmd>set spell!<CR>")
 map("n", "<leader>r", "<cmd>redraw!<CR>")
 
 -- nvim-tree.lua bind
-map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
+map("n", "<leader>nt", "<cmd>NvimTreeToggle<CR>")
 
 -- telescope.nvim bind
 map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
