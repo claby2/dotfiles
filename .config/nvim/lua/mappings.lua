@@ -16,7 +16,10 @@ map("n", "<leader>s", "<cmd>set spell!<CR>")
 map("n", "<leader>r", "<cmd>redraw!<CR>")
 
 -- nvim-tree.lua bind
-map("n", "<leader>nt", "<cmd>NvimTreeToggle<CR>")
+map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
+-- Some OCaml plugin seems to override <leader>t.
+-- This prevents that from happening.
+vim.cmd([[let no_ocaml_maps = 1]])
 
 -- telescope.nvim bind
 map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
