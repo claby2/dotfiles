@@ -16,7 +16,7 @@ xset r rate 200 50
 host=$(uname -n)
 case "$host" in
 "groudon")
-	xrandr --output DisplayPort-2 --mode 1920x1080 --rate 240.0
+	xrandr --output DisplayPort-1 --mode 1920x1080 --rate 240.0
 	device="pointer:Razer Razer Viper Mini"
 	device_id="$(xinput list --id-only "$device")"
 	xinput set-prop "$device_id" "libinput Accel Speed" -0.5
