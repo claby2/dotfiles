@@ -197,7 +197,7 @@ def load_colors(xresources):
     c.colors.statusbar.passthrough.fg = background
 
     # Background color of the statusbar in passthrough mode.
-    c.colors.statusbar.passthrough.bg = base0C
+    c.colors.statusbar.passthrough.bg = base03
 
     # Foreground color of the statusbar in private browsing mode.
     c.colors.statusbar.private.fg = foreground
@@ -271,10 +271,10 @@ def load_colors(xresources):
     c.colors.tabs.odd.bg = foreground
 
     # Foreground color of unselected even tabs.
-    c.colors.tabs.even.fg = background
+    c.colors.tabs.even.fg = c.colors.tabs.odd.fg
 
     # Background color of unselected even tabs.
-    c.colors.tabs.even.bg = foreground
+    c.colors.tabs.even.bg = c.colors.tabs.odd.bg
 
     # Background color of pinned unselected even tabs.
     c.colors.tabs.pinned.even.bg = foreground
@@ -311,10 +311,6 @@ def load_colors(xresources):
 
     # Background color of selected even tabs.
     c.colors.tabs.selected.even.bg = background
-
-    # Background color for webpages if unset (or empty to use the theme's
-    # color).
-    c.colors.webpage.bg = background
 
 
 load_xresources('*')
