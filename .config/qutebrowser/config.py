@@ -74,21 +74,4 @@ c.colors.webpage.preferred_color_scheme = 'dark'
 
 c.downloads.position = 'bottom'
 
-
-def redirect(request: interceptor.Request):
-    rewrite_map = {
-        "www.reddit.com": "old.reddit.com",
-    }
-
-    for original_link, new_link in rewrite_map.items():
-        if request.request_url.host() == original_link:
-            request.request_url.setHost(new_link)
-            try:
-                request.redirect(request.request_url)
-            except:
-                pass
-
-
-interceptor.register(redirect)
-
 config.source('color.py')
