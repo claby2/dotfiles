@@ -167,6 +167,11 @@ require("formatter").setup({
 				return { exe = "raco fmt --width 70", stdin = true }
 			end,
 		},
+		lisp = {
+			function()
+				return { exe = "raco fmt --width 70", stdin = true }
+			end,
+		},
 		cmake = {
 			function()
 				return { exe = "cmake-format", stdin = true }
@@ -202,7 +207,7 @@ require("formatter").setup({
 			function()
 				return {
 					exe = "latexindent",
-					args = { "-sl", "-g /dev/stderr", "2>/dev/null" },
+					args = { "-g", "/dev/null" },
 					stdin = true,
 				}
 			end,
