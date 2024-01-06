@@ -151,7 +151,16 @@ require("formatter").setup({
 		},
 		ocaml = {
 			function()
-				return { exe = "ocamlformat --enable-outside-detected-project --impl -", stdin = true }
+				return {
+					exe = "ocamlformat",
+					args = {
+						"--enable-outside-detected-project",
+						"--name",
+						vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+						"-",
+					},
+					stdin = true,
+				}
 			end,
 		},
 		yaml = { prettier_format },
