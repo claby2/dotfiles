@@ -8,7 +8,7 @@ require("packer").startup(function()
 
 	-- Language
 	use("nvim-treesitter/nvim-treesitter")
-	use("neovim/nvim-lspconfig")
+	use({ "neovim/nvim-lspconfig", tag = vim.fn.has("nvim-0.8") == 1 and "*" or "v0.1.6" })
 	use("mhartington/formatter.nvim")
 	use("onsails/lspkind-nvim")
 	use({ "j-hui/fidget.nvim", tag = "legacy", disable = vim.fn.has("nvim-0.9") == 0 })
@@ -40,7 +40,7 @@ require("packer").startup(function()
 
 	-- Misc
 	use("aklt/plantuml-syntax")
-	use("akinsho/toggleterm.nvim")
+	use({"akinsho/toggleterm.nvim", tag = vim.fn.has("nvim-0.8") == 1 and "*" or "v2.7.0"})
 	use("baskerville/vim-sxhkdrc")
 	use("elkowar/yuck.vim")
 	use("hoob3rt/lualine.nvim")
