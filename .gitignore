@@ -4,11 +4,16 @@ __pycache__
 .config/mpd/database
 .config/mpd/playlists/
 .config/ncmpcpp/error.log
+.config/newsboat/password.gpg
 .config/nvim/plugin/packer_compiled.lua
 .config/qutebrowser/autoconfig.yml
 .config/qutebrowser/bookmarks/
 .config/qutebrowser/qsettings/
 .config/qutebrowser/quickmarks
 .config/zsh/.zcompdump
+.config/zsh/.zsh_history
+.config/zsh/.zsh_sessions/
 .config/zsh/history
-.config/newsboat/password.gpg
+.config/zsh/host.zsh
+.local/share/
+.local/state/

@@ -13,10 +13,14 @@ export MANPAGER="nvim +Man!"
 export TERMINAL="st"
 
 path=(
-	$HOME/.local/bin
-	$HOME/.cargo/bin
-	$HOME/.yarn/bin
-	$HOME/.config/dotfiles/.local/bin
-	$GOPATH/bin
-	$path
+    $HOME/.lean/bin
+    $HOME/.local/bin
+    $HOME/.cargo/bin
+    $HOME/.yarn/bin
+    $HOME/.config/dotfiles/.local/bin
+    $GOPATH/bin
+    $path
 )
+
+# Load host specific configuration
+[ -f ~/.config/zsh/host.zsh ] && source ~/.config/zsh/host.zsh
