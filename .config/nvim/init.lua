@@ -22,9 +22,5 @@ opt("o", "scrolloff", 0)
 opt("o", "mouse", "a")
 opt("o", "inccommand", "nosplit")
 
-require("plugins")
+require("config.lazy")
 require("mappings")
-require("treesitter")
-require("lsp")
-
-vim.cmd([[ autocmd BufRead,BufNewFile *.astro set filetype=astro ]])

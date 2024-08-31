@@ -1,34 +1,24 @@
-local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local map = vim.keymap.set
 
--- Clear hlsearch highlights
-map("n", "<esc>", "<cmd>nohls<CR>")
-
--- Toggle spell checking
-map("n", "<leader>s", "<cmd>set spell!<CR>")
-
--- Redraw screen
-map("n", "<leader>r", "<cmd>redraw!<CR>")
-
--- nvim-tree.lua bind
-map("n", "<leader>t", "<cmd>NvimTreeToggle<CR>")
--- Some OCaml plugin seems to override <leader>t.
--- This prevents that from happening.
-vim.cmd([[let no_ocaml_maps = 1]])
-
--- telescope.nvim bind
-map("n", "<leader><tab>", [[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]])
-
--- genfmt.vim bind
-map("n", "<leader>f", "<cmd>Format<CR>")
+map("n", "<leader>s", "<cmd>set spell!<cr>", { desc = "Toggle spell checking" })
+map("n", "<leader>f", "<cmd>Format<cr>", { desc = "Format current buffer" })
+map(
+	"n",
+	"<leader><tab>",
+	[[<cmd>lua require("telescope.builtin").find_files{follow = true}<CR>]],
+	{ desc = "Find files with Telescope" }
+)
+map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 
 -- Switch between window splits easily
 map("n", "<C-H>", "<C-W>h")
 map("n", "<C-J>", "<C-W>j")
 map("n", "<C-K>", "<C-W>k")
 map("n", "<C-L>", "<C-W>l")
+
+map(
+	"i",
+	"<C-J>",
+	'copilot#Accept("<CR>")',
+	{ noremap = true, silent = true, expr = true, replace_keycodes = false, desc = "Accept copilot completion" }
+)
