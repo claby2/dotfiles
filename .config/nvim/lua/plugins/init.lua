@@ -1,17 +1,8 @@
 return {
 	{ "nvim-telescope/telescope.nvim" },
 	{
-		"mhartington/formatter.nvim",
-		config = function()
-			require("formatter").setup({
-				logging = true,
-				filetype = {
-					lua = {
-						require("formatter.filetypes.lua").stylua,
-					},
-				},
-			})
-		end,
+		"stevearc/conform.nvim",
+		config = require("config.conform").setup,
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -33,14 +24,10 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		config = function()
-			require("config.lspconfig").setup()
-		end,
+		config = require("config.lspconfig").setup,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("config.treesitter").setup()
-		end,
+		config = require("config.treesitter").setup,
 	},
 }
