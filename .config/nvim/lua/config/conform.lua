@@ -8,7 +8,8 @@ M.setup = function()
 			go = { "gofmt" },
 			rust = { "rustfmt" },
 			sh = { "shfmt" },
-            zsh = { "shfmt" },
+			zsh = { "shfmt" },
+			ocaml = { "ocamlformat" },
 		},
 	})
 end

@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+map("n", "<esc>", "<cmd>nohls<cr>", { desc = "Clear search highlights" })
+
 map("n", "<leader>s", "<cmd>set spell!<cr>", { desc = "Toggle spell checking" })
 map("n", "<leader>f", [[<cmd> lua require("conform").format()<cr>]], { desc = "Format current buffer" })
 map(
@@ -9,6 +11,9 @@ map(
 	{ desc = "Find files with Telescope" }
 )
 map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
+
+-- Restart LSP
+map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
 -- Switch between window splits easily
 map("n", "<C-H>", "<C-W>h")

@@ -30,4 +30,30 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		config = require("config.treesitter").setup,
 	},
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		opts = {
+			open_mapping = [[<leader><space>]],
+			direction = "float",
+			float_opts = {
+				border = "curved",
+			},
+		},
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			{
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+			},
+		},
+		opts = function()
+			return require("config.cmp")
+		end,
+	},
 }

@@ -48,6 +48,7 @@ M.setup = function()
 	M.setup_server("rust_analyzer")
 	M.setup_server("gopls")
 	M.setup_server("ccls")
+	M.setup_server("ocamllsp")
 	M.setup_server("lua_ls", {
 		settings = {
 			Lua = {

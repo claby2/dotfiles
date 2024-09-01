@@ -22,5 +22,7 @@ opt("o", "scrolloff", 0)
 opt("o", "mouse", "a")
 opt("o", "inccommand", "nosplit")
 
+vim.cmd([[let no_ocaml_maps = 1]])
+
 require("config.lazy")
 require("mappings")
