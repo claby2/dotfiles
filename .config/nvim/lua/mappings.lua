@@ -23,7 +23,7 @@ map("n", "<C-L>", "<C-W>l")
 
 map(
 	"i",
-	"<C-J>",
+	"<C-l>",
 	'copilot#Accept("<CR>")',
 	{ noremap = true, silent = true, expr = true, replace_keycodes = false, desc = "Accept copilot completion" }
 )

@@ -10,6 +10,7 @@ M.setup = function()
 			sh = { "shfmt" },
 			zsh = { "shfmt" },
 			ocaml = { "ocamlformat" },
+			cpp = { "clang-format" },
 		},
 	})
 end
