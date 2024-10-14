@@ -27,3 +27,19 @@ map(
 	'copilot#Accept("<CR>")',
 	{ noremap = true, silent = true, expr = true, replace_keycodes = false, desc = "Accept copilot completion" }
 )
+
+-- I don't think Copilot has a way to toggle itself, so this is a workaround
+vim.cmd("Copilot disable")
+local copilot_enabled = false
+vim.api.nvim_create_user_command("ToggleCopilot", function()
+	if copilot_enabled then
+		vim.cmd("Copilot disable")
+		copilot_enabled = false
+		print("Cplt disabled")
+	else
+		vim.cmd("Copilot enable")
+		copilot_enabled = true
+		print("Cplt enabled")
+	end
+end, {})
+map("n", "<leader>cp", "<cmd>ToggleCopilot<cr>", { desc = "Toggle Copilot" })
