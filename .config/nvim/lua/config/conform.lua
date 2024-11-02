@@ -11,9 +11,10 @@ M.setup = function()
 			zsh = { "shfmt" },
 			ocaml = { "ocamlformat" },
 			cpp = { "clang-format" },
+			c = { "clang-format" },
 			typescript = { "prettier" },
-            astro = { "astro format" },
-            json = { "prettier" },
+			astro = { "astro format" },
+			json = { "prettier" },
 		},
 	})
 end
