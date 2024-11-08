@@ -19,6 +19,14 @@ return {
 	{
 		"Shatur/neovim-ayu",
 		config = function()
+			local colors = require("ayu.colors")
+			colors.generate(true)
+			require("ayu").setup({
+				overrides = {
+					LineNR = { fg = colors.fg },
+					NvimTreeNormal = { bg = colors.panel_bg },
+				},
+			})
 			vim.cmd("colorscheme ayu-mirage")
 		end,
 	},

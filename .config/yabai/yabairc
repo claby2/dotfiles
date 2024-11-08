@@ -1,0 +1,20 @@
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+yabai -m config layout bsp
+
+yabai -m config top_padding 12
+yabai -m config bottom_padding 12
+yabai -m config left_padding 12
+yabai -m config right_padding 12
+yabai -m config window_gap 12
+
+yabai -m config mouse_follows_focus on
+
+NSPACES=9
+SPACES_TO_CREATE=$(yabai -m query --displays | jq ".[0].spaces | $NSPACES - length | if . < 1 then 0 else . end")
+
+i=0
+while [ "$i" -lt "$SPACES_TO_CREATE" ]; do
+    yabai -m space --create
+    i=$((i + 1))
+done

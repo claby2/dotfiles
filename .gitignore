@@ -1,6 +1,7 @@
 __pycache__
 *.pyc
 
+.config/kitty/kitty.conf.bak
 .config/mpd/database
 .config/mpd/playlists/
 .config/ncmpcpp/error.log
