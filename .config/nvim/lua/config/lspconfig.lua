@@ -56,7 +56,15 @@ end
 M.setup = function()
 	-- Setup servers with common configurations
 	M.setup_server("pyright")
-	M.setup_server("rust_analyzer")
+	M.setup_server("rust_analyzer", {
+		settings = {
+			["rust-analyzer"] = {
+				checkOnSave = {
+					command = "clippy",
+				},
+			},
+		},
+	})
 	M.setup_server("gopls")
 	M.setup_server("ccls")
 	M.setup_server("ocamllsp")

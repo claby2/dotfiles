@@ -13,7 +13,7 @@ M.setup = function()
 			cpp = { "clang-format" },
 			c = { "clang-format" },
 			typescript = { "prettier" },
-			astro = { "astro format" },
+			astro = { "prettier" },
 			json = { "prettier" },
 		},
 	})

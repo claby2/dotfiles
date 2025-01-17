@@ -1,5 +1,31 @@
 return {
 	{ "nvim-telescope/telescope.nvim", config = require("config.telescope").setup },
+	{ "echasnovski/mini.statusline", version = "*", opts = {} },
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+	},
+	{
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+	},
 	{
 		"stevearc/conform.nvim",
 		config = require("config.conform").setup,
@@ -23,8 +49,7 @@ return {
 			colors.generate(true)
 			require("ayu").setup({
 				overrides = {
-					LineNR = { fg = colors.fg },
-					NvimTreeNormal = { bg = colors.panel_bg },
+					NormalFloat = { bg = "#000000" },
 				},
 			})
 			vim.cmd("colorscheme ayu-mirage")
