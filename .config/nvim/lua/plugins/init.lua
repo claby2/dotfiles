@@ -1,5 +1,4 @@
 return {
-	{ "nvim-telescope/telescope.nvim", config = require("config.telescope").setup },
 	{ "echasnovski/mini.statusline", version = "*", opts = {} },
 	{
 		"folke/noice.nvim",

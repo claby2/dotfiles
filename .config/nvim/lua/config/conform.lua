@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 M.setup = function()
 	require("conform").setup({
@@ -15,6 +15,7 @@ M.setup = function()
 			typescript = { "prettier" },
 			astro = { "prettier" },
 			json = { "prettier" },
+			markdown = { "prettier" },
 		},
 	})
 end
