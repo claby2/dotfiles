@@ -128,4 +128,22 @@ return {
 			require("rsync").setup()
 		end,
 	},
+	{
+		"quarto-dev/quarto-nvim",
+		dependencies = {
+			"jmbuhr/otter.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
+	{
+		"kaarmu/typst.vim",
+		ft = "typst",
+		init = function() end,
+	},
+	{
+		"chomosuke/typst-preview.nvim",
+		ft = "typst",
+		version = "1.*",
+		opts = {},
+	},
 }
