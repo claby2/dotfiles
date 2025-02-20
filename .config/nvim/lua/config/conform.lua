@@ -12,10 +12,11 @@ M.setup = function()
 			ocaml = { "ocamlformat" },
 			cpp = { "clang-format" },
 			c = { "clang-format" },
-			typescript = { "prettier" },
 			astro = { "prettier" },
 			json = { "prettier" },
 			markdown = { "prettier" },
+			typescript = { "prettier" },
+			typescriptreact = { "prettier" },
 		},
 	})
 end
