@@ -1,0 +1,13 @@
+#!/bin/sh
+# Small script to open a textbook from ~/Documents/textbooks
+# Call without arguments to list available textbooks
+# Call with the name of a textbook to open it
+# Assumes that the textbooks are in ~/Documents/textbooks and have a .pdf extension
+
+if [ -z "$1" ]; then
+    echo "Available textbooks:"
+    ls -1 ~/Documents/textbooks/*.pdf | sed 's/.*\///' | sed 's/\.pdf//'
+    exit 0
+fi
+
+open ~/Documents/textbooks/"$1".pdf
