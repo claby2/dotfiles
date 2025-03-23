@@ -77,6 +77,11 @@ M.setup = function()
 			},
 		},
 	})
+	M.setup_server("tinymist", {
+		formatterMode = "typstyle",
+		exportPdf = "onType",
+		semanticTokens = "disable",
+	})
 end
 
 return M

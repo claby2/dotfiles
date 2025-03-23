@@ -17,6 +17,7 @@ M.setup = function()
 			markdown = { "prettier" },
 			typescript = { "prettier" },
 			typescriptreact = { "prettier" },
+			typst = { "typstyle" },
 		},
 	})
 end

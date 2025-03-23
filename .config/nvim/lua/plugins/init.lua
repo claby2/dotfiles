@@ -120,14 +120,14 @@ return {
 			mappings = true,
 		},
 	},
-	{
-		"OscarCreator/rsync.nvim",
-		build = "make",
-		dependencies = "nvim-lua/plenary.nvim",
-		config = function()
-			require("rsync").setup()
-		end,
-	},
+	-- {
+	-- 	"OscarCreator/rsync.nvim",
+	-- 	build = "make",
+	-- 	dependencies = "nvim-lua/plenary.nvim",
+	-- 	config = function()
+	-- 		require("rsync").setup()
+	-- 	end,
+	-- },
 	{
 		"quarto-dev/quarto-nvim",
 		dependencies = {
@@ -144,6 +144,10 @@ return {
 		"chomosuke/typst-preview.nvim",
 		ft = "typst",
 		version = "1.*",
-		opts = {},
+		opts = {
+			-- Typst preview is weird on safari, so use chrome
+			-- NOTE: I think this only works on mac, should probably make it more general
+			open_cmd = 'open -a "Google Chrome" %s',
+		},
 	},
 }
