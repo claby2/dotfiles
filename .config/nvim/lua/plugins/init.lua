@@ -1,20 +1,20 @@
 return {
 	{ "echasnovski/mini.statusline", version = "*", opts = {} },
-	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			-- add any options here
-		},
-		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			"rcarriga/nvim-notify",
-		},
-	},
+	-- {
+	-- 	"folke/noice.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		-- add any options here
+	-- 	},
+	-- 	dependencies = {
+	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		-- OPTIONAL:
+	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
+	-- 		--   If not available, we use `mini` as the fallback
+	-- 		"rcarriga/nvim-notify",
+	-- 	},
+	-- },
 	{
 		"ibhagwan/fzf-lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -46,18 +46,13 @@ return {
 		config = function()
 			local colors = require("ayu.colors")
 			colors.generate(true)
-			require("ayu").setup({
-				overrides = {
-					NormalFloat = { bg = "#000000" },
-				},
-			})
 			vim.cmd("colorscheme ayu-mirage")
 		end,
 	},
-	{
-		"neovim/nvim-lspconfig",
-		config = require("config.lspconfig").setup,
-	},
+	-- {
+	-- 	"neovim/nvim-lspconfig",
+	-- 	config = require("config.lspconfig").setup,
+	-- },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = require("config.treesitter").setup,
@@ -120,14 +115,6 @@ return {
 			mappings = true,
 		},
 	},
-	-- {
-	-- 	"OscarCreator/rsync.nvim",
-	-- 	build = "make",
-	-- 	dependencies = "nvim-lua/plenary.nvim",
-	-- 	config = function()
-	-- 		require("rsync").setup()
-	-- 	end,
-	-- },
 	{
 		"quarto-dev/quarto-nvim",
 		dependencies = {

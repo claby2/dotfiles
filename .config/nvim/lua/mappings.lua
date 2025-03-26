@@ -12,6 +12,21 @@ map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
 -- Restart LSP
 map("n", "<leader>lr", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
+-- LSP mappings
+map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Show hover info" })
+map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+map("n", "gr", vim.lsp.buf.references, { desc = "Show references" })
+map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Go to type definition" })
+map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Show code actions" })
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
+
+-- Diagnostic mappings
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostics" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
+
 -- Switch between window splits easily
 map("n", "<C-H>", "<C-W>h")
 map("n", "<C-J>", "<C-W>j")

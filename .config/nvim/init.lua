@@ -21,8 +21,11 @@ opt("o", "laststatus", 2)
 opt("o", "scrolloff", 0)
 opt("o", "mouse", "a")
 opt("o", "inccommand", "nosplit")
+opt("o", "winborder", "rounded")
 
 vim.cmd([[let no_ocaml_maps = 1]])
 
 require("config.lazy")
 require("mappings")
+
+vim.lsp.enable({ "ccls", "gopls", "lua-language-server", "ocamllsp", "pyright", "rust_analyzer", "tinymist" })
