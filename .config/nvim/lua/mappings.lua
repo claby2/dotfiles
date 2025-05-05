@@ -58,3 +58,9 @@ map("n", "<leader>cp", "<cmd>ToggleCopilot<cr>", { desc = "Toggle Copilot" })
 
 -- Dismiss notifications
 map("n", "<leader>d", [[<cmd>lua require("notify").dismiss()<cr>]])
+
+-- Toggle virtual lines for diagnostics
+map("n", "<leader>v", function()
+	local new_config = not vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_lines = new_config })
+end)

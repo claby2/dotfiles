@@ -1,20 +1,5 @@
 return {
 	{ "echasnovski/mini.statusline", version = "*", opts = {} },
-	-- {
-	-- 	"folke/noice.nvim",
-	-- 	event = "VeryLazy",
-	-- 	opts = {
-	-- 		-- add any options here
-	-- 	},
-	-- 	dependencies = {
-	-- 		-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-	-- 		"MunifTanjim/nui.nvim",
-	-- 		-- OPTIONAL:
-	-- 		--   `nvim-notify` is only needed, if you want to use the notification view.
-	-- 		--   If not available, we use `mini` as the fallback
-	-- 		"rcarriga/nvim-notify",
-	-- 	},
-	-- },
 	{
 		"ibhagwan/fzf-lua",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -49,10 +34,6 @@ return {
 			vim.cmd("colorscheme ayu-mirage")
 		end,
 	},
-	-- {
-	-- 	"neovim/nvim-lspconfig",
-	-- 	config = require("config.lspconfig").setup,
-	-- },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		config = require("config.treesitter").setup,
@@ -97,7 +78,12 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		event = "BufRead",
-		config = require("config.gitsigns").setup,
+		init = function()
+			require("config.gitsigns").setup()
+			require("gitsigns").setup({
+				sign_priority = 20,
+			})
+		end,
 	},
 	{
 		"Julian/lean.nvim",
