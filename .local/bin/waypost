@@ -8,14 +8,15 @@ import argparse
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description="Synchronize a project directory via rsync based on a .waypost file or DESTINATION env var."
+        description="Synchronize a project directory via rsync based on a .waypost file or DESTINATION/EXCLUDE env vars."
     )
     p.add_argument('-q', '--quiet',
                    action='store_true',
                    help="suppress non-error output")
     p.add_argument('-v', '--verbose',
-                   action='store_true',
-                   help="print extra debug info and pass -v to rsync")
+                   action='count',
+                   default=0,
+                   help="increase verbosity (use -v multiple times to pass more -v to rsync)")
     p.add_argument('-n', '--dry-run',
                    action='store_true',
                    help="perform a dry run (rsync -n)")
@@ -27,6 +28,7 @@ def parse_args():
                    help="delete remote files that have been removed locally (rsync --delete)")
     return p.parse_args()
 
+
 def find_waypost_dir(start_path=None):
     path = os.path.abspath(start_path or os.getcwd())
     while True:
@@ -36,6 +38,7 @@ def find_waypost_dir(start_path=None):
         if parent == path:
             return None
         path = parent
+
 
 def parse_destination_from_file(waypost_path):
     dest = None
@@ -50,28 +53,57 @@ def parse_destination_from_file(waypost_path):
                 break
     return dest
 
+
+def parse_exclude_from_file(waypost_path):
+    excludes = None
+    with open(waypost_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if line.startswith('EXCLUDE='):
+                _, val = line.split('=', 1)
+                # split comma-separated list
+                excludes = [p.strip() for p in val.strip().split(',') if p.strip()]
+                break
+    return excludes
+
+
 def main():
     args = parse_args()
     cwd = os.getcwd()
     env_dest = os.environ.get('DESTINATION')
+    env_excl = os.environ.get('EXCLUDE')
 
     wp_dir = find_waypost_dir()
     file_dest = None
+    file_excl = None
     if wp_dir:
         file_dest = parse_destination_from_file(os.path.join(wp_dir, '.waypost'))
+        file_excl = parse_exclude_from_file(os.path.join(wp_dir, '.waypost'))
 
     dest = env_dest or file_dest
     if not dest:
         print("Error: DESTINATION not set in environment or .waypost file.", file=sys.stderr)
         sys.exit(1)
 
+    # build exclude list: env overrides file
+    excludes = []
+    if env_excl:
+        excludes = [p.strip() for p in env_excl.split(',') if p.strip()]
+    elif file_excl:
+        excludes = file_excl
+
     src_dir = (wp_dir or cwd).rstrip('/')
 
-    if args.verbose:
+    # verbose info
+    if args.verbose > 0:
         if wp_dir and file_dest:
             print(f"[verbose] Found .waypost in {wp_dir}, DESTINATION={file_dest}")
         elif env_dest:
             print(f"[verbose] No .waypost; using DESTINATION from environment: {env_dest}")
+        if excludes:
+            print(f"[verbose] Excluding patterns: {excludes}")
         if args.dry_run:
             print("[verbose] Dry-run mode enabled; rsync will not make changes.")
         if args.yes:
@@ -79,26 +111,39 @@ def main():
         if args.delete:
             print("[verbose] Removing remote files not present locally (rsync --delete).")
 
+    # summary line
     if not args.quiet:
-        action = "(dry run) " if args.dry_run else ""
-        delete_msg = "with delete" if args.delete else ""
-        print(f"Syncing {src_dir} → {dest} {action}{delete_msg}")
+        parts = []
+        if args.dry_run:
+            parts.append("(dry run)")
+        if args.delete:
+            parts.append("with delete")
+        if excludes:
+            parts.append(f"excluding {', '.join(excludes)}")
+        summary = ' '.join(parts)
+        if summary:
+            summary = ' ' + summary
+        print(f"Syncing {src_dir} → {dest}{summary}")
 
+    # build rsync command
     rsync_cmd = ['rsync', '-a', '-z']
-    if args.verbose:
-        rsync_cmd.append('-v')
+    if args.verbose > 0:
+        rsync_cmd.extend(['-v'] * args.verbose)
     if args.quiet:
         rsync_cmd.append('--quiet')
     if args.dry_run:
         rsync_cmd.append('-n')
     if args.delete:
         rsync_cmd.append('--delete')
+    # apply excludes
+    for pat in excludes:
+        rsync_cmd.extend(['--exclude', pat])
     rsync_cmd.extend([src_dir, dest])
 
-    if args.verbose:
+    if args.verbose > 0:
         print(f"[verbose] Running: {' '.join(rsync_cmd)}")
 
-    # Confirmation prompt for real runs (unless --yes)
+    # confirm
     if not args.dry_run and not args.yes:
         try:
             resp = input("Proceed with sync? [y/N] ")
