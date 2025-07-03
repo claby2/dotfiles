@@ -1,0 +1,113 @@
+#!/usr/bin/env -S uv run --script
+# -*- mode: python -*-
+import os
+import sys
+import subprocess
+import argparse
+
+def parse_args():
+    p = argparse.ArgumentParser(
+        description="Synchronize a project directory via rsync based on a .waypost file or DESTINATION env var."
+    )
+    p.add_argument('-q', '--quiet',
+                   action='store_true',
+                   help="suppress non-error output")
+    p.add_argument('-v', '--verbose',
+                   action='store_true',
+                   help="print extra debug info and pass -v to rsync")
+    p.add_argument('-n', '--dry-run',
+                   action='store_true',
+                   help="perform a dry run (rsync -n)")
+    p.add_argument('-y', '--yes',
+                   action='store_true',
+                   help="skip confirmation prompt and proceed immediately")
+    return p.parse_args()
+
+def find_waypost_dir(start_path=None):
+    path = os.path.abspath(start_path or os.getcwd())
+    while True:
+        if os.path.isfile(os.path.join(path, '.waypost')):
+            return path
+        parent = os.path.dirname(path)
+        if parent == path:
+            return None
+        path = parent
+
+def parse_destination_from_file(waypost_path):
+    dest = None
+    with open(waypost_path, 'r') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            if line.startswith('DESTINATION='):
+                _, val = line.split('=', 1)
+                dest = val.strip().strip('"').strip("'")
+                break
+    return dest
+
+def main():
+    args = parse_args()
+    cwd = os.getcwd()
+    env_dest = os.environ.get('DESTINATION')
+
+    wp_dir = find_waypost_dir()
+    file_dest = None
+    if wp_dir:
+        file_dest = parse_destination_from_file(os.path.join(wp_dir, '.waypost'))
+
+    dest = env_dest or file_dest
+    if not dest:
+        print("Error: DESTINATION not set in environment or .waypost file.", file=sys.stderr)
+        sys.exit(1)
+
+    src_dir = (wp_dir or cwd).rstrip('/')
+
+    if args.verbose:
+        if wp_dir and file_dest:
+            print(f"[verbose] Found .waypost in {wp_dir}, DESTINATION={file_dest}")
+        elif env_dest:
+            print(f"[verbose] No .waypost; using DESTINATION from environment: {env_dest}")
+        if args.dry_run:
+            print("[verbose] Dry-run mode enabled; rsync will not make changes.")
+        if args.yes:
+            print("[verbose] Skipping confirmation prompt due to --yes flag.")
+
+    if not args.quiet:
+        action = "(dry run) " if args.dry_run else ""
+        print(f"Syncing {src_dir} → {dest} {action}")
+
+    rsync_cmd = ['rsync', '-a', '-z']
+    if args.verbose:
+        rsync_cmd.append('-v')
+    if args.quiet:
+        rsync_cmd.append('--quiet')
+    if args.dry_run:
+        rsync_cmd.append('-n')
+    rsync_cmd.extend([src_dir, dest])
+
+    if args.verbose:
+        print(f"[verbose] Running: {' '.join(rsync_cmd)}")
+
+    # Confirmation prompt for real runs (unless --yes)
+    if not args.dry_run and not args.yes:
+        try:
+            resp = input("Proceed with sync? [y/N] ")
+        except EOFError:
+            resp = 'n'
+        if resp.lower() not in ('y', 'yes'):
+            print("Sync aborted.")
+            sys.exit(0)
+
+    try:
+        subprocess.run(rsync_cmd, check=True)
+    except FileNotFoundError:
+        print("Error: 'rsync' not found. Please install rsync.", file=sys.stderr)
+        sys.exit(1)
+    except subprocess.CalledProcessError as e:
+        print(f"rsync exited with status {e.returncode}", file=sys.stderr)
+        sys.exit(e.returncode)
+
+if __name__ == '__main__':
+    main()
+
