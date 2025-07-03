@@ -1,5 +1,6 @@
 #!/usr/bin/env -S uv run --script
 # -*- mode: python -*-
+
 import os
 import sys
 import subprocess
@@ -21,6 +22,9 @@ def parse_args():
     p.add_argument('-y', '--yes',
                    action='store_true',
                    help="skip confirmation prompt and proceed immediately")
+    p.add_argument('-D', '--delete',
+                   action='store_true',
+                   help="delete remote files that have been removed locally (rsync --delete)")
     return p.parse_args()
 
 def find_waypost_dir(start_path=None):
@@ -72,10 +76,13 @@ def main():
             print("[verbose] Dry-run mode enabled; rsync will not make changes.")
         if args.yes:
             print("[verbose] Skipping confirmation prompt due to --yes flag.")
+        if args.delete:
+            print("[verbose] Removing remote files not present locally (rsync --delete).")
 
     if not args.quiet:
         action = "(dry run) " if args.dry_run else ""
-        print(f"Syncing {src_dir} → {dest} {action}")
+        delete_msg = "with delete" if args.delete else ""
+        print(f"Syncing {src_dir} → {dest} {action}{delete_msg}")
 
     rsync_cmd = ['rsync', '-a', '-z']
     if args.verbose:
@@ -84,6 +91,8 @@ def main():
         rsync_cmd.append('--quiet')
     if args.dry_run:
         rsync_cmd.append('-n')
+    if args.delete:
+        rsync_cmd.append('--delete')
     rsync_cmd.extend([src_dir, dest])
 
     if args.verbose:
@@ -110,4 +119,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
